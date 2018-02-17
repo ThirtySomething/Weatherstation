@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".\..\TFAmbientLight.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFAmbientLight.Core.dll">
+      <Link>SensorPlugins\TFAmbientLight.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".\..\TFBarometer.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFBarometer.Core.dll">
+      <Link>SensorPlugins\TFBarometer.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".\..\TFHumidity.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFHumidity.Core.dll">
+      <Link>SensorPlugins\TFHumidity.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".\..\TFSensor.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFSensor.Core.dll">
+      <Link>SensorPlugins\TFSensor.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TFSensor.Core\TFSensor.Core.csproj" />
+  </ItemGroup>
+  
+</Project>
