@@ -1,14 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include=".\..\TFAmbientLight.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFAmbientLight.Core.dll">
       <Link>SensorPlugins\TFAmbientLight.Core.dll</Link>
@@ -27,9 +25,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TFSensor.Core\TFSensor.Core.csproj" />
+    <Content Include="TFHandler.cs" />
+    <Content Include="Program.cs" />
+    <Content Include="Defines.cs" />
+    <Content Include="TFPluginLoader.cs" />
   </ItemGroup>
-  
 </Project>

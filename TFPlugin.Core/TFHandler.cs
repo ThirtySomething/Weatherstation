@@ -86,9 +86,9 @@ namespace net.derpaul.tf
             {
                 try
                 {
+                    _TFConnection.EnumerateCallback -= IdentifySensorsCallBack;
                     _TFConnection.EnumerateCallback += IdentifySensorsCallBack;
                     _TFConnection.Enumerate();
-                    // _TFConnection.EnumerateCallback -= IdentifySensorsCallBack;
                 }
                 catch (NotConnectedException e)
                 {
