@@ -36,9 +36,14 @@ namespace net.derpaul.tf
         private bool _Connected { get; set; }
 
         /// <summary>
-        /// List of plugins
+        /// List of sensor plugins
         /// </summary>
-        private ICollection<ITFSensor> _Plugins { get; set; }
+        private ICollection<ITFSensor> _SensorPlugins { get; set; }
+
+        /// <summary>
+        /// List of data sink plugins
+        /// </summary>
+        private ICollection<ITFDataSink> _DataSinkPlugins { get; set; }
 
         /// <summary>
         /// List of identified sensors
@@ -131,17 +136,29 @@ namespace net.derpaul.tf
         /// </summary>
         internal void Init()
         {
-            _Plugins = TFPluginLoader<ITFSensor>.TFPluginsLoad(_PluginPath);
+            _SensorPlugins = TFPluginLoader<ITFSensor>.TFPluginsLoad(_PluginPath);
+
+            if (_SensorPlugins.Count == 0)
+            {
+                System.Console.WriteLine($"No sensor plugins found in [{_PluginPath}].");
+                return;
+            }
             // TODO: Replace foreach loop with a Linq statement
             foreach (var currentSensor in _TFSensorIdentified)
             {
-                var plugin = _Plugins.FirstOrDefault(p => currentSensor.Item1 == p.SensorType);
+                var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.Item1 == p.SensorType);
                 if (plugin == null)
                 {
                     System.Console.WriteLine($"No plugin found for sensor type [{currentSensor.Item1}].");
                     continue;
                 }
                 plugin.Init(_TFConnection, currentSensor.Item2);
+            }
+
+            _DataSinkPlugins = TFPluginLoader<ITFDataSink>.TFPluginsLoad(_PluginPath);
+            if (_DataSinkPlugins.Count == 0)
+            {
+                System.Console.WriteLine($"No datasink plugins found in [{_PluginPath}].");
             }
         }
 
@@ -153,12 +170,24 @@ namespace net.derpaul.tf
         {
             ICollection<Tuple<string, double>> pluginData = new List<Tuple<string, double>>();
             // TODO: Replace foreach loop with a Linq statement
-            foreach (ITFSensor currentPlugin in _Plugins)
+            foreach (var currentPlugin in _SensorPlugins)
             {
                 pluginData.Add(currentPlugin.ValueGet());
             }
 
             return pluginData;
+        }
+
+        /// <summary>
+        /// Feed each datasink plugin with sensor data
+        /// </summary>
+        /// <param name="SensorValues"></param>
+        internal void HandleValues(ICollection<Tuple<string, double>> SensorValues)
+        {
+            foreach (var currentPlugin in _DataSinkPlugins)
+            {
+                currentPlugin.HandleValues(SensorValues);
+            }
         }
     }
 }

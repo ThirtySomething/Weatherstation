@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>namespace net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
@@ -14,6 +15,10 @@
     </Content>
     <Content Include=".\..\TFBarometer.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFBarometer.Core.dll">
       <Link>Plugins\TFBarometer.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".\..\TFConsole.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFConsole.Core.dll">
+      <Link>Plugins\TFConsole.Core.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include=".\..\TFHumidity.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFHumidity.Core.dll">

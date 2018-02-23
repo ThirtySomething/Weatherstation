@@ -2,6 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>namespace net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />

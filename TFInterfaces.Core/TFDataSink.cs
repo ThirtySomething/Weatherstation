@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace net.derpaul.tf
 {
-    public interface TFDataSink
+    /// <summary>
+    /// Interface to deal with a collection of Tinkerforge Sensor plugin values
+    /// </summary>
+    public interface ITFDataSink
     {
         /// <summary>
         /// Load plugin configuration
@@ -20,7 +23,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Perform action on measurement values
         /// </summary>
-        /// <param name="SensorValues">List of collected values</param>
-        void HandleValues(List<Tuple<string, double>> SensorValues);
+        /// <param name="SensorValues">Collection of collected values</param>
+        void HandleValues(ICollection<Tuple<string, double>> SensorValues);
     }
 }

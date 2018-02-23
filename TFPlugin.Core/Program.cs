@@ -31,10 +31,7 @@ namespace net.derpaul.tf
             while (loop > 0)
             {
                 Console.WriteLine("---");
-                foreach (Tuple<string, double> currentValue in pluginValues)
-                {
-                    Console.WriteLine($"Sensor [{currentValue.Item1}], Value [{currentValue.Item2}]");
-                }
+                SensorHandler.HandleValues(pluginValues);
                 loop--;
                 System.Threading.Thread.Sleep(Defines.constDefaultDelay);
                 pluginValues = SensorHandler.ValuesRead();
