@@ -1,4 +1,5 @@
-﻿using Tinkerforge;
+﻿using System;
+using Tinkerforge;
 
 namespace net.derpaul.tf
 {
@@ -27,7 +28,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Read the value of the sensor
         /// </summary>
-        /// <returns>Sensor value</returns>
-        double ValueGet();
+        /// <returns>tuple of sensor name and value</returns>
+        Tuple<string, double> ValueGet();
     }
 }

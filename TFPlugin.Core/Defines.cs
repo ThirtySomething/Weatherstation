@@ -8,7 +8,7 @@
         /// <summary>
         /// Path to sensor plugins
         /// </summary>
-        internal const string constPluginPath = "SensorPlugins";
+        internal const string constPluginPath = "Plugins";
 
         /// <summary>
         /// Name of TF host to connect to

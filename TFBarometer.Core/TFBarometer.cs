@@ -1,4 +1,5 @@
-﻿using Tinkerforge;
+﻿using System;
+using Tinkerforge;
 
 namespace net.derpaul.tf
 {
@@ -36,6 +37,6 @@ namespace net.derpaul.tf
         /// Abstract method, should be implemented in subclasses. Shall retrieve sensor's value.
         /// </summary>
         /// <returns>Measurement value of sensor or 0.0</returns>
-        protected override abstract double ValueGetRaw();
+        protected override abstract Tuple<string, double> ValueGetRaw();
     }
 }

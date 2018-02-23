@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFPlugin.Core", "TFPlugin.C
 		{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E} = {9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSensor.Core", "TFSensor.Core\TFSensor.Core.csproj", "{91CE6045-FB79-4366-899A-6CD6E412B0F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFInterfaces.Core", "TFInterfaces.Core\TFInterfaces.Core.csproj", "{91CE6045-FB79-4366-899A-6CD6E412B0F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFHumidity.Core", "TFHumidity.Core\TFHumidity.Core.csproj", "{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}"
 EndProject

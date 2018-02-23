@@ -7,7 +7,7 @@
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TFSensor.Core\TFSensor.Core.csproj" />
+    <ProjectReference Include="..\TFInterfaces.Core\TFInterfaces.Core.csproj" />
     <Content Include="TFHumidity.cs" />
   </ItemGroup>
 </Project>

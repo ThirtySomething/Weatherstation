@@ -1,4 +1,6 @@
-﻿namespace net.derpaul.tf
+﻿using System;
+
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Class to read altitude from barometer sensor
@@ -9,17 +11,17 @@
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Altitude or 0.0</returns>
-        protected override double ValueGetRaw()
+        protected override Tuple<string, double> ValueGetRaw()
         {
             if (_BrickletBarometer == null)
             {
-                return 0.0;
+                return new Tuple<string, double>(Name, 0.0);
             }
 
             int altitudeRaw = _BrickletBarometer.GetAltitude();
             double altitude = altitudeRaw / 100.0;
 
-            return altitude;
+            return new Tuple<string, double>(Name, altitude);
         }
     }
 }

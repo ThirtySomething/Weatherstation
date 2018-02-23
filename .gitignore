@@ -3,3 +3,5 @@
 */obj/*
 /.vs
 /.vscode
+/doxygen/TFPlugin.Core.log
+/doxygen/html

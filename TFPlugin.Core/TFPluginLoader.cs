@@ -9,19 +9,19 @@ namespace net.derpaul.tf
     /// <summary>
     /// Generic plugin loader for plugins of given type
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    internal static class TFPluginLoader<T>
+    /// <typeparam name="PluginType"></typeparam>
+    internal static class TFPluginLoader<PluginType>
     {
         /// <summary>
         /// Load plugins from given path
         /// </summary>
         /// <param name="pluginPath">Path to plugins</param>
         /// <returns></returns>
-        public static ICollection<T> TFPluginsLoad(string pluginPath)
+        public static ICollection<PluginType> TFPluginsLoad(string pluginPath)
         {
             ICollection<Assembly> assemblyList = GetPluginAssemblyList(pluginPath);
             ICollection<Type> pluginTypeList = GetPluginTypeList(assemblyList);
-            ICollection<T> pluginInstanceList = GetPluginInstanceList(pluginTypeList);
+            ICollection<PluginType> pluginInstanceList = GetPluginInstanceList(pluginTypeList);
 
             return pluginInstanceList;
         }
@@ -60,7 +60,7 @@ namespace net.derpaul.tf
             {
                 return null;
             }
-            Type pluginType = typeof(T);
+            Type pluginType = typeof(PluginType);
             ICollection<Type> pluginTypes = new List<Type>();
             foreach (Assembly assembly in assemblyList)
             {
@@ -92,17 +92,17 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="pluginTypeList">Collection of plugins of type T</param>
         /// <returns>Collection of plugin objects</returns>
-        private static ICollection<T> GetPluginInstanceList(ICollection<Type> pluginTypeList)
+        private static ICollection<PluginType> GetPluginInstanceList(ICollection<Type> pluginTypeList)
         {
             if (pluginTypeList == null)
             {
                 return null;
             }
 
-            ICollection<T> pluginInstanceList = new List<T>();
+            ICollection<PluginType> pluginInstanceList = new List<PluginType>();
             foreach (Type pluginType in pluginTypeList)
             {
-                T pluginInstance = (T)Activator.CreateInstance(pluginType);
+                PluginType pluginInstance = (PluginType)Activator.CreateInstance(pluginType);
                 pluginInstanceList.Add(pluginInstance);
             }
             return pluginInstanceList;

@@ -1,4 +1,5 @@
-﻿using Tinkerforge;
+﻿using System;
+using Tinkerforge;
 
 namespace net.derpaul.tf
 {
@@ -34,9 +35,9 @@ namespace net.derpaul.tf
         /// Read the value of the sensor, will catch TF exceptions
         /// </summary>
         /// <returns>Sensor value or 0.0</returns>
-        public double ValueGet()
+        public Tuple<string, double> ValueGet()
         {
-            double value = 0.0;
+            var value = new Tuple<string, double>(string.Empty, 0.0);
 
             try
             {
@@ -53,7 +54,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Read the value of the sensor without paying attention to exceptions
         /// </summary>
-        /// <returns>Sensor value or 0.0</returns>
-        protected abstract double ValueGetRaw();
+        /// <returns>Sensor name and value or 0.0</returns>
+        protected abstract Tuple<string, double> ValueGetRaw();
     }
 }

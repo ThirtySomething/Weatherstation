@@ -1,4 +1,5 @@
-﻿using Tinkerforge;
+﻿using System;
+using Tinkerforge;
 
 namespace net.derpaul.tf
 {
@@ -36,17 +37,17 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Humidity or 0.0</returns>
-        protected override double ValueGetRaw()
+        protected override Tuple<string, double> ValueGetRaw()
         {
             if (_BrickletHumidity == null)
             {
-                return 0.0;
+                return new Tuple<string, double>(Name, 0.0);
             }
 
-            int illuminanceRaw = _BrickletHumidity.GetHumidity();
-            double illuminance = illuminanceRaw / 10.0;
+            int humidityRaw = _BrickletHumidity.GetHumidity();
+            double humidity = humidityRaw / 10.0;
 
-            return illuminance;
+            return new Tuple<string, double>(Name, humidity);
         }
     }
 }

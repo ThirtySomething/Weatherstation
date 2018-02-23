@@ -48,6 +48,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Constructor of TF handler
         /// </summary>
+        /// <param name="pluginPath">Path to plugins</param>
         /// <param name="tfHost">TF host</param>
         /// <param name="tfPort">TF port</param>
         internal TFHandler(string pluginPath, string tfHost, int tfPort)
@@ -154,10 +155,7 @@ namespace net.derpaul.tf
             // TODO: Replace foreach loop with a Linq statement
             foreach (ITFSensor currentPlugin in _Plugins)
             {
-                string type = currentPlugin.Name;
-
-                double value = currentPlugin.ValueGet();
-                pluginData.Add(new Tuple<string, double>(type, value));
+                pluginData.Add(currentPlugin.ValueGet());
             }
 
             return pluginData;
