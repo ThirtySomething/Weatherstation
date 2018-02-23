@@ -18,12 +18,10 @@ namespace net.derpaul.tf
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Defines.constPluginPath);
             TFHandler SensorHandler = new TFHandler(pluginPath, Defines.constDefaultHost, Defines.constDefaultPort);
 
-            if (SensorHandler.Connect() == false)
+            if (SensorHandler.Init() == false)
             {
                 return;
             }
-
-            SensorHandler.Init();
 
             ICollection<Tuple<string, double>> pluginValues = SensorHandler.ValuesRead();
 

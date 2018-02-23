@@ -69,7 +69,7 @@ namespace net.derpaul.tf
         /// Establish connection to master brick
         /// </summary>
         /// <returns>true on succes, true on already connected, false on failure</returns>
-        internal bool Connect()
+        private bool Connect()
         {
             if (_TFConnection != null || _Connected == true)
             {
@@ -132,16 +132,21 @@ namespace net.derpaul.tf
         }
 
         /// <summary>
-        /// Initialize all plugins
+        /// Initialize sensor plugins
         /// </summary>
-        internal void Init()
+        /// <returns>true on success, otherwise false</returns>
+        private bool InitSensorPlugins()
         {
+            if (Connect() == false)
+            {
+                return false;
+            }
             _SensorPlugins = TFPluginLoader<ITFSensor>.TFPluginsLoad(_PluginPath);
 
             if (_SensorPlugins.Count == 0)
             {
                 System.Console.WriteLine($"No sensor plugins found in [{_PluginPath}].");
-                return;
+                return false;
             }
             // TODO: Replace foreach loop with a Linq statement
             foreach (var currentSensor in _TFSensorIdentified)
@@ -154,12 +159,45 @@ namespace net.derpaul.tf
                 }
                 plugin.Init(_TFConnection, currentSensor.Item2);
             }
+            return true;
+        }
 
+        /// <summary>
+        /// Initialize datasink plugins
+        /// </summary>
+        /// <returns>true on success, otherwise false</returns>
+        private bool InitDataSinkPlugins()
+        {
             _DataSinkPlugins = TFPluginLoader<ITFDataSink>.TFPluginsLoad(_PluginPath);
             if (_DataSinkPlugins.Count == 0)
             {
                 System.Console.WriteLine($"No datasink plugins found in [{_PluginPath}].");
+                return false;
             }
+
+            foreach (var currentPlugin in _DataSinkPlugins)
+            {
+                currentPlugin.ConfigLoad();
+                currentPlugin.Init();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Initialize all plugins
+        /// </summary>
+        /// <returns>true on success, otherwise false</returns>
+        internal bool Init()
+        {
+            bool InitDone = InitSensorPlugins();
+
+            if (!InitDone)
+            {
+                return InitDone;
+            }
+
+            return InitDataSinkPlugins();
         }
 
         /// <summary>
