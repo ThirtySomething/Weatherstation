@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>namespace net.derpaul.tf</RootNamespace>
+    <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
@@ -27,6 +27,10 @@
     </Content>
     <Content Include=".\..\TFInterfaces.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFInterfaces.Core.dll">
       <Link>Plugins\TFInterfaces.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include=".\..\TFLcd.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFLcd.Core.dll">
+      <Link>Plugins\TFLcd.Core.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

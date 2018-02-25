@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>TFConsole.Core</AssemblyName>
-    <RootNamespace>namespace net.derpaul.tf</RootNamespace>
+    <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -21,6 +21,8 @@ As training for my C# skills, I'm using my [Tinkerforge weather station][TFURL] 
 - Add data sink
    - A TF device such as the display of the weather station
    - A remote data sink addressed by MQTT for example
+   - Implement serialze mechanism to read properties/config of data sink plugin
+   - Avoid double call of <code>TFHandler::IdentifySensorsCallBack</code> - find best place for unregister callback
 
 [Plugin]:https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b6174b62
 [TFNuGet]:https://www.nuget.org/packages/Tinkerforge/
