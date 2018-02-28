@@ -9,12 +9,6 @@ namespace net.derpaul.tf
     public interface ITFDataSink
     {
         /// <summary>
-        /// Load plugin configuration
-        /// </summary>
-        /// <returns></returns>
-        bool ConfigLoad();
-
-        /// <summary>
         /// Initialize plugin with loaded config
         /// </summary>
         /// <returns></returns>

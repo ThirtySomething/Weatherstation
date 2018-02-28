@@ -7,7 +7,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Main program to run on M$ Windows, reading data from TF weather station
     /// </summary>
-    internal class Program
+    internal class TFPluginCore
     {
         /// <summary>
         /// Main entry point
@@ -15,8 +15,8 @@ namespace net.derpaul.tf
         /// <param name="args">Command line agruments</param>
         private static void Main(string[] args)
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Defines.constPluginPath);
-            TFHandler SensorHandler = new TFHandler(pluginPath, Defines.constDefaultHost, Defines.constDefaultPort);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.constPluginPath);
+            TFHandler SensorHandler = new TFHandler(pluginPath, TFPluginCoreConfig.Instance.Host, TFPluginCoreConfig.Instance.Port);
 
             if (SensorHandler.Init() == false)
             {
@@ -31,7 +31,7 @@ namespace net.derpaul.tf
                 Console.WriteLine("---");
                 SensorHandler.HandleValues(pluginValues);
                 loop--;
-                System.Threading.Thread.Sleep(Defines.constDefaultDelay);
+                System.Threading.Thread.Sleep(TFPluginCoreConfig.Instance.Delay);
                 pluginValues = SensorHandler.ValuesRead();
             }
         }

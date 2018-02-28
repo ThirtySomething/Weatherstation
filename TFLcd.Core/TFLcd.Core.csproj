@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TFInterfaces.Core\TFInterfaces.Core.csproj" />
-    <Content Include="Defines.cs" />
     <Content Include="TFLcd.cs" />
   </ItemGroup>
 </Project>

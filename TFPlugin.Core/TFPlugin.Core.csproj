@@ -36,9 +36,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TFInterfaces.Core\TFInterfaces.Core.csproj" />
+    <Content Include="Constants.cs" />
     <Content Include="TFHandler.cs" />
-    <Content Include="Program.cs" />
-    <Content Include="Defines.cs" />
+    <Content Include="TFPluginCore.cs" />
+    <Content Include="TFPluginCoreConfig.cs" />
     <Content Include="TFPluginLoader.cs" />
   </ItemGroup>
 </Project>

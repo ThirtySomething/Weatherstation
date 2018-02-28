@@ -11,16 +11,6 @@ namespace net.derpaul.tf
     public class TFLcd : ITFDataSink
     {
         /// <summary>
-        /// Host to connect to
-        /// </summary>
-        private string Host { get; } = "localhost";
-
-        /// <summary>
-        /// Port of ´host to connect to
-        /// </summary>
-        private int Port { get; } = 4223;
-
-        /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
         private static BrickletLCD20x4 _BrickletLCD20x4 { get; set; }
@@ -42,16 +32,6 @@ namespace net.derpaul.tf
         {
             _TFSensorIdentified = new List<Tuple<int, string>>();
             _BrickletLCD20x4 = null;
-        }
-
-        /// <summary>
-        /// Part of interface TFDataSink - load config from file
-        /// </summary>
-        /// <returns>true on success, otherwise false</returns>
-        public bool ConfigLoad()
-        {
-            // TODO: Load config from plugin specific XML file
-            return true;
         }
 
         /// <summary>
@@ -123,7 +103,6 @@ namespace net.derpaul.tf
             catch (NotConnectedException e)
             {
                 System.Console.WriteLine($"Enumeration Error [{e.Message}]");
-                System.Threading.Thread.Sleep(Defines.constDefaultDelay);
                 return false;
             }
 
@@ -139,12 +118,11 @@ namespace net.derpaul.tf
             _TFConnection = new IPConnection();
             try
             {
-                _TFConnection.Connect(Host, Port);
+                _TFConnection.Connect(TFLcdConfig.Instance.Host, TFLcdConfig.Instance.Port);
             }
             catch (System.Net.Sockets.SocketException e)
             {
                 System.Console.WriteLine($"Connection Error [{e.Message}]");
-                System.Threading.Thread.Sleep(Defines.constDefaultDelay);
                 return false;
             }
             return true;

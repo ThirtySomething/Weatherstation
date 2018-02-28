@@ -85,7 +85,6 @@ namespace net.derpaul.tf
             catch (System.Net.Sockets.SocketException e)
             {
                 System.Console.WriteLine($"Connection Error [{e.Message}]");
-                System.Threading.Thread.Sleep(Defines.constDefaultDelay);
             }
 
             if (_Connected)
@@ -99,7 +98,6 @@ namespace net.derpaul.tf
                 catch (NotConnectedException e)
                 {
                     System.Console.WriteLine($"Enumeration Error [{e.Message}]");
-                    System.Threading.Thread.Sleep(Defines.constDefaultDelay);
                 }
             }
 
@@ -177,7 +175,6 @@ namespace net.derpaul.tf
 
             foreach (var currentPlugin in _DataSinkPlugins)
             {
-                currentPlugin.ConfigLoad();
                 currentPlugin.Init();
             }
 
