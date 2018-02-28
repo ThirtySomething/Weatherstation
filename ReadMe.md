@@ -12,17 +12,22 @@ As training for my C# skills, I'm using my [Tinkerforge weather station][TFURL] 
 
 ## Implementation details
 
-- Each sensor should be a plugin. The plugin system is based on this article of [Christoph Gattnar][Plugin].
-- The Tinkerforge parts are pulled as [NuGet Package][TFNuGet].
-- Using abstract base class to catch exception of Tinkerforge.
+- The plugin system is based on this article of [Christoph Gattnar][Plugin].
+- Two kind of plugins are available:
+  - Each Tinkerforge sensor is a plugin of type <code>TFSensor</code>. These plugins produce the data. 
+  - There is also a plugin of type <code>TFDataSink</code> available. These plugins consume the data.
+- The Tinkerforge library is pulled as [NuGet Package][TFNuGet].
+- An abstract base class is used for the <code>TFSensor</code> plugins to catch exception of Tinkerforge.
+- A mechanism to simplify the handling of config files is implemented:
+  - The <code>ConfigSaver</code> interface is mandatory for each config settings.
+  - The <code>ConfigLoader</code> generic, also mandatory for each config settings.
+  - See <code>TFPluginCoreConfig</code> how to apply the previous mentioned parts.
 
 ## ToDo's
 
 - Add data sink
-   - A TF device such as the display of the weather station
-   - A remote data sink addressed by MQTT for example
-   - Implement serialze mechanism to read properties/config of data sink plugin
-   - Avoid double call of <code>TFHandler::IdentifySensorsCallBack</code> - find best place for unregister callback
+  - A remote data sink addressed by MQTT for example
+  - Avoid double call of <code>TFHandler::IdentifySensorsCallBack</code> - find best place for unregister callback
 
 [Plugin]:https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b6174b62
 [TFNuGet]:https://www.nuget.org/packages/Tinkerforge/
