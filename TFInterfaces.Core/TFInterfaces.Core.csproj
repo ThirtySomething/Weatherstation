@@ -6,7 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+    <Content Include="ConfigLoader.cs" />
+    <Content Include="ConfigSaver.cs" />
+    <Content Include="Constants.cs" />
     <Content Include="TFDataSink.cs" />
+    <Content Include="TFPluginLoader.cs" />
     <Content Include="TFSensor.cs" />
     <Content Include="TFSensorBase.cs" />
   </ItemGroup>

@@ -12,5 +12,6 @@
     <Content Include="TFAirPressure.cs" />
     <Content Include="TFAltitude.cs" />
     <Content Include="TFBarometer.cs" />
+    <Content Include="TFTemperature.cs" />
   </ItemGroup>
 </Project>

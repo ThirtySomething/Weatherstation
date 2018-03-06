@@ -10,7 +10,7 @@ namespace net.derpaul.tf
     /// Generic plugin loader for plugins of given type
     /// </summary>
     /// <typeparam name="PluginType"></typeparam>
-    internal static class TFPluginLoader<PluginType>
+    public static class TFPluginLoader<PluginType>
     {
         /// <summary>
         /// Load plugins from given path

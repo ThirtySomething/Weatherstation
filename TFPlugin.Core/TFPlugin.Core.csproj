@@ -6,6 +6,9 @@
     <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="TFPluginLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +36,10 @@
       <Link>Plugins\TFLcd.Core.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+	<Content Include=".\..\TFMQTT.Core\bin\$(ConfigurationName)\netcoreapp2.0\TFMQTT.Core.dll">
+      <Link>Plugins\TFMQTT.Core.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TFInterfaces.Core\TFInterfaces.Core.csproj" />
@@ -40,6 +47,5 @@
     <Content Include="TFHandler.cs" />
     <Content Include="TFPluginCore.cs" />
     <Content Include="TFPluginCoreConfig.cs" />
-    <Content Include="TFPluginLoader.cs" />
   </ItemGroup>
 </Project>

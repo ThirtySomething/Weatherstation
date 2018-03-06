@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFAmbientLight.Core", "TFAm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFConsole.Core", "TFConsole.Core\TFConsole.Core.csproj", "{FC96418E-9B94-4C39-9400-96C0B21CA9F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFLcd.Core", "TFLcd.Core\TFLcd.Core.csproj", "{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFLcd.Core", "TFLcd.Core\TFLcd.Core.csproj", "{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFMQTT.Core", "TFMQTT.Core\TFMQTT.Core.csproj", "{F5462D99-DE79-4D75-8197-2E10047C0B6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5462D99-DE79-4D75-8197-2E10047C0B6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5462D99-DE79-4D75-8197-2E10047C0B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5462D99-DE79-4D75-8197-2E10047C0B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5462D99-DE79-4D75-8197-2E10047C0B6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

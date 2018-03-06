@@ -5,11 +5,8 @@
     <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TFInterfaces.Core\TFInterfaces.Core.csproj" />
-    <Content Include="TFLcd.cs" />
-    <Content Include="TFLcdConfig.cs" />
+    <Content Include="TFMQTT.cs" />
+    <Content Include="TFMQTTConfig.cs" />
   </ItemGroup>
 </Project>
