@@ -9,6 +9,11 @@ namespace net.derpaul.tf
     public interface IDataSink
     {
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        bool IsInitialized { get; }
+
+        /// <summary>
         /// Initialize plugin with loaded config
         /// </summary>
         /// <returns></returns>
@@ -18,6 +23,6 @@ namespace net.derpaul.tf
         /// Perform action on measurement values
         /// </summary>
         /// <param name="SensorValues">Collection of collected values</param>
-        void HandleValues(ICollection<Tuple<string, double, string>> SensorValues);
+        void HandleValues(ICollection<Result> SensorValues);
     }
 }

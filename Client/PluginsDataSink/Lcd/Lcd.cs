@@ -11,6 +11,11 @@ namespace net.derpaul.tf
     public class Lcd : IDataSink
     {
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        public bool IsInitialized { get; private set; } = false;
+
+        /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
         private static BrickletLCD20x4 _Bricklet { get; set; }
@@ -38,7 +43,7 @@ namespace net.derpaul.tf
         /// Part of interface TFDataSink - perform action with given data
         /// </summary>
         /// <param name="SensorValues"></param>
-        public void HandleValues(ICollection<Tuple<string, double, string>> SensorValues)
+        public void HandleValues(ICollection<Result> SensorValues)
         {
             if (_Bricklet == null)
             {
@@ -48,25 +53,25 @@ namespace net.derpaul.tf
             foreach (var currentDataPair in SensorValues)
             {
                 string text;
-                switch (currentDataPair.Item1)
+                switch (currentDataPair.Name)
                 {
-                    case "TFAmbientLight":
-                        text = string.Format("Illuminanc {0,6:###.00} lx", currentDataPair.Item2);
+                    case "AmbientLight":
+                        text = string.Format("Illuminanc {0,6:###.00} lx", currentDataPair.Value);
                         _Bricklet.WriteLine(0, 0, text);
                         break;
 
-                    case "TFHumidity":
-                        text = string.Format("Humidity   {0,6:###.00} %", currentDataPair.Item2);
+                    case "Humidity":
+                        text = string.Format("Humidity   {0,6:###.00} %", currentDataPair.Value);
                         _Bricklet.WriteLine(1, 0, text);
                         break;
 
-                    case "TFAirPressure":
-                        text = string.Format("Air Press {0,7:####.00} mb", currentDataPair.Item2);
+                    case "AirPressure":
+                        text = string.Format("Air Press {0,7:####.00} mb", currentDataPair.Value);
                         _Bricklet.WriteLine(2, 0, text);
                         break;
 
-                    case "TFTemperature":
-                        text = string.Format("Temperature {0,5:##.00} {1}C", currentDataPair.Item2, (char)0xDF);
+                    case "Temperature":
+                        text = string.Format("Temperature {0,5:##.00} {1}C", currentDataPair.Value, (char)0xDF);
                         _Bricklet.WriteLine(3, 0, text);
                         break;
                 }
@@ -102,7 +107,7 @@ namespace net.derpaul.tf
             }
             catch (NotConnectedException e)
             {
-                System.Console.WriteLine($"Enumeration Error [{e.Message}]");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
                 return false;
             }
 
@@ -122,7 +127,7 @@ namespace net.derpaul.tf
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                System.Console.WriteLine($"Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
                 return false;
             }
             return true;
@@ -151,6 +156,7 @@ namespace net.derpaul.tf
                 _Bricklet.ClearDisplay();
                 _Bricklet.BacklightOn();
                 System.Console.WriteLine($"Datasink of type [{GetType().Name}] instantiated.");
+                IsInitialized = true;
             }
         }
     }

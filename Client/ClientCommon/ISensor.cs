@@ -34,6 +34,6 @@ namespace net.derpaul.tf
         /// Read the value of the sensor
         /// </summary>
         /// <returns>tuple of sensor name and value</returns>
-        Tuple<string, double, string> ValueGet();
+        Result ValueGet();
     }
 }

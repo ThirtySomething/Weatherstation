@@ -40,9 +40,9 @@ namespace net.derpaul.tf
         /// Read the value of the sensor, will catch TF exceptions
         /// </summary>
         /// <returns>Sensor value or 0.0</returns>
-        public Tuple<string, double, string> ValueGet()
+        public Result ValueGet()
         {
-            var value = new Tuple<string, double, string>(string.Empty, 0.0, Unit);
+            var value = new Result();
 
             try
             {
@@ -60,6 +60,6 @@ namespace net.derpaul.tf
         /// Read the value of the sensor without paying attention to exceptions
         /// </summary>
         /// <returns>Sensor name and value or 0.0</returns>
-        protected abstract Tuple<string, double, string> ValueGetRaw();
+        protected abstract Result ValueGetRaw();
     }
 }

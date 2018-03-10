@@ -16,17 +16,19 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override Tuple<string, double, string> ValueGetRaw()
+        protected override Result ValueGetRaw()
         {
+            Result result = new Result(Name, Unit);
+
             if (_Bricklet == null)
             {
-                return new Tuple<string, double, string>(Name, 0.0, Unit);
+                return result;
             }
 
             int temperatureRaw = _Bricklet.GetChipTemperature();
-            double temperature = temperatureRaw / 100.0;
+            result.Value = temperatureRaw / 100.0;
 
-            return new Tuple<string, double, string>(Name, temperature, Unit);
+            return result;
         }
     }
 }

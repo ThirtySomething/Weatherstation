@@ -37,6 +37,6 @@ namespace net.derpaul.tf
         /// Abstract method, should be implemented in subclasses. Shall retrieve sensor's value.
         /// </summary>
         /// <returns>Measurement value of sensor or 0.0</returns>
-        protected override abstract Tuple<string, double, string> ValueGetRaw();
+        protected override abstract Result ValueGetRaw();
     }
 }

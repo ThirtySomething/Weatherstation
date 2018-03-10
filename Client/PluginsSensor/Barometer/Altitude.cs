@@ -16,17 +16,19 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Altitude or 0.0</returns>
-        protected override Tuple<string, double, string> ValueGetRaw()
+        protected override Result ValueGetRaw()
         {
+            Result result = new Result(Name, Unit);
+
             if (_Bricklet == null)
             {
-                return new Tuple<string, double, string>(Name, 0.0, Unit);
+                return result;
             }
 
             int altitudeRaw = _Bricklet.GetAltitude();
-            double altitude = altitudeRaw / 100.0;
+            result.Value = altitudeRaw / 100.0;
 
-            return new Tuple<string, double, string>(Name, altitude, Unit);
+            return result;
         }
     }
 }

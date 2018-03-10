@@ -42,17 +42,19 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Humidity or 0.0</returns>
-        protected override Tuple<string, double, string> ValueGetRaw()
+        protected override Result ValueGetRaw()
         {
+            Result result = new Result(Name, Unit);
+
             if (_Bricklet == null)
             {
-                return new Tuple<string, double, string>(Name, 0.0, Unit);
+                return result;
             }
 
             int humidityRaw = _Bricklet.GetHumidity();
-            double humidity = humidityRaw / 10.0;
+            result.Value = humidityRaw / 10.0;
 
-            return new Tuple<string, double, string>(Name, humidity, Unit);
+            return result;
         }
     }
 }

@@ -9,23 +9,20 @@ namespace net.derpaul.tf
     public class Console : IDataSink
     {
         /// <summary>
-        /// This plugin does not have a configuration
+        /// Flags successful initialization
         /// </summary>
-        /// <returns>signal success with true</returns>
-        public bool ConfigLoad()
-        {
-            return true;
-        }
+        public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
         /// Write sensor values to console
         /// </summary>
         /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>
-        public void HandleValues(ICollection<Tuple<string, double, string>> SensorValues)
+        public void HandleValues(ICollection<Result> SensorValues)
         {
+            System.Console.WriteLine("---");
             foreach (var currentValue in SensorValues)
             {
-                System.Console.WriteLine($"Sensor [{currentValue.Item1}], Value [{currentValue.Item2}], Unit [{currentValue.Item3}]");
+                System.Console.WriteLine($"Sensor [{currentValue.Name}], Value [{currentValue.Value}], Unit [{currentValue.Unit}]");
             }
         }
 
@@ -35,6 +32,7 @@ namespace net.derpaul.tf
         /// <returns>signal success with true</returns>
         public bool Init()
         {
+            IsInitialized = true;
             return true;
         }
     }

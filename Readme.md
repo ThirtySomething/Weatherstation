@@ -16,18 +16,18 @@ As training for my develooper skills, I'm using my [Tinkerforge weather station]
 
 ## Client
 
-The client project part is responsible fordealing with the data of the weatherstations. The implemented plugin system offers two types of plugins:
-  - <code>ISensor</code> plugins are responsible for reading data from the sensors.
-  - <code>IDataSink</code> plugins are responsible for transfering to a destination dealing with the data.
+The client project part is responsible for dealing with the data of the weatherstation. 
 
 ### Implementation details
 
-- The plugin system is based on this article of [Christoph Gattnar][Plugin].
 - The Tinkerforge library is pulled as [NuGet Package][TFNuGet].
 - A mechanism to simplify the handling of config files is implemented:
   - The <code>ConfigSaver</code> interface is mandatory for each config settings.
   - The <code>ConfigLoader</code> generic, also mandatory for each config settings.
-  - See <code>TFPluginCoreConfig</code> how to apply the previous mentioned parts.
+  - See <code>ClientConfig</code> how to apply the previous mentioned parts.
+- A plugin system, based on this article of [Christoph Gattnar][Plugin]. There are two types of plugins:
+  - <code>ISensor</code> plugins are responsible for reading data of the sensors. They are data producers.
+  - <code>IDataSink</code> plugins are responsible for working with the data. They are data consumers.
 
 ### ToDo's
 

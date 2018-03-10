@@ -84,7 +84,7 @@ namespace net.derpaul.tf
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                System.Console.WriteLine($"Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
             }
 
             if (_Connected)
@@ -97,7 +97,7 @@ namespace net.derpaul.tf
                 }
                 catch (NotConnectedException e)
                 {
-                    System.Console.WriteLine($"Enumeration Error [{e.Message}]");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
                 }
             }
 
@@ -143,7 +143,7 @@ namespace net.derpaul.tf
 
             if (_SensorPlugins.Count == 0)
             {
-                System.Console.WriteLine($"No sensor plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No sensor plugins found in [{_PluginPath}].");
                 return false;
             }
             // TODO: Replace foreach loop with a Linq statement
@@ -152,7 +152,7 @@ namespace net.derpaul.tf
                 var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.Item1 == p.SensorType);
                 if (plugin == null)
                 {
-                    System.Console.WriteLine($"No plugin found for sensor type [{currentSensor.Item1}].");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.Item1}].");
                     continue;
                 }
                 plugin.Init(_TFConnection, currentSensor.Item2);
@@ -169,13 +169,20 @@ namespace net.derpaul.tf
             _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath);
             if (_DataSinkPlugins.Count == 0)
             {
-                System.Console.WriteLine($"No datasink plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No datasink plugins found in [{_PluginPath}].");
                 return false;
             }
 
             foreach (var currentPlugin in _DataSinkPlugins)
             {
-                currentPlugin.Init();
+                try
+                {
+                    currentPlugin.Init();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.GetType()}] => [{e.Message}]");
+                }
             }
 
             return true;
@@ -201,9 +208,9 @@ namespace net.derpaul.tf
         /// Loop over all sensors, read value name and type, return collection of all results
         /// </summary>
         /// <returns>Collection of (sensor type|sensor value)</returns>
-        internal ICollection<Tuple<string, double, string>> ValuesRead()
+        internal ICollection<Result> ValuesRead()
         {
-            ICollection<Tuple<string, double, string>> pluginData = new List<Tuple<string, double, string>>();
+            ICollection<Result> pluginData = new List<Result>();
             // TODO: Replace foreach loop with a Linq statement
             foreach (var currentPlugin in _SensorPlugins)
             {
@@ -217,11 +224,14 @@ namespace net.derpaul.tf
         /// Feed each datasink plugin with sensor data
         /// </summary>
         /// <param name="SensorValues"></param>
-        internal void HandleValues(ICollection<Tuple<string, double, string>> SensorValues)
+        internal void HandleValues(ICollection<Result> SensorValues)
         {
             foreach (var currentPlugin in _DataSinkPlugins)
             {
-                currentPlugin.HandleValues(SensorValues);
+                if (currentPlugin.IsInitialized)
+                {
+                    currentPlugin.HandleValues(SensorValues);
+                }
             }
         }
     }
