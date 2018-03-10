@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>net.derpaul.tf</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+    <Content Include="ConfigLoader.cs" />
+    <Content Include="ConfigSaver.cs" />
+    <Content Include="Constants.cs" />
+    <Content Include="IDataSink.cs" />
+    <Content Include="PluginLoader.cs" />
+    <Content Include="ISensor.cs" />
+    <Content Include="SensorBase.cs" />
+  </ItemGroup>
+</Project>

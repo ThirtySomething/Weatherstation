@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>net.derpaul.tf</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
+    <Content Include="Humidity.cs" />
+  </ItemGroup>
+</Project>
