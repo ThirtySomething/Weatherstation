@@ -7,12 +7,11 @@ namespace net.derpaul.tf
     {
         public void HandleValues(ICollection<Tuple<string, double>> SensorValues)
         {
-            throw new NotImplementedException();
         }
 
         public bool Init()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
