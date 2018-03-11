@@ -38,12 +38,12 @@ namespace net.derpaul.tf
         /// <summary>
         /// List of sensor plugins
         /// </summary>
-        private ICollection<ISensor> _SensorPlugins { get; set; }
+        private List<ISensor> _SensorPlugins { get; set; }
 
         /// <summary>
         /// List of data sink plugins
         /// </summary>
-        private ICollection<IDataSink> _DataSinkPlugins { get; set; }
+        private List<IDataSink> _DataSinkPlugins { get; set; }
 
         /// <summary>
         /// List of identified sensors
@@ -208,23 +208,23 @@ namespace net.derpaul.tf
         /// Loop over all sensors, read value name and type, return collection of all results
         /// </summary>
         /// <returns>Collection of (sensor type|sensor value)</returns>
-        internal ICollection<Result> ValuesRead()
+        internal List<MeasurementValue> ValuesRead()
         {
-            ICollection<Result> pluginData = new List<Result>();
+            var pluginData = new List<MeasurementValue>();
             // TODO: Replace foreach loop with a Linq statement
             foreach (var currentPlugin in _SensorPlugins)
             {
                 pluginData.Add(currentPlugin.ValueGet());
             }
 
-            return pluginData;
+            return pluginData.OrderBy(o => o.SortOrder).ToList();
         }
 
         /// <summary>
         /// Feed each datasink plugin with sensor data
         /// </summary>
         /// <param name="SensorValues"></param>
-        internal void HandleValues(ICollection<Result> SensorValues)
+        internal void HandleValues(List<MeasurementValue> SensorValues)
         {
             foreach (var currentPlugin in _DataSinkPlugins)
             {

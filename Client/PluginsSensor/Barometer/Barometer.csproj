@@ -12,6 +12,7 @@
     <Content Include="AirPressure.cs" />
     <Content Include="Altitude.cs" />
     <Content Include="Barometer.cs" />
+    <Content Include="BarometerConfig.cs" />
     <Content Include="Temperature.cs" />
   </ItemGroup>
 </Project>

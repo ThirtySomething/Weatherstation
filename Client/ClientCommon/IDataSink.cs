@@ -23,6 +23,6 @@ namespace net.derpaul.tf
         /// Perform action on measurement values
         /// </summary>
         /// <param name="SensorValues">Collection of collected values</param>
-        void HandleValues(ICollection<Result> SensorValues);
+        void HandleValues(List<MeasurementValue> SensorValues);
     }
 }

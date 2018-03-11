@@ -43,37 +43,33 @@ namespace net.derpaul.tf
         /// Part of interface TFDataSink - perform action with given data
         /// </summary>
         /// <param name="SensorValues"></param>
-        public void HandleValues(ICollection<Result> SensorValues)
+        public void HandleValues(List<MeasurementValue> SensorValues)
         {
             if (_Bricklet == null)
             {
                 return;
             }
 
+            _Bricklet.ClearDisplay();
+
+            _Bricklet.WriteLine(0, 0, SensorValues.First().Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
+
+            byte posX = 0;
+            byte posY = 1;
             foreach (var currentDataPair in SensorValues)
             {
-                string text;
-                switch (currentDataPair.Name)
+                string MeasurementValueData = string.Format("{0,7:####.00} {1}", currentDataPair.Value, currentDataPair.Unit);
+                // string text = string.Format("1234.56 pb", currentDataPair.Value, currentDataPair.Unit);
+
+                _Bricklet.WriteLine(posY, posX, MeasurementValueData);
+                if (posX == 0)
                 {
-                    case "AmbientLight":
-                        text = string.Format("Illuminanc {0,6:###.00} lx", currentDataPair.Value);
-                        _Bricklet.WriteLine(0, 0, text);
-                        break;
-
-                    case "Humidity":
-                        text = string.Format("Humidity   {0,6:###.00} %", currentDataPair.Value);
-                        _Bricklet.WriteLine(1, 0, text);
-                        break;
-
-                    case "AirPressure":
-                        text = string.Format("Air Press {0,7:####.00} mb", currentDataPair.Value);
-                        _Bricklet.WriteLine(2, 0, text);
-                        break;
-
-                    case "Temperature":
-                        text = string.Format("Temperature {0,5:##.00} {1}C", currentDataPair.Value, (char)0xDF);
-                        _Bricklet.WriteLine(3, 0, text);
-                        break;
+                    posX = 10;
+                }
+                else
+                {
+                    posX = 0;
+                    posY++;
                 }
             }
         }

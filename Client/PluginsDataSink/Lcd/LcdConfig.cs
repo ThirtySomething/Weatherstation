@@ -11,5 +11,10 @@
         /// Port of ´host to connect to
         /// </summary>
         public int Port { get; set; } = 4223;
+
+        /// <summary>
+        /// Format to display a timestamp
+        /// </summary>
+        public string TimestampFormat = "dd.MM.yyyy  HH:mm:ss";
     }
 }

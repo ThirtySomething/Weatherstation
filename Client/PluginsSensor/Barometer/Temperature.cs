@@ -10,15 +10,15 @@ namespace net.derpaul.tf
         /// <summary>
         /// Measurement unit of sensor
         /// </summary>
-        public override string Unit { get; } = "°C";
+        public override string Unit { get; } = "C";
 
         /// <summary>
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override Result ValueGetRaw()
+        protected override MeasurementValue ValueGetRaw()
         {
-            Result result = new Result(Name, Unit);
+            MeasurementValue result = new MeasurementValue(Name, Unit, BarometerConfig.Instance.SortOrderTemperature);
 
             if (_Bricklet == null)
             {

@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
     <Content Include="AmbientLight.cs" />
+    <Content Include="AmbientLightConfig.cs" />
   </ItemGroup>
 </Project>

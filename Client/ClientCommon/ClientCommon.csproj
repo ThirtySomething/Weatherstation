@@ -10,8 +10,9 @@
     <Content Include="ConfigSaver.cs" />
     <Content Include="Constants.cs" />
     <Content Include="IDataSink.cs" />
-    <Content Include="PluginLoader.cs" />
     <Content Include="ISensor.cs" />
+    <Content Include="MeasurementValue.cs" />
+    <Content Include="PluginLoader.cs" />
     <Content Include="SensorBase.cs" />
   </ItemGroup>
 </Project>

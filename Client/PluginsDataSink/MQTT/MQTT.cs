@@ -32,7 +32,7 @@ namespace net.derpaul.tf
             return success;
         }
 
-        public void HandleValues(ICollection<Result> SensorValues)
+        public void HandleValues(List<MeasurementValue> SensorValues)
         {
         }
     }

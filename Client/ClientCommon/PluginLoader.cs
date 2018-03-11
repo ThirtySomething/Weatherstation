@@ -17,11 +17,11 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="pluginPath">Path to plugins</param>
         /// <returns></returns>
-        public static ICollection<PluginType> TFPluginsLoad(string pluginPath)
+        public static List<PluginType> TFPluginsLoad(string pluginPath)
         {
-            ICollection<Assembly> assemblyList = GetPluginAssemblyList(pluginPath);
-            ICollection<Type> pluginTypeList = GetPluginTypeList(assemblyList);
-            ICollection<PluginType> pluginInstanceList = GetPluginInstanceList(pluginTypeList);
+            List<Assembly> assemblyList = GetPluginAssemblyList(pluginPath);
+            List<Type> pluginTypeList = GetPluginTypeList(assemblyList);
+            List<PluginType> pluginInstanceList = GetPluginInstanceList(pluginTypeList);
 
             return pluginInstanceList;
         }
@@ -31,7 +31,7 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="pluginFolder">Path to search for assemblies</param>
         /// <returns>Collection of assembly objects</returns>
-        private static ICollection<Assembly> GetPluginAssemblyList(string pluginFolder)
+        private static List<Assembly> GetPluginAssemblyList(string pluginFolder)
         {
             if (!Directory.Exists(pluginFolder))
             {
@@ -39,7 +39,7 @@ namespace net.derpaul.tf
             }
 
             string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
-            ICollection<Assembly> assemblyList = new List<Assembly>();
+            List<Assembly> assemblyList = new List<Assembly>();
             foreach (string pluginFile in pluginFileList)
             {
                 Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
@@ -54,14 +54,14 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="assemblyList">Collection of assemblies</param>
         /// <returns>Collection of plugins of type T</returns>
-        private static ICollection<Type> GetPluginTypeList(ICollection<Assembly> assemblyList)
+        private static List<Type> GetPluginTypeList(List<Assembly> assemblyList)
         {
             if (assemblyList == null)
             {
                 return null;
             }
             Type pluginType = typeof(PluginType);
-            ICollection<Type> pluginTypes = new List<Type>();
+            List<Type> pluginTypes = new List<Type>();
             foreach (Assembly assembly in assemblyList)
             {
                 if (assembly != null)
@@ -92,14 +92,14 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="pluginTypeList">Collection of plugins of type T</param>
         /// <returns>Collection of plugin objects</returns>
-        private static ICollection<PluginType> GetPluginInstanceList(ICollection<Type> pluginTypeList)
+        private static List<PluginType> GetPluginInstanceList(List<Type> pluginTypeList)
         {
             if (pluginTypeList == null)
             {
                 return null;
             }
 
-            ICollection<PluginType> pluginInstanceList = new List<PluginType>();
+            List<PluginType> pluginInstanceList = new List<PluginType>();
             foreach (Type pluginType in pluginTypeList)
             {
                 PluginType pluginInstance = (PluginType)Activator.CreateInstance(pluginType);

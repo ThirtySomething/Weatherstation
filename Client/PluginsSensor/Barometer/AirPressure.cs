@@ -16,9 +16,9 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override Result ValueGetRaw()
+        protected override MeasurementValue ValueGetRaw()
         {
-            Result returnValue = new Result(Name, Unit);
+            MeasurementValue returnValue = new MeasurementValue(Name, Unit, BarometerConfig.Instance.SortOrderAirPressure);
 
             if (_Bricklet == null)
             {

@@ -20,16 +20,16 @@
       <Link>Plugins\Barometer.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include=".\..\ClientCommon\bin\$(ConfigurationName)\netcoreapp2.0\ClientCommon.dll">
+      <Link>Plugins\ClientCommon.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include=".\..\PluginsDataSink\Console\bin\$(ConfigurationName)\netcoreapp2.0\Console.dll">
       <Link>Plugins\Console.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include=".\..\PluginsSensor\Humidity\bin\$(ConfigurationName)\netcoreapp2.0\Humidity.dll">
       <Link>Plugins\Humidity.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include=".\..\ClientCommon\bin\$(ConfigurationName)\netcoreapp2.0\ClientCommon.dll">
-      <Link>Plugins\ClientCommon.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 	<Content Include=".\..\PluginsDataSink\Lcd\bin\$(ConfigurationName)\netcoreapp2.0\Lcd.dll">
@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClientCommon\ClientCommon.csproj" />
-    <Content Include="Constants.cs" />
-    <Content Include="PluginHandler.cs" />
     <Content Include="Client.cs" />
     <Content Include="ClientConfig.cs" />
+    <Content Include="Constants.cs" />
+    <Content Include="PluginHandler.cs" />
   </ItemGroup>
 </Project>

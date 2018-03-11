@@ -9,22 +9,17 @@ namespace net.derpaul.tf
     /// - Name/kind of sensor
     /// - Timestamp of recording
     /// </summary>
-    public class Result
+    public class MeasurementValue
     {
-        /// <summary>
-        /// Measurement value
-        /// </summary>
-        public double Value { get; set; }
-
-        /// <summary>
-        /// Unit of measurement value
-        /// </summary>
-        public string Unit { get; set; }
-
         /// <summary>
         /// Name/kind of sensor
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Sort priority
+        /// </summary>
+        public int SortOrder { get; set; }
 
         /// <summary>
         /// Timestamp of recording
@@ -32,21 +27,32 @@ namespace net.derpaul.tf
         public DateTime Timestamp { get; set; }
 
         /// <summary>
+        /// Unit of measurement value
+        /// </summary>
+        public string Unit { get; set; }
+
+        /// <summary>
+        /// Measurement value
+        /// </summary>
+        public double Value { get; set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
-        public Result() : this("", "")
+        public MeasurementValue() : this("", "", 0)
         {
         }
 
         /// <summary>
         /// Constructor to initialize values
         /// </summary>
-        public Result(string sensorName, string valueUnit)
+        public MeasurementValue(string sensorName, string valueUnit, int sortOrder)
         {
-            Value = 0.0;
-            Unit = valueUnit;
             Name = sensorName;
             Timestamp = DateTime.Now;
+            SortOrder = sortOrder;
+            Unit = valueUnit;
+            Value = 0.0;
         }
     }
 }

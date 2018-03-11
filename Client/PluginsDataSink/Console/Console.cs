@@ -17,7 +17,7 @@ namespace net.derpaul.tf
         /// Write sensor values to console
         /// </summary>
         /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>
-        public void HandleValues(ICollection<Result> SensorValues)
+        public void HandleValues(List<MeasurementValue> SensorValues)
         {
             System.Console.WriteLine("---");
             foreach (var currentValue in SensorValues)

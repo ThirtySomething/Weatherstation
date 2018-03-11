@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
     <Content Include="Humidity.cs" />
+    <Content Include="HumidityConfig.cs" />
   </ItemGroup>
 </Project>
