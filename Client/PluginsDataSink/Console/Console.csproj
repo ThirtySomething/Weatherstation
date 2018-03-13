@@ -5,9 +5,6 @@
     <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
     <Content Include="Console.cs" />
   </ItemGroup>

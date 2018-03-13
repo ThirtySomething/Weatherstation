@@ -9,7 +9,8 @@
     <Compile Remove="TFPluginLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+    <PackageReference Include="MQTTnet" Version="2.7.0" />
+    <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".\..\PluginsSensor\AmbientLight\bin\$(ConfigurationName)\netcoreapp2.0\AmbientLight.dll">
@@ -45,7 +46,6 @@
     <ProjectReference Include="..\ClientCommon\ClientCommon.csproj" />
     <Content Include="Client.cs" />
     <Content Include="ClientConfig.cs" />
-    <Content Include="Constants.cs" />
     <Content Include="PluginHandler.cs" />
   </ItemGroup>
 </Project>

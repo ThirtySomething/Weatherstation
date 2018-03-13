@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MQTTnet.Client;
+using System;
 using System.Collections.Generic;
-using uPLibrary.Networking.M2Mqtt;
 
 namespace net.derpaul.tf
 {
     public class MQTT : IDataSink
     {
-        private MqttClient MqttClient;
+        private IMqttClient MqttClient;
+
+        private string ClientId { get; } = System.Guid.NewGuid().ToString();
 
         /// <summary>
         /// Flags successful initialization
@@ -19,7 +21,18 @@ namespace net.derpaul.tf
 
             try
             {
-                MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
+                var factory = new MQTTnet.MqttFactory();
+
+                MqttClient = factory.CreateMqttClient();
+
+                var options = new MqttClientOptionsBuilder()
+                    .WithClientId(ClientId)
+                    .WithTcpServer(MQTTConfig.Instance.BrokerIP, MQTTConfig.Instance.BrokerPort)
+                    .WithCleanSession()
+                    .Build();
+
+                MqttClient.ConnectAsync(options);
+
                 success = true;
                 IsInitialized = true;
             }

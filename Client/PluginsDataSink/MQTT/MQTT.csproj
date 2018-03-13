@@ -10,6 +10,6 @@
     <Content Include="MQTTConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
+    <PackageReference Include="MQTTnet" Version="2.7.0" />
   </ItemGroup>
 </Project>

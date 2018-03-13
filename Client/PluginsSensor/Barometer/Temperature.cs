@@ -18,7 +18,7 @@ namespace net.derpaul.tf
         /// <returns>Air pressure or 0.0</returns>
         protected override MeasurementValue ValueGetRaw()
         {
-            MeasurementValue result = new MeasurementValue(Name, Unit, BarometerConfig.Instance.SortOrderTemperature);
+            MeasurementValue result = new MeasurementValue(Name, Unit, TemperatureConfig.Instance.SortOrder);
 
             if (_Bricklet == null)
             {

@@ -5,14 +5,16 @@
     <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+    <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
     <Content Include="AirPressure.cs" />
+    <Content Include="AirPressureConfig.cs" />
     <Content Include="Altitude.cs" />
+    <Content Include="AltitudeConfig.cs" />
     <Content Include="Barometer.cs" />
-    <Content Include="BarometerConfig.cs" />
     <Content Include="Temperature.cs" />
+    <Content Include="TemperatureConfig.cs" />
   </ItemGroup>
 </Project>

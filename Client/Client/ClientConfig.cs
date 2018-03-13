@@ -19,5 +19,10 @@
         /// Port of TF host
         /// </summary>
         public int Port { get; set; } = 4223;
+
+        /// <summary>
+        /// Default path for plugins
+        /// </summary>
+        public string PluginPath { get; set; } = "Plugins";
     }
 }

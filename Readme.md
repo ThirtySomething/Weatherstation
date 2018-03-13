@@ -12,7 +12,7 @@ This project will address a [Tinkerforge weather station][TFURL] weatherstation.
 
 ## Motivation
 
-As training for my develooper skills, I'm using my [Tinkerforge weather station][TFURL] for excercising.
+As training for my developer skills, I'm using my [Tinkerforge weather station][TFURL] for excercising.
 
 ## Client
 
@@ -31,6 +31,7 @@ The client project part is responsible for dealing with the data of the weathers
 
 ### ToDo's
 
+- Need to remove <code>MQTTNet</code> NuGet package
 - Add data sink
   - A remote data sink addressed by MQTT for example
   - Avoid double call of <code>TFHandler::IdentifySensorsCallBack</code> - find best place for unregister callback

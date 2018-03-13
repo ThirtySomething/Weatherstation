@@ -48,7 +48,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// List of identified sensors
         /// </summary>
-        private List<Tuple<int, string>> _TFSensorIdentified { get; }
+        private List<TFSensor> _TFSensorIdentified { get; }
 
         /// <summary>
         /// Constructor of TF handler
@@ -62,7 +62,7 @@ namespace net.derpaul.tf
             _Port = tfPort;
             _PluginPath = pluginPath;
             _Connected = false;
-            _TFSensorIdentified = new List<Tuple<int, string>>();
+            _TFSensorIdentified = new List<TFSensor>();
         }
 
         /// <summary>
@@ -122,10 +122,17 @@ namespace net.derpaul.tf
             if (enumerationType == IPConnection.ENUMERATION_TYPE_CONNECTED ||
                enumerationType == IPConnection.ENUMERATION_TYPE_AVAILABLE)
             {
-                var hVersion = string.Join(",", hardwareVersion.Select(x => x.ToString()).ToArray());
-                var fVersion = string.Join(",", firmwareVersion.Select(x => x.ToString()).ToArray());
-                System.Console.WriteLine($"Sensor [{UID}], type [{deviceIdentifier}], hardware [{hVersion}], firmware [{fVersion}].");
-                _TFSensorIdentified.Add(new Tuple<int, string>(deviceIdentifier, UID));
+                var currentSensor = new TFSensor();
+                currentSensor.UID = UID;
+                currentSensor.ConnectedUID = connectedUID;
+                currentSensor.Position = position;
+                currentSensor.HardwareVersion = string.Join(",", hardwareVersion.Select(x => x.ToString()).ToArray());
+                currentSensor.FirmwareVersion = string.Join(",", firmwareVersion.Select(x => x.ToString()).ToArray());
+                currentSensor.DeviceIdentifier = deviceIdentifier;
+                currentSensor.EnumerationType = enumerationType;
+
+                System.Console.WriteLine(currentSensor.ToString());
+                _TFSensorIdentified.Add(currentSensor);
             }
         }
 
@@ -149,13 +156,13 @@ namespace net.derpaul.tf
             // TODO: Replace foreach loop with a Linq statement
             foreach (var currentSensor in _TFSensorIdentified)
             {
-                var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.Item1 == p.SensorType);
+                var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
                 if (plugin == null)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.Item1}].");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
                     continue;
                 }
-                plugin.Init(_TFConnection, currentSensor.Item2);
+                plugin.Init(_TFConnection, currentSensor.UID);
             }
             return true;
         }

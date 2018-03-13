@@ -18,7 +18,7 @@ namespace net.derpaul.tf
         /// <returns>Altitude or 0.0</returns>
         protected override MeasurementValue ValueGetRaw()
         {
-            MeasurementValue result = new MeasurementValue(Name, Unit, BarometerConfig.Instance.SortOrderAltitude);
+            MeasurementValue result = new MeasurementValue(Name, Unit, AltitudeConfig.Instance.SortOrder);
 
             if (_Bricklet == null)
             {

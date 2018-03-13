@@ -5,7 +5,7 @@
     <RootNamespace>net.derpaul.tf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Tinkerforge" Version="2.1.16.1" />
+    <PackageReference Include="Tinkerforge" Version="2.1.17" />
     <Content Include="ConfigLoader.cs" />
     <Content Include="ConfigSaver.cs" />
     <Content Include="Constants.cs" />
@@ -14,5 +14,6 @@
     <Content Include="MeasurementValue.cs" />
     <Content Include="PluginLoader.cs" />
     <Content Include="SensorBase.cs" />
+    <Content Include="TFSensor.cs" />
   </ItemGroup>
 </Project>

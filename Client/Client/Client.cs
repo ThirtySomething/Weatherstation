@@ -14,7 +14,7 @@ namespace net.derpaul.tf
         /// <param name="args">Command line agruments</param>
         private static void Main(string[] args)
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.constPluginPath);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClientConfig.Instance.PluginPath);
             PluginHandler pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.Host, ClientConfig.Instance.Port);
 
             if (pluginHandler.Init() == false)
@@ -22,11 +22,14 @@ namespace net.derpaul.tf
                 return;
             }
 
-            while (true)
+            do
             {
-                pluginHandler.HandleValues(pluginHandler.ValuesRead());
-                System.Threading.Thread.Sleep(ClientConfig.Instance.Delay);
-            }
+                while (!Console.KeyAvailable)
+                {
+                    pluginHandler.HandleValues(pluginHandler.ValuesRead());
+                    System.Threading.Thread.Sleep(ClientConfig.Instance.Delay);
+                }
+            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
         }
     }
 }
