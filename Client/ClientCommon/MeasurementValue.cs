@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace net.derpaul.tf
 {
@@ -53,6 +54,15 @@ namespace net.derpaul.tf
             SortOrder = sortOrder;
             Unit = valueUnit;
             Value = 0.0;
+        }
+
+        /// <summary>
+        /// Get object as JSON string
+        /// </summary>
+        /// <returns></returns>
+        public string ToJSON()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

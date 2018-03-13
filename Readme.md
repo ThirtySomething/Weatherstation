@@ -1,7 +1,7 @@
 # Weatherstation
 
-This project will address a [Tinkerforge weather station][TFURL] weatherstation. It's splittet into two parts:
-  - The client for reading the data from the weather station.
+This project will address a [Tinkerforge weather station][TFURL]. It's splittet into two parts:
+  - The client for reading the data of the weather station.
   - The server for dealing with the data in form of history and diagrams.
 
 ## General information
@@ -29,13 +29,28 @@ The client project part is responsible for dealing with the data of the weathers
   - <code>ISensor</code> plugins are responsible for reading data of the sensors. They are data producers.
   - <code>IDataSink</code> plugins are responsible for working with the data. They are data consumers.
 
-### ToDo's
+### ToDos
 
-- Need to remove <code>MQTTNet</code> NuGet package
-- Add data sink
-  - A remote data sink addressed by MQTT for example
-  - Avoid double call of <code>TFHandler::IdentifySensorsCallBack</code> - find best place for unregister callback
+- Remember to remove <code>M2MqttDotnetCore</code> NuGet package at client before publish
+- Implement server part, consists of
+  - MQTT client subscribing to the same topic as MQTT plugin
+  - Writing data to database (MySQL, MariaDB, SQLite, ...)
+  - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
+  - Create a HTML frontend with various information
+    - Data of current values
+    - Historized data
+    - Graphics
+
+### URLs
+
+#### Swinging door
+- http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
+- https://pisquare.osisoft.com/thread/7566
+- https://osipi.wordpress.com/tag/swinging-door-algorithm/
+- https://www.hackerboard.de/code-kitchen/50448-c-gesucht-implementierung-des-swinging-door-algorithmus.html
 
 [Plugin]:https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b6174b62
+[SDoor]:https://support.industry.siemens.com/cs/document/109739594/komprimierung-von-prozesswertarchiven-mit-dem-swinging-door-algorithmus-in-pcs-7?dti=0&lc=de-WW
 [TFNuGet]:https://www.nuget.org/packages/Tinkerforge/
 [TFURL]:https://www.tinkerforge.com/en/doc/Kits/WeatherStation/WeatherStation.html
+

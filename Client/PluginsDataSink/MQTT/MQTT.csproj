@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
@@ -10,6 +11,6 @@
     <Content Include="MQTTConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MQTTnet" Version="2.7.0" />
+    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
   </ItemGroup>
 </Project>

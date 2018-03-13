@@ -4,12 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="TFPluginLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MQTTnet" Version="2.7.0" />
+    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
     <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
   <ItemGroup>

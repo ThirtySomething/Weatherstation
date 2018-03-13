@@ -6,9 +6,9 @@
     public class ClientConfig : ConfigLoader<ClientConfig>, ConfigSaver
     {
         /// <summary>
-        /// For internal delays
+        /// Delay between reading/sending values in milliseconds
         /// </summary>
-        public int Delay { get; set; } = 1000;
+        public int Delay { get; set; } = 5000;
 
         /// <summary>
         /// Name of TF host to connect to

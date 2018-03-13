@@ -8,8 +8,13 @@
         public string BrokerIP { get; set; } = "127.0.0.1";
 
         /// <summary>
-        /// Port of MQTT broker to connect to
+        /// Client ID
         /// </summary>
-        public int BrokerPort { get; set; } = 1883;
+        public string MQTTClientID { get; set; } = "WeatherMQTT";
+
+        /// <summary>
+        /// Topic to publish messages to
+        /// </summary>
+        public string MQTTTopic { get; set; } = "/tinkerforge/weatherstation";
     }
 }

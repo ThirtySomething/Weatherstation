@@ -6,7 +6,7 @@ using Tinkerforge;
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Class to write values to LCD20x4 bricklet
+    /// Class to write values to TF LCD20x4 bricklet
     /// </summary>
     public class Lcd : IDataSink
     {
@@ -59,7 +59,6 @@ namespace net.derpaul.tf
             foreach (var currentDataPair in SensorValues)
             {
                 string MeasurementValueData = string.Format("{0,7:####.00} {1}", currentDataPair.Value, currentDataPair.Unit);
-                // string text = string.Format("1234.56 pb", currentDataPair.Value, currentDataPair.Unit);
 
                 _Bricklet.WriteLine(posY, posX, MeasurementValueData);
                 if (posX == 0)
@@ -151,7 +150,6 @@ namespace net.derpaul.tf
                 _Bricklet = new BrickletLCD20x4(UID, _TFConnection);
                 _Bricklet.ClearDisplay();
                 _Bricklet.BacklightOn();
-                System.Console.WriteLine($"Datasink of type [{GetType().Name}] instantiated.");
                 IsInitialized = true;
             }
         }

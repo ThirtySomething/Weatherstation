@@ -13,6 +13,11 @@ namespace net.derpaul.tf
     public class ConfigLoader<ConfigClass> where ConfigClass : ConfigSaver, new()
     {
         /// <summary>
+        /// Extension for config files
+        /// </summary>
+        private const string ConfigFileExtenstion = ".config";
+
+        /// <summary>
         /// Configs are singletons, this is the internal instance
         /// </summary>
         private static ConfigClass SingletonInstance;
@@ -44,7 +49,7 @@ namespace net.derpaul.tf
         protected static string GetConfigFilePath()
         {
             var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
-            var configFilePath = Path.Combine(assemblyDirectory, GetConfigFileName()) + Constants.ConfigFileExtenstion;
+            var configFilePath = Path.Combine(assemblyDirectory, GetConfigFileName()) + ConfigFileExtenstion;
             return configFilePath;
         }
 

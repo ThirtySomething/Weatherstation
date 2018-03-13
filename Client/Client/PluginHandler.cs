@@ -130,8 +130,6 @@ namespace net.derpaul.tf
                 currentSensor.FirmwareVersion = string.Join(",", firmwareVersion.Select(x => x.ToString()).ToArray());
                 currentSensor.DeviceIdentifier = deviceIdentifier;
                 currentSensor.EnumerationType = enumerationType;
-
-                System.Console.WriteLine(currentSensor.ToString());
                 _TFSensorIdentified.Add(currentSensor);
             }
         }
@@ -153,7 +151,7 @@ namespace net.derpaul.tf
                 System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No sensor plugins found in [{_PluginPath}].");
                 return false;
             }
-            // TODO: Replace foreach loop with a Linq statement
+
             foreach (var currentSensor in _TFSensorIdentified)
             {
                 var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
@@ -218,7 +216,6 @@ namespace net.derpaul.tf
         internal List<MeasurementValue> ValuesRead()
         {
             var pluginData = new List<MeasurementValue>();
-            // TODO: Replace foreach loop with a Linq statement
             foreach (var currentPlugin in _SensorPlugins)
             {
                 pluginData.Add(currentPlugin.ValueGet());
@@ -235,10 +232,12 @@ namespace net.derpaul.tf
         {
             foreach (var currentPlugin in _DataSinkPlugins)
             {
-                if (currentPlugin.IsInitialized)
+                if (!currentPlugin.IsInitialized)
                 {
-                    currentPlugin.HandleValues(SensorValues);
+                    continue;
                 }
+
+                currentPlugin.HandleValues(SensorValues);
             }
         }
     }
