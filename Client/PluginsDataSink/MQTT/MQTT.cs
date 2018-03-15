@@ -7,9 +7,10 @@ namespace net.derpaul.tf
 {
     public class MQTT : IDataSink
     {
+        /// <summary>
+        /// Instance of M2Mqtt client
+        /// </summary>
         private MqttClient MqttClient;
-
-        private string ClientId { get; } = System.Guid.NewGuid().ToString();
 
         /// <summary>
         /// Flags successful initialization

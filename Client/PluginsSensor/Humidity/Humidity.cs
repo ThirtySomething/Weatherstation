@@ -1,5 +1,4 @@
-﻿using System;
-using Tinkerforge;
+﻿using Tinkerforge;
 
 namespace net.derpaul.tf
 {

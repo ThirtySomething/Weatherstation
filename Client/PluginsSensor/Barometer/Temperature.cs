@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace net.derpaul.tf
+﻿namespace net.derpaul.tf
 {
     /// <summary>
     /// Class to read temperature using barometer sensor

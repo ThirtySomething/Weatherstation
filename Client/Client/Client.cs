@@ -11,8 +11,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Main entry point
         /// </summary>
-        /// <param name="args">Command line agruments</param>
-        private static void Main(string[] args)
+        private static void Main()
         {
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClientConfig.Instance.PluginPath);
             PluginHandler pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.Host, ClientConfig.Instance.Port);

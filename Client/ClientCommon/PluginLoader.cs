@@ -74,12 +74,10 @@ namespace net.derpaul.tf
                         {
                             continue;
                         }
-                        else
+
+                        if (type.GetInterface(pluginType.FullName) != null)
                         {
-                            if (type.GetInterface(pluginType.FullName) != null)
-                            {
-                                pluginTypes.Add(type);
-                            }
+                            pluginTypes.Add(type);
                         }
                     }
                 }
