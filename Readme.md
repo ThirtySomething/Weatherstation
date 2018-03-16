@@ -16,22 +16,11 @@ As training for my developer skills, I'm using my [Tinkerforge weather station][
 
 ## Client
 
-The client project part is responsible for dealing with the data of the weatherstation. 
-
-### Implementation details
-
-- The Tinkerforge library is pulled as [NuGet Package][TFNuGet].
-- A mechanism to simplify the handling of config files is implemented:
-  - The <code>ConfigSaver</code> interface is mandatory for each config settings.
-  - The <code>ConfigLoader</code> generic, also mandatory for each config settings.
-  - See <code>ClientConfig</code> how to apply the previous mentioned parts.
-- A plugin system, based on this article of [Christoph Gattnar][Plugin]. There are two types of plugins:
-  - <code>ISensor</code> plugins are responsible for reading data of the sensors. They are data producers.
-  - <code>IDataSink</code> plugins are responsible for working with the data. They are data consumers.
+The client project part is responsible for dealing with the data of the weatherstation. See [here](./Client/Readme.md) fore more details.
 
 ### ToDos
 
-- Remember to remove <code>M2MqttDotnetCore</code> NuGet package at client before publish
+- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish
 - Implement server part, consists of
   - MQTT client subscribing to the same topic as MQTT plugin
   - Writing data to database (MySQL, MariaDB, SQLite, ...)
@@ -43,14 +32,12 @@ The client project part is responsible for dealing with the data of the weathers
 
 ### URLs
 
-#### Swinging door
+#### Swinging door links
 - http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
 - https://pisquare.osisoft.com/thread/7566
 - https://osipi.wordpress.com/tag/swinging-door-algorithm/
 - https://www.hackerboard.de/code-kitchen/50448-c-gesucht-implementierung-des-swinging-door-algorithmus.html
 
-[Plugin]:https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b6174b62
 [SDoor]:https://support.industry.siemens.com/cs/document/109739594/komprimierung-von-prozesswertarchiven-mit-dem-swinging-door-algorithmus-in-pcs-7?dti=0&lc=de-WW
-[TFNuGet]:https://www.nuget.org/packages/Tinkerforge/
 [TFURL]:https://www.tinkerforge.com/en/doc/Kits/WeatherStation/WeatherStation.html
-
+[NGMQTT]:https://www.nuget.org/packages/M2MqttDotnetCore/
