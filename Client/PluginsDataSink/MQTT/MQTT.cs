@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace net.derpaul.tf
 {
@@ -26,7 +27,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Published measurement values waiting for acknowledge
         /// </summary>
-        private Dictionary<string, MeasurementValue> AckQueue { get; set; }
+        private Dictionary<string, MeasurementValue> AcknowledgeList { get; set; }
 
         /// <summary>
         /// Disconnect from MQTT broker
@@ -47,10 +48,12 @@ namespace net.derpaul.tf
             try
             {
                 DataQueue = new Queue<MeasurementValue>();
-                AckQueue = new Dictionary<string, MeasurementValue>();
+                AcknowledgeList = new Dictionary<string, MeasurementValue>();
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
+                MqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
                 MqttClient.Connect(MQTTConfig.Instance.MQTTClientID);
+                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicSubscribe }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 Thread thread = new Thread(HandlePublishQueue);
                 thread.Start();
@@ -110,9 +113,27 @@ namespace net.derpaul.tf
             var message = dataToPublish.ToJSON();
             MqttClient.Publish(MQTTConfig.Instance.MQTTTopicPublish, Encoding.ASCII.GetBytes(message));
 
-            lock (AckQueue)
+            lock (AcknowledgeList)
             {
-                AckQueue.Add(dataToPublish.ToHash(), dataToPublish);
+                AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
+            }
+        }
+
+        /// <summary>
+        /// Handles response of server and removes measurement values from internal acknowledge list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            string messageHash = Encoding.UTF8.GetString(e.Message);
+
+            lock (AcknowledgeList)
+            {
+                if (AcknowledgeList.ContainsKey(messageHash))
+                {
+                    AcknowledgeList.Remove(messageHash);
+                }
             }
         }
     }
