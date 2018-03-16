@@ -16,6 +16,8 @@ The client is responsible for several different things:
   - Tinkerforge LCD display as part of the weather station
   - MQTT - publish the data to somewhere else
 
+__To abort the endless loop of picking measurement values just hit escape.__
+
 ### Implementation details
 
 - The Tinkerforge library is pulled as [NuGet Package][NGTinkerForge].

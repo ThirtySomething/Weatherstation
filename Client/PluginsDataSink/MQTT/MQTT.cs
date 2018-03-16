@@ -52,8 +52,8 @@ namespace net.derpaul.tf
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
                 MqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
-                MqttClient.Connect(MQTTConfig.Instance.MQTTClientID);
-                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicSubscribe }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                MqttClient.Connect(MQTTConfig.Instance.MQTTClientIDClient);
+                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicHandshake }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 Thread thread = new Thread(HandlePublishQueue);
                 thread.Start();
@@ -110,8 +110,8 @@ namespace net.derpaul.tf
         /// <param name="dataToPublish"></param>
         private void PublishSingleValue(MeasurementValue dataToPublish)
         {
-            var message = dataToPublish.ToJSON();
-            MqttClient.Publish(MQTTConfig.Instance.MQTTTopicPublish, Encoding.ASCII.GetBytes(message));
+            var dataJSON = dataToPublish.ToJSON();
+            MqttClient.Publish(MQTTConfig.Instance.MQTTTopicData, Encoding.ASCII.GetBytes(dataJSON));
 
             lock (AcknowledgeList)
             {
@@ -134,6 +134,7 @@ namespace net.derpaul.tf
                 {
                     AcknowledgeList.Remove(messageHash);
                 }
+                System.Console.WriteLine($"values not acknowledged: {AcknowledgeList.Count}");
             }
         }
     }

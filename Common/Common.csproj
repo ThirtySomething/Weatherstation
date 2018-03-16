@@ -13,6 +13,7 @@
     <Content Include="IDataSink.cs" />
     <Content Include="ISensor.cs" />
     <Content Include="MeasurementValue.cs" />
+    <Content Include="MQTTConfig.cs" />	
     <Content Include="PluginLoader.cs" />
     <Content Include="SensorBase.cs" />
     <Content Include="TFSensor.cs" />

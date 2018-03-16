@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
     <Content Include="MQTT.cs" />
-    <Content Include="MQTTConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
