@@ -15,6 +15,11 @@
         /// <summary>
         /// Topic to publish messages to
         /// </summary>
-        public string MQTTTopic { get; set; } = "/tinkerforge/weatherstation";
+        public string MQTTTopicPublish { get; set; } = "/tinkerforge/weatherstation/pub";
+
+        /// <summary>
+        /// Topic to recieve acknowledge
+        /// </summary>
+        public string MQTTTopicSubscribe { get; set; } = "/tinkerforge/weatherstation/ack";
     }
 }

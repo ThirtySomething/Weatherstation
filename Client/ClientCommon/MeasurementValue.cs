@@ -64,5 +64,19 @@ namespace net.derpaul.tf
         {
             return JsonConvert.SerializeObject(this);
         }
+
+        /// <summary>
+        /// Get object as hash
+        /// </summary>
+        /// <returns></returns>
+        public string ToHash()
+        {
+            using (var sha = new System.Security.Cryptography.SHA256Managed())
+            {
+                byte[] stringJSON = System.Text.Encoding.UTF8.GetBytes(ToJSON());
+                byte[] stringHash = sha.ComputeHash(stringJSON);
+                return BitConverter.ToString(stringHash).Replace("-", String.Empty);
+            }
+        }
     }
 }
