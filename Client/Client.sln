@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 		{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94} = {9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientCommon", "ClientCommon\ClientCommon.csproj", "{91CE6045-FB79-4366-899A-6CD6E412B0F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientCommon", "..\Common\ClientCommon.csproj", "{91CE6045-FB79-4366-899A-6CD6E412B0F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humidity", "PluginsSensor\Humidity\Humidity.csproj", "{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}"
 EndProject

@@ -22,8 +22,8 @@
       <Link>Plugins\Barometer.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include=".\..\ClientCommon\bin\$(ConfigurationName)\netcoreapp2.0\ClientCommon.dll">
-      <Link>Plugins\ClientCommon.dll</Link>
+    <Content Include=".\..\..\Common\bin\$(ConfigurationName)\netcoreapp2.0\Common.dll">
+      <Link>Plugins\Common.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include=".\..\PluginsDataSink\Console\bin\$(ConfigurationName)\netcoreapp2.0\Console.dll">
@@ -44,7 +44,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClientCommon\ClientCommon.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
     <Content Include="Client.cs" />
     <Content Include="ClientConfig.cs" />
     <Content Include="PluginHandler.cs" />

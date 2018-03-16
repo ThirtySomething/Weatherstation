@@ -9,7 +9,7 @@
     <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.csproj" />
     <Content Include="AirPressure.cs" />
     <Content Include="AirPressureConfig.cs" />
     <Content Include="Altitude.cs" />

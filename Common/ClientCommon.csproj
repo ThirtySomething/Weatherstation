@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>net.derpaul.tf</RootNamespace>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Tinkerforge" Version="2.1.17" />
+    <Content Include="ConfigLoader.cs" />
+    <Content Include="ConfigSaver.cs" />
+    <Content Include="IDataSink.cs" />
+    <Content Include="ISensor.cs" />
+    <Content Include="MeasurementValue.cs" />
+    <Content Include="PluginLoader.cs" />
+    <Content Include="SensorBase.cs" />
+    <Content Include="TFSensor.cs" />
+  </ItemGroup>
+</Project>

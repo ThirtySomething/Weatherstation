@@ -6,7 +6,7 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ClientCommon\ClientCommon.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.csproj" />
     <Content Include="MQTT.cs" />
     <Content Include="MQTTConfig.cs" />
   </ItemGroup>
