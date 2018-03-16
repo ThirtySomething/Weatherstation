@@ -23,5 +23,10 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="SensorValues">Collection of collected values</param>
         void HandleValues(List<MeasurementValue> SensorValues);
+
+        /// <summary>
+        /// Enable plugin to shutdown some resources
+        /// </summary>
+        void Shutdown();
     }
 }

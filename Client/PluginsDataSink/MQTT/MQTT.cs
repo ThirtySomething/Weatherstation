@@ -18,6 +18,14 @@ namespace net.derpaul.tf
         public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
+        /// Disconnect from MQTT broker
+        /// </summary>
+        public void Shutdown()
+        {
+            MqttClient.Disconnect();
+        }
+
+        /// <summary>
         /// Initialize MQTT client and connect to broker
         /// </summary>
         /// <returns>true on success otherwise false</returns>

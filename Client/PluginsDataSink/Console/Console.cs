@@ -13,6 +13,13 @@ namespace net.derpaul.tf
         public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
+        /// Dummy implementation, console has no need for dispose
+        /// </summary>
+        public void Shutdown()
+        {
+        }
+
+        /// <summary>
         /// Write sensor values to console
         /// </summary>
         /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>

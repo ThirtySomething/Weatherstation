@@ -40,6 +40,15 @@ namespace net.derpaul.tf
         }
 
         /// <summary>
+        /// Cleanup Lcd
+        /// </summary>
+        public void Shutdown()
+        {
+            _Bricklet.ClearDisplay();
+            _Bricklet.BacklightOff();
+        }
+
+        /// <summary>
         /// Part of interface TFDataSink - perform action with given data
         /// </summary>
         /// <param name="SensorValues"></param>

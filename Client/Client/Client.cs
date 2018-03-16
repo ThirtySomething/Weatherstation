@@ -21,14 +21,19 @@ namespace net.derpaul.tf
                 return;
             }
 
+            UtilsTF.WaitUntilStart();
             do
             {
                 while (!Console.KeyAvailable)
                 {
                     pluginHandler.HandleValues(pluginHandler.ValuesRead());
-                    System.Threading.Thread.Sleep(ClientConfig.Instance.Delay);
+                    UtilsTF.WaitNMilliseconds(ClientConfig.Instance.Delay);
                 }
             } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
+            pluginHandler.Shutdown();
+
+            Environment.Exit(0);
         }
     }
 }

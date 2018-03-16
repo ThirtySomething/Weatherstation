@@ -240,5 +240,21 @@ namespace net.derpaul.tf
                 currentPlugin.HandleValues(SensorValues);
             }
         }
+
+        /// <summary>
+        /// Shutdown all datasink plugins
+        /// </summary>
+        internal void Shutdown()
+        {
+            foreach (var currentPlugin in _DataSinkPlugins)
+            {
+                if (!currentPlugin.IsInitialized)
+                {
+                    continue;
+                }
+
+                currentPlugin.Shutdown();
+            }
+        }
     }
 }

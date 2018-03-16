@@ -48,5 +48,6 @@
     <Content Include="Client.cs" />
     <Content Include="ClientConfig.cs" />
     <Content Include="PluginHandler.cs" />
+    <Content Include="UtilsTF.cs" />
   </ItemGroup>
 </Project>
