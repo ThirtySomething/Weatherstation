@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Abstract base class for all sensors implementing sensor's interface
     /// </summary>
-    public abstract class SensorBase : ISensor
+    public abstract class SensorBase : IDataSource
     {
         /// <summary>
         /// Measurement unit of sensor

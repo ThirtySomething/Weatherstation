@@ -5,12 +5,12 @@ namespace net.derpaul.tf
     /// <summary>
     /// Some primitve utilities
     /// </summary>
-    internal class UtilsTF
+    public class UtilsTF
     {
         /// <summary>
         /// Dump method to wait until good moment to start with
         /// </summary>
-        internal static void WaitUntilStart()
+        public static void WaitUntilStart()
         {
             var currentSeconds = DateTime.Now.Second;
 
@@ -24,7 +24,7 @@ namespace net.derpaul.tf
         /// Wait until n milliseconds are gone
         /// </summary>
         /// <param name="delay"></param>
-        internal static void WaitNMilliseconds(int delay)
+        public static void WaitNMilliseconds(int delay)
         {
             System.Threading.Thread.Sleep(delay);
         }

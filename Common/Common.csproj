@@ -11,11 +11,11 @@
     <Content Include="ConfigLoader.cs" />
     <Content Include="ConfigSaver.cs" />
     <Content Include="IDataSink.cs" />
-    <Content Include="ISensor.cs" />
+    <Content Include="IDataSource.cs" />
     <Content Include="MeasurementValue.cs" />
-    <Content Include="MQTTConfig.cs" />	
     <Content Include="PluginLoader.cs" />
     <Content Include="SensorBase.cs" />
     <Content Include="TFSensor.cs" />
+    <Content Include="UtilsTF.cs" />	
   </ItemGroup>
 </Project>

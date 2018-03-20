@@ -3,32 +3,38 @@
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Write collection of Tinkerforge Sensor plugin values to console
+    /// Write collection of Tinkerforge Sensor plugin values to a file
     /// </summary>
-    public class Console : IDataSink
+    public class File : IDataSink
     {
+        /// <summary>
+        /// Stream to write data to
+        /// </summary>
+        private System.IO.StreamWriter Datafile { get; set; }
+
         /// <summary>
         /// Flags successful initialization
         /// </summary>
         public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
-        /// Dummy implementation, console has no need for dispose
+        /// Close the file
         /// </summary>
         public void Shutdown()
         {
+            Datafile.Flush();
+            Datafile.Close();
         }
 
         /// <summary>
-        /// Write sensor values to console
+        /// Write sensor values to file
         /// </summary>
         /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>
         public void HandleValues(List<MeasurementValue> SensorValues)
         {
-            System.Console.WriteLine("---");
             foreach (var currentValue in SensorValues)
             {
-                System.Console.WriteLine($"Sensor [{currentValue.Name}], Value [{currentValue.Value}], Unit [{currentValue.Unit}]");
+                Datafile.WriteLine(currentValue.ToJSON());
             }
         }
 
@@ -38,6 +44,8 @@ namespace net.derpaul.tf
         /// <returns>signal success with true</returns>
         public bool Init()
         {
+            Datafile = new System.IO.StreamWriter(FileConfig.Instance.DataFilename);
+
             IsInitialized = true;
             return true;
         }

@@ -38,7 +38,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// List of sensor plugins
         /// </summary>
-        private List<ISensor> _SensorPlugins { get; set; }
+        private List<IDataSource> _SensorPlugins { get; set; }
 
         /// <summary>
         /// List of data sink plugins
@@ -84,7 +84,7 @@ namespace net.derpaul.tf
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
             }
 
             if (_Connected)
@@ -97,7 +97,7 @@ namespace net.derpaul.tf
                 }
                 catch (NotConnectedException e)
                 {
-                    Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
                 }
             }
 
@@ -144,11 +144,11 @@ namespace net.derpaul.tf
             {
                 return false;
             }
-            _SensorPlugins = PluginLoader<ISensor>.TFPluginsLoad(_PluginPath);
+            _SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(_PluginPath);
 
             if (_SensorPlugins.Count == 0)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No sensor plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No sensor plugins found in [{_PluginPath}].");
                 return false;
             }
 
@@ -157,7 +157,7 @@ namespace net.derpaul.tf
                 var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
                 if (plugin == null)
                 {
-                    Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
                     continue;
                 }
                 plugin.Init(_TFConnection, currentSensor.UID);
@@ -174,7 +174,7 @@ namespace net.derpaul.tf
             _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath);
             if (_DataSinkPlugins.Count == 0)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No datasink plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No datasink plugins found in [{_PluginPath}].");
                 return false;
             }
 
@@ -186,7 +186,7 @@ namespace net.derpaul.tf
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.GetType()}] => [{e.Message}]");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.GetType()}] => [{e.Message}]");
                 }
             }
 

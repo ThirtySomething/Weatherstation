@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Interface of a Tinkerforge Sensor plugin and its capabilities
     /// </summary>
-    public interface ISensor
+    public interface IDataSource
     {
         /// <summary>
         /// Measurement unit of sensor

@@ -27,7 +27,7 @@ __To abort the endless loop of picking measurement values just hit escape.__
   - The <code>ConfigLoader</code> generic, also mandatory for each config settings.
   - See <code>ClientConfig</code> how to apply the previous mentioned parts.
 - A plugin system, based on this article of [Christoph Gattnar][Plugin]. There are two types of plugins:
-  - <code>ISensor</code> plugins are responsible for reading data of the sensors. They are data producers.
+  - <code>IDataSource</code> plugins are responsible for reading data of the sensors. They are data producers.
   - <code>IDataSink</code> plugins are responsible for working with the data. They are data consumers.
 
 [NGTinkerForge]:https://www.nuget.org/packages/Tinkerforge/

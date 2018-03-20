@@ -24,12 +24,12 @@ namespace net.derpaul.tf
             UtilsTF.WaitUntilStart();
             do
             {
-                while (!Console.KeyAvailable)
+                while (!System.Console.KeyAvailable)
                 {
                     pluginHandler.HandleValues(pluginHandler.ValuesRead());
                     UtilsTF.WaitNMilliseconds(ClientConfig.Instance.Delay);
                 }
-            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+            } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
 
             pluginHandler.Shutdown();
 

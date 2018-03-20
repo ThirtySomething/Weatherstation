@@ -55,9 +55,6 @@ namespace net.derpaul.tf
                 MqttClient.Connect(MQTTConfig.Instance.MQTTClientIDClient);
                 MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicHandshake }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
-                Thread thread = new Thread(HandlePublishQueue);
-                thread.Start();
-
                 success = MqttClient.IsConnected;
                 IsInitialized = success;
             }
@@ -78,30 +75,8 @@ namespace net.derpaul.tf
         {
             foreach (var currentMeasurementValue in SensorValues)
             {
-                lock (DataQueue)
-                {
-                    DataQueue.Enqueue(currentMeasurementValue);
-                }
+                PublishSingleValue(currentMeasurementValue);
             }
-        }
-
-        /// <summary>
-        /// Work on queue and publish data
-        /// </summary>
-        private void HandlePublishQueue()
-        {
-            do
-            {
-                lock (DataQueue)
-                {
-                    if (DataQueue.Count > 0)
-                    {
-                        var currentMeasurementData = DataQueue.Dequeue();
-                        Thread thread = new Thread(() => PublishSingleValue(currentMeasurementData));
-                        thread.Start();
-                    }
-                }
-            } while (true);
         }
 
         /// <summary>

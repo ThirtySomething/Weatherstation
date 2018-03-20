@@ -3,32 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client\Client.csproj", "{17668AF9-1701-4184-B2C4-38C1C041BB2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{17668AF9-1701-4184-B2C4-38C1C041BB2F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{91CE6045-FB79-4366-899A-6CD6E412B0F7} = {91CE6045-FB79-4366-899A-6CD6E412B0F7}
 		{467E1555-8F85-4E06-9D95-8355BA1DD42F} = {467E1555-8F85-4E06-9D95-8355BA1DD42F}
 		{54E5175F-9FF2-4486-970D-7EDDC27EEC68} = {54E5175F-9FF2-4486-970D-7EDDC27EEC68}
 		{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E} = {9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}
 		{FC96418E-9B94-4C39-9400-96C0B21CA9F1} = {FC96418E-9B94-4C39-9400-96C0B21CA9F1}
+		{EDE41698-9F20-44E6-8258-4757EC22E749} = {EDE41698-9F20-44E6-8258-4757EC22E749}
 		{F5462D99-DE79-4D75-8197-2E10047C0B6B} = {F5462D99-DE79-4D75-8197-2E10047C0B6B}
 		{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94} = {9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{91CE6045-FB79-4366-899A-6CD6E412B0F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humidity", "Client\PluginsSensor\Humidity\Humidity.csproj", "{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humidity", "Plugins\PluginsDataSource\Humidity\Humidity.csproj", "{9B1CA28C-9A3F-4713-99A2-6D9FA425C14E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barometer", "Client\PluginsSensor\Barometer\Barometer.csproj", "{467E1555-8F85-4E06-9D95-8355BA1DD42F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barometer", "Plugins\PluginsDataSource\Barometer\Barometer.csproj", "{467E1555-8F85-4E06-9D95-8355BA1DD42F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmbientLight", "Client\PluginsSensor\AmbientLight\AmbientLight.csproj", "{54E5175F-9FF2-4486-970D-7EDDC27EEC68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmbientLight", "Plugins\PluginsDataSource\AmbientLight\AmbientLight.csproj", "{54E5175F-9FF2-4486-970D-7EDDC27EEC68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Client\PluginsDataSink\Console\Console.csproj", "{FC96418E-9B94-4C39-9400-96C0B21CA9F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Plugins\PluginsDataSink\Console\Console.csproj", "{FC96418E-9B94-4C39-9400-96C0B21CA9F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lcd", "Client\PluginsDataSink\Lcd\Lcd.csproj", "{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lcd", "Plugins\PluginsDataSink\Lcd\Lcd.csproj", "{9D383EC2-1EBA-4C3E-8067-29DE7CD35A94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTT", "Client\PluginsDataSink\MQTT\MQTT.csproj", "{F5462D99-DE79-4D75-8197-2E10047C0B6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTT", "Plugins\PluginsDataSink\MQTT\MQTT.csproj", "{F5462D99-DE79-4D75-8197-2E10047C0B6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server\Server.csproj", "{8CB85443-283F-4946-BB58-A75A53C91AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{8CB85443-283F-4946-BB58-A75A53C91AD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File", "Plugins\PluginsDataSink\File\File.csproj", "{EDE41698-9F20-44E6-8258-4757EC22E749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,10 @@ Global
 		{8CB85443-283F-4946-BB58-A75A53C91AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB85443-283F-4946-BB58-A75A53C91AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CB85443-283F-4946-BB58-A75A53C91AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE41698-9F20-44E6-8258-4757EC22E749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE41698-9F20-44E6-8258-4757EC22E749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE41698-9F20-44E6-8258-4757EC22E749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE41698-9F20-44E6-8258-4757EC22E749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

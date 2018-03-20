@@ -1,7 +1,7 @@
 *.user
 .vs
 .vscode
-/Client/doxygen/Client.log
-/Client/doxygen/html
+/doxygen/Client.log
+/doxygen/html
 bin
 obj
