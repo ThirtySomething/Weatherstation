@@ -9,5 +9,10 @@
         /// Filename to write data to
         /// </summary>
         public string DataFilename = "clientdata.dat";
+
+        /// <summary>
+        /// Flag for appending to existing file or not
+        /// </summary>
+        public bool AppendToFile = true;
     }
 }

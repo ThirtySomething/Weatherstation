@@ -230,14 +230,17 @@ namespace net.derpaul.tf
         /// <param name="SensorValues"></param>
         internal void HandleValues(List<MeasurementValue> SensorValues)
         {
-            foreach (var currentPlugin in _DataSinkPlugins)
+            foreach (var currentValue in SensorValues)
             {
-                if (!currentPlugin.IsInitialized)
+                foreach (var currentPlugin in _DataSinkPlugins)
                 {
-                    continue;
-                }
+                    if (!currentPlugin.IsInitialized)
+                    {
+                        continue;
+                    }
 
-                currentPlugin.HandleValues(SensorValues);
+                    currentPlugin.HandleValue(currentValue);
+                }
             }
         }
 

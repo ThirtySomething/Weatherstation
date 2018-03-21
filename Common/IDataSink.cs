@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace net.derpaul.tf
+﻿namespace net.derpaul.tf
 {
     /// <summary>
     /// Interface to deal with a collection of Tinkerforge Sensor plugin values
@@ -19,10 +17,10 @@ namespace net.derpaul.tf
         bool Init();
 
         /// <summary>
-        /// Perform action on measurement values
+        /// Perform action on a measurement value
         /// </summary>
-        /// <param name="SensorValues">Collection of collected values</param>
-        void HandleValues(List<MeasurementValue> SensorValues);
+        /// <param name="SensorValue">A measuremet value</param>
+        void HandleValue(MeasurementValue SensorValue);
 
         /// <summary>
         /// Enable plugin to shutdown some resources

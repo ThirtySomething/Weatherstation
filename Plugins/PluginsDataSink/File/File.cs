@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
 
 namespace net.derpaul.tf
 {
@@ -10,7 +10,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Stream to write data to
         /// </summary>
-        private System.IO.StreamWriter Datafile { get; set; }
+        private StreamWriter Datafile { get; set; }
 
         /// <summary>
         /// Flags successful initialization
@@ -29,13 +29,10 @@ namespace net.derpaul.tf
         /// <summary>
         /// Write sensor values to file
         /// </summary>
-        /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>
-        public void HandleValues(List<MeasurementValue> SensorValues)
+        /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
+        public void HandleValue(MeasurementValue SensorValue)
         {
-            foreach (var currentValue in SensorValues)
-            {
-                Datafile.WriteLine(currentValue.ToJSON());
-            }
+            Datafile.WriteLine(SensorValue.ToJSON());
         }
 
         /// <summary>
@@ -44,10 +41,10 @@ namespace net.derpaul.tf
         /// <returns>signal success with true</returns>
         public bool Init()
         {
-            Datafile = new System.IO.StreamWriter(FileConfig.Instance.DataFilename);
+            Datafile = new StreamWriter(FileConfig.Instance.DataFilename, FileConfig.Instance.AppendToFile);
 
-            IsInitialized = true;
-            return true;
+            IsInitialized = System.IO.File.Exists(FileConfig.Instance.DataFilename);
+            return IsInitialized;
         }
     }
 }

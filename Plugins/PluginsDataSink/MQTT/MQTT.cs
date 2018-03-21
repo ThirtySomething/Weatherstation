@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -70,13 +69,10 @@ namespace net.derpaul.tf
         /// <summary>
         /// Transform each result in a JSON string and publish string to topic
         /// </summary>
-        /// <param name="SensorValues">List of all sensor values</param>
-        public void HandleValues(List<MeasurementValue> SensorValues)
+        /// <param name="SensorValue">Sensor value</param>
+        public void HandleValue(MeasurementValue SensorValue)
         {
-            foreach (var currentMeasurementValue in SensorValues)
-            {
-                PublishSingleValue(currentMeasurementValue);
-            }
+            PublishSingleValue(SensorValue);
         }
 
         /// <summary>

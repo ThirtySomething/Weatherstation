@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace net.derpaul.tf
+﻿namespace net.derpaul.tf
 {
     /// <summary>
     /// Write collection of Tinkerforge Sensor plugin values to console
@@ -22,14 +20,10 @@ namespace net.derpaul.tf
         /// <summary>
         /// Write sensor values to console
         /// </summary>
-        /// <param name="SensorValues">Tinkerforge Sensor plugin values</param>
-        public void HandleValues(List<MeasurementValue> SensorValues)
+        /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
+        public void HandleValue(MeasurementValue SensorValue)
         {
-            System.Console.WriteLine("---");
-            foreach (var currentValue in SensorValues)
-            {
-                System.Console.WriteLine($"Sensor [{currentValue.Name}], Value [{currentValue.Value}], Unit [{currentValue.Unit}]");
-            }
+            System.Console.WriteLine($"Sensor [{SensorValue.Name}], Value [{SensorValue.Value}], Unit [{SensorValue.Unit}]");
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tinkerforge;
 
 namespace net.derpaul.tf
@@ -51,35 +50,21 @@ namespace net.derpaul.tf
         /// <summary>
         /// Part of interface TFDataSink - perform action with given data
         /// </summary>
-        /// <param name="SensorValues"></param>
-        public void HandleValues(List<MeasurementValue> SensorValues)
+        /// <param name="SensorValue"></param>
+        public void HandleValue(MeasurementValue SensorValue)
         {
             if (_Bricklet == null)
             {
                 return;
             }
 
-            _Bricklet.ClearDisplay();
+            _Bricklet.WriteLine(0, 0, SensorValue.Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
 
-            _Bricklet.WriteLine(0, 0, SensorValues.First().Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
+            byte posX = (byte)((SensorValue.SortOrder % 2) * 10);
+            byte posY = (byte)((SensorValue.SortOrder / 2) + 1);
+            string MeasurementValueData = string.Format("{0,7:####.00} {1}", SensorValue.Value, SensorValue.Unit);
 
-            byte posX = 0;
-            byte posY = 1;
-            foreach (var currentDataPair in SensorValues)
-            {
-                string MeasurementValueData = string.Format("{0,7:####.00} {1}", currentDataPair.Value, currentDataPair.Unit);
-
-                _Bricklet.WriteLine(posY, posX, MeasurementValueData);
-                if (posX == 0)
-                {
-                    posX = 10;
-                }
-                else
-                {
-                    posX = 0;
-                    posY++;
-                }
-            }
+            _Bricklet.WriteLine(posY, posX, MeasurementValueData);
         }
 
         /// <summary>
