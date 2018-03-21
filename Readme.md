@@ -16,7 +16,11 @@ As training for my developer skills, I'm using my [Tinkerforge weather station][
 
 ## Client
 
-The client project part is responsible for dealing with the data of the weatherstation. See [here](./Client/Readme.md) fore more details.
+See the [client documentation](./Client/Readme.md) for more details.
+
+## Server
+
+See the [server documentation](./Server/Readme.md) for more details.
 
 ### ToDos
 

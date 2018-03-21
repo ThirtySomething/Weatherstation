@@ -29,6 +29,7 @@ __To abort the endless loop of picking measurement values just hit escape.__
 - A plugin system, based on this article of [Christoph Gattnar][Plugin]. There are two types of plugins:
   - <code>IDataSource</code> plugins are responsible for reading data of the sensors. They are data producers.
   - <code>IDataSink</code> plugins are responsible for working with the data. They are data consumers.
+- See also the [server documentation](./../Server/Readme.md)
 
 [NGTinkerForge]:https://www.nuget.org/packages/Tinkerforge/
 [NGMQTT]:https://www.nuget.org/packages/M2MqttDotnetCore/

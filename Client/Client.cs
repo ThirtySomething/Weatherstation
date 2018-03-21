@@ -14,7 +14,7 @@ namespace net.derpaul.tf
         private static void Main()
         {
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClientConfig.Instance.PluginPath);
-            PluginHandler pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.Host, ClientConfig.Instance.Port);
+            var pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.Host, ClientConfig.Instance.Port);
 
             if (pluginHandler.Init() == false)
             {

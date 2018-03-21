@@ -52,6 +52,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Plugins\PluginsDataSink\Console\Console.csproj" />
+    <ProjectReference Include="..\Plugins\PluginsDataSink\File\File.csproj" />
     <ProjectReference Include="..\Plugins\PluginsDataSink\Lcd\Lcd.csproj" />
     <ProjectReference Include="..\Plugins\PluginsDataSink\MQTT\MQTT.csproj" />
     <ProjectReference Include="..\Plugins\PluginsDataSource\AmbientLight\AmbientLight.csproj" />

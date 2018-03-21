@@ -13,6 +13,6 @@
         /// <summary>
         /// Flag for appending to existing file or not
         /// </summary>
-        public bool AppendToFile = true;
+        public bool AppendToFile = false;
     }
 }

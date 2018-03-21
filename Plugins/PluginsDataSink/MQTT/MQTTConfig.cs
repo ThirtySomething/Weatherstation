@@ -13,11 +13,6 @@
         public string MQTTClientIDClient { get; set; } = "WeatherMQTTClient";
 
         /// <summary>
-        /// Server ID
-        /// </summary>
-        public string MQTTClientIDServer { get; set; } = "WeatherMQTTServer";
-
-        /// <summary>
         /// Topic to publish data to
         /// </summary>
         public string MQTTTopicData { get; set; } = "/tinkerforge/weatherstation/data";
