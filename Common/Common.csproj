@@ -9,7 +9,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="Tinkerforge" Version="2.1.17" />
     <Content Include="ConfigLoader.cs" />
-    <Content Include="ConfigSaver.cs" />
+    <Content Include="IConfigSaver.cs" />
     <Content Include="IDataSink.cs" />
     <Content Include="IDataSource.cs" />
     <Content Include="MeasurementValue.cs" />

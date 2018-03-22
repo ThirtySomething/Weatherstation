@@ -3,7 +3,7 @@
     /// <summary>
     /// Config settings of barometer sensor
     /// </summary>
-    public class AltitudeConfig : ConfigLoader<AltitudeConfig>, ConfigSaver
+    public class AltitudeConfig : ConfigLoader<AltitudeConfig>, IConfigSaver
     {
         /// <summary>
         /// Sort order for altitude

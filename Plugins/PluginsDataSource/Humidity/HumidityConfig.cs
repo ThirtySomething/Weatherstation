@@ -3,7 +3,7 @@
     /// <summary>
     /// Config settings for humidity sensor
     /// </summary>
-    public class HumidityConfig : ConfigLoader<HumidityConfig>, ConfigSaver
+    public class HumidityConfig : ConfigLoader<HumidityConfig>, IConfigSaver
     {
         /// <summary>
         /// Sort order

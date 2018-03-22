@@ -3,7 +3,7 @@
     /// <summary>
     /// Config settings of ambient light sensor
     /// </summary>
-    public class AmbientLightConfig : ConfigLoader<AmbientLightConfig>, ConfigSaver
+    public class AmbientLightConfig : ConfigLoader<AmbientLightConfig>, IConfigSaver
     {
         /// <summary>
         /// Sort order

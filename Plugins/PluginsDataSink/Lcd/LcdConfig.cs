@@ -1,14 +1,14 @@
 ﻿namespace net.derpaul.tf
 {
-    public class LcdConfig : ConfigLoader<LcdConfig>, ConfigSaver
+    public class LcdConfig : ConfigLoader<LcdConfig>, IConfigSaver
     {
         /// <summary>
-        /// Host to connect to
+        /// Host where the brick daemon is running
         /// </summary>
         public string Host { get; set; } = "localhost";
 
         /// <summary>
-        /// Port of ´host to connect to
+        /// Port of the brick daemon to connect to
         /// </summary>
         public int Port { get; set; } = 4223;
 

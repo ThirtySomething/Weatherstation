@@ -3,7 +3,7 @@
     /// <summary>
     /// Write collection of Tinkerforge Sensor plugin values to console
     /// </summary>
-    public class FileConfig : ConfigLoader<FileConfig>, ConfigSaver
+    public class FileConfig : ConfigLoader<FileConfig>, IConfigSaver
     {
         /// <summary>
         /// Filename to write data to

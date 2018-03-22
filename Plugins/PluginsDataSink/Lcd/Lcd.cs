@@ -58,8 +58,10 @@ namespace net.derpaul.tf
                 return;
             }
 
+            // Display timestamp
             _Bricklet.WriteLine(0, 0, SensorValue.Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
 
+            // Calculation of position in dependency of the sort order
             byte posX = (byte)((SensorValue.SortOrder % 2) * 10);
             byte posY = (byte)((SensorValue.SortOrder / 2) + 1);
             string MeasurementValueData = string.Format("{0,7:####.00} {1}", SensorValue.Value, SensorValue.Unit);

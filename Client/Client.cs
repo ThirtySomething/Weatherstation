@@ -4,7 +4,7 @@ using System.IO;
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Main program to handle data of Tinkerforge weather station
+    /// Main program to handle data of TF weather station
     /// </summary>
     internal class Client
     {

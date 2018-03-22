@@ -7,10 +7,19 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace net.derpaul.tf
 {
+    /// <summary>
+    /// Recieve data via MQTT and push them to data sink plugins
+    /// </summary>
     public class Server
     {
+        /// <summary>
+        /// The plugin handler
+        /// </summary>
         private PluginHandler pluginHandler { get; set; }
 
+        /// <summary>
+        /// The MQTT client
+        /// </summary>
         private MqttClient MqttClient { get; set; }
 
         /// <summary>
@@ -22,6 +31,9 @@ namespace net.derpaul.tf
             Server.Run();
         }
 
+        /// <summary>
+        /// Main actions
+        /// </summary>
         private void Run()
         {
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ServerConfig.Instance.PluginPath);
@@ -45,9 +57,17 @@ namespace net.derpaul.tf
                 }
             } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
 
+            pluginHandler.Shutdown();
+            MqttClient.Disconnect();
+
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Action performed when MQTT message is recieved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             string stringJson = Encoding.UTF8.GetString(e.Message);

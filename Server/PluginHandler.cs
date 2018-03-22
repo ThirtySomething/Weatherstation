@@ -6,7 +6,7 @@ using Tinkerforge;
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Class to deal with collection of TF sensors, addressed by a common interface
+    /// Class to deal with collection of data sink plugins
     /// </summary>
     internal class PluginHandler
     {
@@ -69,7 +69,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Feed each datasink plugin with sensor data
         /// </summary>
-        /// <param name="SensorValues"></param>
+        /// <param name="SensorValue"></param>
         internal void HandleValue(MeasurementValue SensorValue)
         {
             foreach (var currentPlugin in _DataSinkPlugins)

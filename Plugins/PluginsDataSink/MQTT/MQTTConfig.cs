@@ -1,6 +1,9 @@
 ﻿namespace net.derpaul.tf
 {
-    public class MQTTConfig : ConfigLoader<MQTTConfig>, ConfigSaver
+    /// <summary>
+    /// Configuration settings for MQTT
+    /// </summary>
+    public class MQTTConfig : ConfigLoader<MQTTConfig>, IConfigSaver
     {
         /// <summary>
         /// IP of MQTT broker to connect to

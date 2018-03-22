@@ -6,6 +6,9 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace net.derpaul.tf
 {
+    /// <summary>
+    /// Data sink - sending data using MQTT
+    /// </summary>
     public class MQTT : IDataSink
     {
         /// <summary>
@@ -27,6 +30,8 @@ namespace net.derpaul.tf
         /// Published measurement values waiting for acknowledge
         /// </summary>
         private Dictionary<string, MeasurementValue> AcknowledgeList { get; set; }
+
+        private Object Locker = new Object();
 
         /// <summary>
         /// Disconnect from MQTT broker
@@ -84,7 +89,7 @@ namespace net.derpaul.tf
             var dataJSON = dataToPublish.ToJSON();
             MqttClient.Publish(MQTTConfig.Instance.MQTTTopicData, Encoding.ASCII.GetBytes(dataJSON));
 
-            lock (AcknowledgeList)
+            lock (Locker)
             {
                 AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
             }
@@ -99,13 +104,13 @@ namespace net.derpaul.tf
         {
             string messageHash = Encoding.UTF8.GetString(e.Message);
 
-            lock (AcknowledgeList)
+            lock (Locker)
             {
                 if (AcknowledgeList.ContainsKey(messageHash))
                 {
                     AcknowledgeList.Remove(messageHash);
+                    System.Console.WriteLine($"Elements in list: {AcknowledgeList.Count}");
                 }
-                System.Console.WriteLine($"values not acknowledged: {AcknowledgeList.Count}");
             }
         }
     }

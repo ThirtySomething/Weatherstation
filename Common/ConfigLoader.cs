@@ -10,7 +10,7 @@ namespace net.derpaul.tf
     /// Generic class as base for config files
     /// </summary>
     /// <typeparam name="ConfigClass"></typeparam>
-    public class ConfigLoader<ConfigClass> where ConfigClass : ConfigSaver, new()
+    public class ConfigLoader<ConfigClass> where ConfigClass : IConfigSaver, new()
     {
         /// <summary>
         /// Extension for config files

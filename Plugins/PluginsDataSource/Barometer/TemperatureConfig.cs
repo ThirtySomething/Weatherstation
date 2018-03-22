@@ -3,7 +3,7 @@
     /// <summary>
     /// Config settings of barometer sensor
     /// </summary>
-    public class TemperatureConfig : ConfigLoader<TemperatureConfig>, ConfigSaver
+    public class TemperatureConfig : ConfigLoader<TemperatureConfig>, IConfigSaver
     {
         /// <summary>
         /// Sort order for temperature

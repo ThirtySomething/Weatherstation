@@ -3,7 +3,7 @@
     /// <summary>
     /// Config class for settings related to reading the bricklets
     /// </summary>
-    public class ServerConfig : ConfigLoader<ServerConfig>, ConfigSaver
+    public class ServerConfig : ConfigLoader<ServerConfig>, IConfigSaver
     {
         /// <summary>
         /// Delay between reading/sending values in milliseconds

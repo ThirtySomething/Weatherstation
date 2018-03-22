@@ -8,7 +8,7 @@ namespace net.derpaul.tf
     public abstract class Barometer : SensorBase
     {
         /// <summary>
-        /// Internal object of TF bricklet
+        /// Internal object of TF barometer bricklet
         /// </summary>
         protected static BrickletBarometer _Bricklet { get; set; }
 
