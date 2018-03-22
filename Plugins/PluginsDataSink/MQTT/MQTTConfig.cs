@@ -23,6 +23,6 @@
         /// <summary>
         /// Topic to recieve handshake information
         /// </summary>
-        public string MQTTTopicHandshake { get; set; } = "/tinkerforge/weatherstation/handshake";
+        public string MQTTTopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
     }
 }

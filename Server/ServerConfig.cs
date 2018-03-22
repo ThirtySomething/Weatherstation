@@ -31,8 +31,8 @@
         public string MQTTTopicData { get; set; } = "/tinkerforge/weatherstation/data";
 
         /// <summary>
-        /// Topic to recieve handshake information
+        /// Topic to send handshake information
         /// </summary>
-        public string MQTTTopicHandshake { get; set; } = "/tinkerforge/weatherstation/handshake";
+        public string MQTTTopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
     }
 }

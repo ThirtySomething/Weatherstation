@@ -55,9 +55,9 @@ namespace net.derpaul.tf
                 AcknowledgeList = new Dictionary<string, MeasurementValue>();
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
-                MqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
+                MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
                 MqttClient.Connect(MQTTConfig.Instance.MQTTClientIDClient);
-                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicHandshake }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 success = MqttClient.IsConnected;
                 IsInitialized = success;
@@ -100,7 +100,7 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        internal void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        internal void MqttAcknowledgeRecieved(object sender, MqttMsgPublishEventArgs e)
         {
             string messageHash = Encoding.UTF8.GetString(e.Message);
 

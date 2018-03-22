@@ -45,7 +45,7 @@ namespace net.derpaul.tf
             }
 
             MqttClient = new MqttClient(ServerConfig.Instance.BrokerIP);
-            MqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
+            MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
             MqttClient.Connect(ServerConfig.Instance.MQTTClientIDServer);
             MqttClient.Subscribe(new string[] { ServerConfig.Instance.MQTTTopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
@@ -68,11 +68,11 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        private void MqttDataRecieved(object sender, MqttMsgPublishEventArgs e)
         {
             string stringJson = Encoding.UTF8.GetString(e.Message);
             MeasurementValue measurementValue = JsonConvert.DeserializeObject<MeasurementValue>(stringJson);
-            MqttClient.Publish(ServerConfig.Instance.MQTTTopicHandshake, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
+            MqttClient.Publish(ServerConfig.Instance.MQTTTopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
             pluginHandler.HandleValue(measurementValue);
         }
     }
