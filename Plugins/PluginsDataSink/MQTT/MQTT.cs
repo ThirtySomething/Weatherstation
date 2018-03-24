@@ -22,15 +22,13 @@ namespace net.derpaul.tf
         public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
-        /// Queue with measurement values to publish
-        /// </summary>
-        private Queue<MeasurementValue> DataQueue { get; set; }
-
-        /// <summary>
         /// Published measurement values waiting for acknowledge
         /// </summary>
         private Dictionary<string, MeasurementValue> AcknowledgeList { get; set; }
 
+        /// <summary>
+        /// Object to lock while modifying acknowledge list
+        /// </summary>
         private Object Locker = new Object();
 
         /// <summary>
@@ -51,7 +49,6 @@ namespace net.derpaul.tf
 
             try
             {
-                DataQueue = new Queue<MeasurementValue>();
                 AcknowledgeList = new Dictionary<string, MeasurementValue>();
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
@@ -87,12 +84,13 @@ namespace net.derpaul.tf
         private void PublishSingleValue(MeasurementValue dataToPublish)
         {
             var dataJSON = dataToPublish.ToJSON();
-            MqttClient.Publish(MQTTConfig.Instance.MQTTTopicData, Encoding.ASCII.GetBytes(dataJSON));
 
             lock (Locker)
             {
                 AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
             }
+
+            MqttClient.Publish(MQTTConfig.Instance.MQTTTopicData, Encoding.ASCII.GetBytes(dataJSON));
         }
 
         /// <summary>

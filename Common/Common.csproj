@@ -16,6 +16,6 @@
     <Content Include="PluginLoader.cs" />
     <Content Include="SensorBase.cs" />
     <Content Include="TFSensor.cs" />
-    <Content Include="UtilsTF.cs" />	
+    <Content Include="TFUtils.cs" />	
   </ItemGroup>
 </Project>

@@ -53,7 +53,7 @@ namespace net.derpaul.tf
             {
                 while (!System.Console.KeyAvailable)
                 {
-                    UtilsTF.WaitNMilliseconds(ServerConfig.Instance.Delay);
+                    TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
                 }
             } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
 

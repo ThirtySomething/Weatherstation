@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Some primitve utilities
     /// </summary>
-    public class UtilsTF
+    public class TFUtils
     {
         /// <summary>
         /// Dump method to wait until good moment to start with
