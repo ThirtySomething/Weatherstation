@@ -161,6 +161,7 @@ namespace net.derpaul.tf
                     continue;
                 }
                 plugin.Init(_TFConnection, currentSensor.UID);
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{plugin.Name}] plugin.");
             }
             return true;
         }
@@ -183,6 +184,7 @@ namespace net.derpaul.tf
                 try
                 {
                     currentPlugin.Init();
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)
                 {

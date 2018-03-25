@@ -6,6 +6,11 @@
     public class Console : IDataSink
     {
         /// <summary>
+        /// Get the name of class
+        /// </summary>
+        public string Name { get { return this.GetType().Name; } }
+
+        /// <summary>
         /// Flags successful initialization
         /// </summary>
         public bool IsInitialized { get; private set; } = false;

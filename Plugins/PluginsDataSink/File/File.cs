@@ -8,6 +8,11 @@ namespace net.derpaul.tf
     public class File : IDataSink
     {
         /// <summary>
+        /// Get the name of class
+        /// </summary>
+        public string Name { get { return this.GetType().Name; } }
+
+        /// <summary>
         /// Stream to write data to
         /// </summary>
         private StreamWriter Datafile { get; set; }

@@ -47,10 +47,11 @@ namespace net.derpaul.tf
                 try
                 {
                     currentPlugin.Init();
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.GetType()}] => [{e.Message}]");
+                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.Name}] => [{e.Message}]");
                 }
             }
 

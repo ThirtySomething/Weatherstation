@@ -6,6 +6,11 @@
     public interface IDataSink
     {
         /// <summary>
+        /// Get the name/kind of a sensor
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Flags successful initialization
         /// </summary>
         bool IsInitialized { get; }

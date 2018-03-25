@@ -12,6 +12,11 @@ namespace net.derpaul.tf
     public class MQTT : IDataSink
     {
         /// <summary>
+        /// Get the name of class
+        /// </summary>
+        public string Name { get { return this.GetType().Name; } }
+
+        /// <summary>
         /// Instance of M2Mqtt client
         /// </summary>
         private MqttClient MqttClient;
@@ -107,7 +112,6 @@ namespace net.derpaul.tf
                 if (AcknowledgeList.ContainsKey(messageHash))
                 {
                     AcknowledgeList.Remove(messageHash);
-                    System.Console.WriteLine($"Elements in list: {AcknowledgeList.Count}");
                 }
             }
         }
