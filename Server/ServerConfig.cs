@@ -23,16 +23,16 @@
         /// <summary>
         /// Client ID
         /// </summary>
-        public string MQTTClientIDServer { get; set; } = "WeatherMQTTServer";
+        public string ClientID { get; set; } = "WeatherMQTTServer";
 
         /// <summary>
         /// Topic to publish data to
         /// </summary>
-        public string MQTTTopicData { get; set; } = "/tinkerforge/weatherstation/data";
+        public string TopicData { get; set; } = "/tinkerforge/weatherstation/data";
 
         /// <summary>
         /// Topic to send handshake information
         /// </summary>
-        public string MQTTTopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
+        public string TopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
     }
 }

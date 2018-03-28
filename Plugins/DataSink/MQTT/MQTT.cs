@@ -58,8 +58,8 @@ namespace net.derpaul.tf
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
                 MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
-                MqttClient.Connect(MQTTConfig.Instance.MQTTClientIDClient);
-                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                MqttClient.Connect(MQTTConfig.Instance.ClientID);
+                MqttClient.Subscribe(new string[] { MQTTConfig.Instance.TopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 success = MqttClient.IsConnected;
             }
@@ -94,7 +94,7 @@ namespace net.derpaul.tf
                 AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
             }
 
-            MqttClient.Publish(MQTTConfig.Instance.MQTTTopicData, Encoding.ASCII.GetBytes(dataJSON));
+            MqttClient.Publish(MQTTConfig.Instance.TopicData, Encoding.ASCII.GetBytes(dataJSON));
         }
 
         /// <summary>

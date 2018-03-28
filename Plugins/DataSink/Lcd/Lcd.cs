@@ -119,7 +119,7 @@ namespace net.derpaul.tf
             _TFConnection = new IPConnection();
             try
             {
-                _TFConnection.Connect(LcdConfig.Instance.Host, LcdConfig.Instance.Port);
+                _TFConnection.Connect(LcdConfig.Instance.BrickDaemonIP, LcdConfig.Instance.BrickDaemonPort);
             }
             catch (System.Net.Sockets.SocketException e)
             {

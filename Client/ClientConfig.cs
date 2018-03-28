@@ -11,14 +11,14 @@
         public int Delay { get; set; } = 5000;
 
         /// <summary>
-        /// Name of TF host to connect to
+        /// IP address TF brick daemon to connect to
         /// </summary>
-        public string Host { get; set; } = "localhost";
+        public string BrickDaemonIP { get; set; } = "localhost";
 
         /// <summary>
-        /// Port of TF host
+        /// Port address TF brick daemon to connect to
         /// </summary>
-        public int Port { get; set; } = 4223;
+        public int BrickDaemonPort { get; set; } = 4223;
 
         /// <summary>
         /// Default path for plugins

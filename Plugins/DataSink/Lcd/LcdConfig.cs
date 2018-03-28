@@ -3,14 +3,14 @@
     public class LcdConfig : ConfigLoader<LcdConfig>, IConfigSaver
     {
         /// <summary>
-        /// Host where the brick daemon is running
+        /// IP address TF brick daemon to connect to
         /// </summary>
-        public string Host { get; set; } = "localhost";
+        public string BrickDaemonIP { get; set; } = "localhost";
 
         /// <summary>
-        /// Port of the brick daemon to connect to
+        /// Port address TF brick daemon to connect to
         /// </summary>
-        public int Port { get; set; } = 4223;
+        public int BrickDaemonPort { get; set; } = 4223;
 
         /// <summary>
         /// Format to display a timestamp
