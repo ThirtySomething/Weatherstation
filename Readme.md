@@ -39,13 +39,15 @@ See the [plugin documentation](./Plugins/Readme.md) for more details.
     - Historized data
     - Graphics
 
-### URLs
-
-#### Swinging door links
+#### Notes for myself
 - http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
 - https://pisquare.osisoft.com/thread/7566
 - https://osipi.wordpress.com/tag/swinging-door-algorithm/
 - https://www.hackerboard.de/code-kitchen/50448-c-gesucht-implementierung-des-swinging-door-algorithmus.html
+- Is the swinging door a good algorithm to be used for weather data?
+- What about [rrdtool](https://de.wikipedia.org/wiki/RRDtool)?
+- What about [prometheus](https://prometheus.io/)?
+- What about [opentsdb](http://opentsdb.net/)?
 
 [SDoor]:https://support.industry.siemens.com/cs/document/109739594/komprimierung-von-prozesswertarchiven-mit-dem-swinging-door-algorithmus-in-pcs-7?dti=0&lc=de-WW
 [TFURL]:https://www.tinkerforge.com/en/doc/Kits/WeatherStation/WeatherStation.html
