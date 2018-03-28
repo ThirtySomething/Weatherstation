@@ -13,7 +13,7 @@
         /// <summary>
         /// Default path for plugins
         /// </summary>
-        public string PluginPath { get; set; } = "Plugins";
+        public string PluginPath { get; set; } = "";
 
         /// <summary>
         /// IP of MQTT broker to connect to

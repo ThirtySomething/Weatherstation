@@ -23,6 +23,6 @@
         /// <summary>
         /// Default path for plugins
         /// </summary>
-        public string PluginPath { get; set; } = "Plugins";
+        public string PluginPath { get; set; } = "";
     }
 }

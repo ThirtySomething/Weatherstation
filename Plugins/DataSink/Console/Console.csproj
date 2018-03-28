@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<AssemblyName>net.derpaul.tf.Console</AssemblyName>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <Content Include="Console.cs" />
   </ItemGroup>
+
 </Project>

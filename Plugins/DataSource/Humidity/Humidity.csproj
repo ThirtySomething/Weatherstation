@@ -1,16 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<AssemblyName>net.derpaul.tf.Humidity</AssemblyName>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <Content Include="Humidity.cs" />
-    <Content Include="HumidityConfig.cs" />
   </ItemGroup>
+
 </Project>

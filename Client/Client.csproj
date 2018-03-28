@@ -1,62 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<AssemblyName>net.derpaul.tf.Client</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
-    <PackageReference Include="Tinkerforge" Version="2.1.17" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".\..\Plugins\DataSource\AmbientLight\bin\$(ConfigurationName)\netcoreapp2.0\AmbientLight.dll">
-      <Link>Plugins\AmbientLight.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include=".\..\Plugins\DataSource\Barometer\bin\$(ConfigurationName)\netcoreapp2.0\Barometer.dll">
-      <Link>Plugins\Barometer.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include=".\..\Common\bin\$(ConfigurationName)\netcoreapp2.0\Common.dll">
-      <Link>Plugins\Common.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include=".\..\Plugins\DataSink\Console\bin\$(ConfigurationName)\netcoreapp2.0\Console.dll">
-      <Link>Plugins\Console.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include=".\..\Plugins\DataSource\Humidity\bin\$(ConfigurationName)\netcoreapp2.0\Humidity.dll">
-      <Link>Plugins\Humidity.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-	<Content Include=".\..\Plugins\DataSink\File\bin\$(ConfigurationName)\netcoreapp2.0\File.dll">
-      <Link>Plugins\File.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-	<Content Include=".\..\Plugins\DataSink\Lcd\bin\$(ConfigurationName)\netcoreapp2.0\Lcd.dll">
-      <Link>Plugins\Lcd.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-	<Content Include=".\..\Plugins\DataSink\MQTT\bin\$(ConfigurationName)\netcoreapp2.0\MQTT.dll">
-      <Link>Plugins\MQTT.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Client.cs" />
-    <Content Include="ClientConfig.cs" />
-    <Content Include="PluginHandler.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Plugins\DataSink\Console\Console.csproj" />
     <ProjectReference Include="..\Plugins\DataSink\File\File.csproj" />
     <ProjectReference Include="..\Plugins\DataSink\Lcd\Lcd.csproj" />
     <ProjectReference Include="..\Plugins\DataSink\MQTT\MQTT.csproj" />
+    <ProjectReference Include="..\Plugins\DataSink\SQLite\SQLite.csproj" />
     <ProjectReference Include="..\Plugins\DataSource\AmbientLight\AmbientLight.csproj" />
     <ProjectReference Include="..\Plugins\DataSource\Barometer\Barometer.csproj" />
     <ProjectReference Include="..\Plugins\DataSource\Humidity\Humidity.csproj" />
   </ItemGroup>
+
 </Project>
