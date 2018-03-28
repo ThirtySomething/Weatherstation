@@ -8,7 +8,7 @@
         /// <summary>
         /// Filename to write data to
         /// </summary>
-        public string DataFilename = "clientdata.dat";
+        public string DataFilename = "weatherdata.dat";
 
         /// <summary>
         /// Flag for appending to existing file or not

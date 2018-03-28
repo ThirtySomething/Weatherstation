@@ -11,11 +11,11 @@
     <PackageReference Include="Tinkerforge" Version="2.1.17" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".\..\Plugins\PluginsDataSource\AmbientLight\bin\$(ConfigurationName)\netcoreapp2.0\AmbientLight.dll">
+    <Content Include=".\..\Plugins\DataSource\AmbientLight\bin\$(ConfigurationName)\netcoreapp2.0\AmbientLight.dll">
       <Link>Plugins\AmbientLight.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include=".\..\Plugins\PluginsDataSource\Barometer\bin\$(ConfigurationName)\netcoreapp2.0\Barometer.dll">
+    <Content Include=".\..\Plugins\DataSource\Barometer\bin\$(ConfigurationName)\netcoreapp2.0\Barometer.dll">
       <Link>Plugins\Barometer.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -23,23 +23,23 @@
       <Link>Plugins\Common.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include=".\..\Plugins\PluginsDataSink\Console\bin\$(ConfigurationName)\netcoreapp2.0\Console.dll">
+    <Content Include=".\..\Plugins\DataSink\Console\bin\$(ConfigurationName)\netcoreapp2.0\Console.dll">
       <Link>Plugins\Console.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include=".\..\Plugins\PluginsDataSource\Humidity\bin\$(ConfigurationName)\netcoreapp2.0\Humidity.dll">
+    <Content Include=".\..\Plugins\DataSource\Humidity\bin\$(ConfigurationName)\netcoreapp2.0\Humidity.dll">
       <Link>Plugins\Humidity.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	<Content Include=".\..\Plugins\PluginsDataSink\File\bin\$(ConfigurationName)\netcoreapp2.0\File.dll">
+	<Content Include=".\..\Plugins\DataSink\File\bin\$(ConfigurationName)\netcoreapp2.0\File.dll">
       <Link>Plugins\File.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	<Content Include=".\..\Plugins\PluginsDataSink\Lcd\bin\$(ConfigurationName)\netcoreapp2.0\Lcd.dll">
+	<Content Include=".\..\Plugins\DataSink\Lcd\bin\$(ConfigurationName)\netcoreapp2.0\Lcd.dll">
       <Link>Plugins\Lcd.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	<Content Include=".\..\Plugins\PluginsDataSink\MQTT\bin\$(ConfigurationName)\netcoreapp2.0\MQTT.dll">
+	<Content Include=".\..\Plugins\DataSink\MQTT\bin\$(ConfigurationName)\netcoreapp2.0\MQTT.dll">
       <Link>Plugins\MQTT.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -51,12 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSink\Console\Console.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSink\File\File.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSink\Lcd\Lcd.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSink\MQTT\MQTT.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSource\AmbientLight\AmbientLight.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSource\Barometer\Barometer.csproj" />
-    <ProjectReference Include="..\Plugins\PluginsDataSource\Humidity\Humidity.csproj" />
+    <ProjectReference Include="..\Plugins\DataSink\Console\Console.csproj" />
+    <ProjectReference Include="..\Plugins\DataSink\File\File.csproj" />
+    <ProjectReference Include="..\Plugins\DataSink\Lcd\Lcd.csproj" />
+    <ProjectReference Include="..\Plugins\DataSink\MQTT\MQTT.csproj" />
+    <ProjectReference Include="..\Plugins\DataSource\AmbientLight\AmbientLight.csproj" />
+    <ProjectReference Include="..\Plugins\DataSource\Barometer\Barometer.csproj" />
+    <ProjectReference Include="..\Plugins\DataSource\Humidity\Humidity.csproj" />
   </ItemGroup>
 </Project>

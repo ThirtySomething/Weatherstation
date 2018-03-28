@@ -13,7 +13,7 @@
         /// <summary>
         /// Flags successful initialization
         /// </summary>
-        bool IsInitialized { get; }
+        bool IsInitialized { get; set; }
 
         /// <summary>
         /// Initialize plugin with loaded config

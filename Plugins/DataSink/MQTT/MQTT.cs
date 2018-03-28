@@ -24,7 +24,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Flags successful initialization
         /// </summary>
-        public bool IsInitialized { get; private set; } = false;
+        public bool IsInitialized { get; set; } = false;
 
         /// <summary>
         /// Published measurement values waiting for acknowledge
@@ -62,7 +62,6 @@ namespace net.derpaul.tf
                 MqttClient.Subscribe(new string[] { MQTTConfig.Instance.MQTTTopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 success = MqttClient.IsConnected;
-                IsInitialized = success;
             }
             catch (Exception e)
             {

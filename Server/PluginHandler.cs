@@ -46,7 +46,7 @@ namespace net.derpaul.tf
             {
                 try
                 {
-                    currentPlugin.Init();
+                    currentPlugin.IsInitialized = currentPlugin.Init();
                     System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)

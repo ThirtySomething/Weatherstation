@@ -17,7 +17,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Flags successful initialization
         /// </summary>
-        public bool IsInitialized { get; private set; } = false;
+        public bool IsInitialized { get; set; } = false;
 
         /// <summary>
         /// Internal object of TF bricklet
@@ -151,7 +151,6 @@ namespace net.derpaul.tf
                 _Bricklet = new BrickletLCD20x4(UID, _TFConnection);
                 _Bricklet.ClearDisplay();
                 _Bricklet.BacklightOn();
-                IsInitialized = true;
             }
         }
     }

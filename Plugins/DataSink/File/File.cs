@@ -20,7 +20,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Flags successful initialization
         /// </summary>
-        public bool IsInitialized { get; private set; } = false;
+        public bool IsInitialized { get; set; } = false;
 
         /// <summary>
         /// Close the file
@@ -48,8 +48,8 @@ namespace net.derpaul.tf
         {
             Datafile = new StreamWriter(FileConfig.Instance.DataFilename, FileConfig.Instance.AppendToFile);
 
-            IsInitialized = System.IO.File.Exists(FileConfig.Instance.DataFilename);
-            return IsInitialized;
+            bool success = System.IO.File.Exists(FileConfig.Instance.DataFilename);
+            return success;
         }
     }
 }

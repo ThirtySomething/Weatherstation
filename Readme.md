@@ -1,8 +1,9 @@
 # Weatherstation
 
-This project will address a [Tinkerforge weather station][TFURL]. It's splittet into two parts:
+This project will address a [Tinkerforge weather station][TFURL]. There are
   - The client for reading the data of the weather station.
-  - The server for dealing with the data in form of history and diagrams.
+  - The server for dealing with the data in form of saving them, historize them and compress them somehow.
+  - The UI for displaying the data processed by the server.
 
 ## General information
 
@@ -22,12 +23,16 @@ See the [client documentation](./Client/Readme.md) for more details.
 
 See the [server documentation](./Server/Readme.md) for more details.
 
+## Plugins
+
+See the [plugin documentation](./Plugins/Readme.md) for more details.
+
 ### ToDos
 
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish
 - Implement server part, consists of
   - MQTT client subscribing to the same topic as MQTT plugin
-  - Writing data to database (MySQL, MariaDB, SQLite, ...)
+  - Writing data to database (MySQL, MariaDB, ...)
   - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
   - Create a HTML frontend with various information
     - Data of current values

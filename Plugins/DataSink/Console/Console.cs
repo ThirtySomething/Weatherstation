@@ -13,7 +13,7 @@
         /// <summary>
         /// Flags successful initialization
         /// </summary>
-        public bool IsInitialized { get; private set; } = false;
+        public bool IsInitialized { get; set; } = false;
 
         /// <summary>
         /// Dummy implementation, console has no need for shutdown
@@ -37,7 +37,6 @@
         /// <returns>signal success with true</returns>
         public bool Init()
         {
-            IsInitialized = true;
             return true;
         }
     }
