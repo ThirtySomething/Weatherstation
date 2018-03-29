@@ -29,6 +29,7 @@ namespace net.derpaul.tf
         {
             var Server = new Server();
             Server.Run();
+            Environment.Exit(0);
         }
 
         /// <summary>
@@ -38,29 +39,43 @@ namespace net.derpaul.tf
         {
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ServerConfig.Instance.PluginPath);
             pluginHandler = new PluginHandler(pluginPath);
+            bool connected = false;
 
             if (pluginHandler.Init() == false)
             {
                 return;
             }
 
-            MqttClient = new MqttClient(ServerConfig.Instance.BrokerIP);
-            MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
-            MqttClient.Connect(ServerConfig.Instance.ClientID);
-            MqttClient.Subscribe(new string[] { ServerConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-
-            do
+            try
             {
-                while (!System.Console.KeyAvailable)
+                MqttClient = new MqttClient(ServerConfig.Instance.BrokerIP);
+                MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
+                MqttClient.Connect(ServerConfig.Instance.ClientID);
+                MqttClient.Subscribe(new string[] { ServerConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                connected = true;
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot connect to broker [{ServerConfig.Instance.BrokerIP}] => [{e.Message}]");
+            }
+
+            if (connected)
+            {
+                do
                 {
-                    TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
-                }
-            } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
+                    while (!System.Console.KeyAvailable)
+                    {
+                        TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
+                    }
+                } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
+            }
 
             pluginHandler.Shutdown();
-            MqttClient.Disconnect();
 
-            Environment.Exit(0);
+            if (connected)
+            {
+                MqttClient.Disconnect();
+            }
         }
 
         /// <summary>
