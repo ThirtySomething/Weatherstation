@@ -23,6 +23,11 @@
         /// <summary>
         /// Default path for plugins
         /// </summary>
-        public string PluginPath { get; set; } = "";
+        public string PluginPath { get; set; } = "Plugins";
+
+        /// <summary>
+        /// Product name of plugin set in AssemblyInfo.cs
+        /// </summary>
+        public string PluginProductName { get; set; } = "net.derpaul.tf.plugin";
     }
 }

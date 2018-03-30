@@ -2,14 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>net.derpaul.tf</RootNamespace>
+    <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	<AssemblyName>net.derpaul.tf.Console</AssemblyName>
-    <RuntimeIdentifiers>win7-x64;ubuntu.16.04-x64;linux.2018.03-arm-raspbian</RuntimeIdentifiers>
+	<AssemblyName>Console</AssemblyName>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

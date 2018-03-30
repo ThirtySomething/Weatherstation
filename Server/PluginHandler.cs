@@ -35,10 +35,10 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         private bool InitDataSinkPlugins()
         {
-            _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath);
+            _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath, ServerConfig.Instance.PluginProductName);
             if (_DataSinkPlugins.Count == 0)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No datasink plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: No datasink plugins found in [{_PluginPath}].");
                 return false;
             }
 
@@ -47,11 +47,12 @@ namespace net.derpaul.tf
                 try
                 {
                     currentPlugin.IsInitialized = currentPlugin.Init();
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{currentPlugin.Name}] plugin.");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.Name}] => [{e.Message}]");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Cannot init plugin [{currentPlugin.Name}] => [{e.Message}]");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: InnerException => [{e.InnerException}]");
                 }
             }
 

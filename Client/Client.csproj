@@ -5,20 +5,23 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>net.derpaul.tf</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	<AssemblyName>net.derpaul.tf.Client</AssemblyName>
-    <RuntimeIdentifiers>win7-x64;ubuntu.16.04-x64;linux.2018.03-arm-raspbian</RuntimeIdentifiers>
+	<AssemblyName>Client</AssemblyName>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0-preview1-final" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Plugins\DataSink\Console\Console.csproj" />
-    <ProjectReference Include="..\Plugins\DataSink\File\File.csproj" />
-    <ProjectReference Include="..\Plugins\DataSink\Lcd\Lcd.csproj" />
-    <ProjectReference Include="..\Plugins\DataSink\MQTT\MQTT.csproj" />
-    <ProjectReference Include="..\Plugins\DataSink\SQLite\SQLite.csproj" />
-    <ProjectReference Include="..\Plugins\DataSource\AmbientLight\AmbientLight.csproj" />
-    <ProjectReference Include="..\Plugins\DataSource\Barometer\Barometer.csproj" />
-    <ProjectReference Include="..\Plugins\DataSource\Humidity\Humidity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

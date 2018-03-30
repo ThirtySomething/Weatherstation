@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
+using System.Diagnostics;
 
 namespace net.derpaul.tf
 {
@@ -17,9 +18,9 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="pluginPath">Path to plugins</param>
         /// <returns></returns>
-        public static List<PluginType> TFPluginsLoad(string pluginPath)
+        public static List<PluginType> TFPluginsLoad(string pluginPath, string productName)
         {
-            List<Assembly> assemblyList = GetPluginAssemblyList(pluginPath);
+            List<Assembly> assemblyList = GetPluginAssemblyList(pluginPath, productName);
             List<Type> pluginTypeList = GetPluginTypeList(assemblyList);
             List<PluginType> pluginInstanceList = GetPluginInstanceList(pluginTypeList);
 
@@ -30,18 +31,25 @@ namespace net.derpaul.tf
         /// Read assemblies from given path
         /// </summary>
         /// <param name="pluginFolder">Path to search for assemblies</param>
+        /// <param name="productName">Product name of plugins</param>
         /// <returns>Collection of assembly objects</returns>
-        private static List<Assembly> GetPluginAssemblyList(string pluginFolder)
+        private static List<Assembly> GetPluginAssemblyList(string pluginFolder, string productName)
         {
+            List<Assembly> assemblyList = new List<Assembly>();
+
             if (!Directory.Exists(pluginFolder))
             {
-                return null;
+                return assemblyList;
             }
 
             string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
-            List<Assembly> assemblyList = new List<Assembly>();
             foreach (string pluginFile in pluginFileList)
             {
+                if (productName != FileVersionInfo.GetVersionInfo(pluginFile).ProductName)
+                {
+                    continue;
+                }
+
                 Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
                 assemblyList.Add(assembly);
             }

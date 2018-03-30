@@ -46,12 +46,12 @@ namespace net.derpaul.tf
                 }
                 else
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Database [{SQLiteConfig.Instance.DatabaseFilename}] in invalid state: [{DBConnection.State}]");
+                    System.Console.WriteLine($"{nameof(Init)}: Database [{SQLiteConfig.Instance.DatabaseFilename}] in invalid state: [{DBConnection.State}]");
                 }
             }
             catch (SqliteException e)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{nameof(Init)}: Connection Error [{e.Message}]");
             }
 
             return success;
@@ -93,7 +93,7 @@ namespace net.derpaul.tf
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot execute command [{command.ToString()}]: [{e.Message}]");
+                System.Console.WriteLine($"{nameof(ExecuteSQLStatement)}: Cannot execute command [{command.ToString()}]: [{e.Message}]");
             }
         }
 
@@ -150,7 +150,7 @@ namespace net.derpaul.tf
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot create index [ndx_{sensorValue.Name}]: [{e.Message}]");
+                System.Console.WriteLine($"{nameof(TableExists)}: Cannot create index [ndx_{sensorValue.Name}]: [{e.Message}]");
             }
 
             return exists;

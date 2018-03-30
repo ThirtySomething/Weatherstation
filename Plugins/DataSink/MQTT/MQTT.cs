@@ -65,7 +65,7 @@ namespace net.derpaul.tf
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot connect to broker [{MQTTConfig.Instance.BrokerIP}] => [{e.Message}]");
+                System.Console.WriteLine($"{nameof(Init)}: Cannot connect to broker [{MQTTConfig.Instance.BrokerIP}] => [{e.Message}]");
                 success = false;
             }
 

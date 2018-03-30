@@ -84,7 +84,7 @@ namespace net.derpaul.tf
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{nameof(Connect)}: Connection Error [{e.Message}]");
             }
 
             if (_Connected)
@@ -97,7 +97,7 @@ namespace net.derpaul.tf
                 }
                 catch (NotConnectedException e)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
+                    System.Console.WriteLine($"{nameof(Connect)}: Enumeration Error [{e.Message}]");
                 }
             }
 
@@ -144,11 +144,11 @@ namespace net.derpaul.tf
             {
                 return false;
             }
-            _SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(_PluginPath);
+            _SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(_PluginPath, ClientConfig.Instance.PluginProductName);
 
             if (_SensorPlugins.Count == 0)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No sensor plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No sensor plugins found in [{_PluginPath}].");
                 return false;
             }
 
@@ -157,11 +157,11 @@ namespace net.derpaul.tf
                 var plugin = _SensorPlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
                 if (plugin == null)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
+                    System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
                     continue;
                 }
                 plugin.Init(_TFConnection, currentSensor.UID);
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{plugin.Name}] plugin.");
+                System.Console.WriteLine($"{nameof(InitSensorPlugins)}: Initialized [{plugin.Name}] plugin.");
             }
             return true;
         }
@@ -172,10 +172,10 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         private bool InitDataSinkPlugins()
         {
-            _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath);
+            _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath, ClientConfig.Instance.PluginProductName);
             if (_DataSinkPlugins.Count == 0)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: No datasink plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: No datasink plugins found in [{_PluginPath}].");
                 return false;
             }
 
@@ -184,11 +184,12 @@ namespace net.derpaul.tf
                 try
                 {
                     currentPlugin.IsInitialized = currentPlugin.Init();
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Initialized [{currentPlugin.Name}] plugin.");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot init plugin[{currentPlugin.GetType()}] => [{e.Message}]");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Cannot init plugin [{currentPlugin.GetType()}] => [{e.Message}]");
+                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Inner exception => [{e.InnerException}]");
                 }
             }
 

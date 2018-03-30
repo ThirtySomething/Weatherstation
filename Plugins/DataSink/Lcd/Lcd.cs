@@ -103,7 +103,7 @@ namespace net.derpaul.tf
             }
             catch (NotConnectedException e)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Enumeration Error [{e.Message}]");
+                System.Console.WriteLine($"{nameof(CollectBrickletInformations)}: Enumeration Error [{e.Message}]");
                 return false;
             }
 
@@ -123,7 +123,7 @@ namespace net.derpaul.tf
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Connection Error [{e.Message}]");
+                System.Console.WriteLine($"{nameof(PerformConnect)}: Connection Error [{e.Message}]");
                 return false;
             }
             return true;

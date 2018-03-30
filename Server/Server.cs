@@ -56,7 +56,7 @@ namespace net.derpaul.tf
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{System.Reflection.MethodBase.GetCurrentMethod().Name}: Cannot connect to broker [{ServerConfig.Instance.BrokerIP}] => [{e.Message}]");
+                System.Console.WriteLine($"{nameof(Run)}: Cannot connect to broker [{ServerConfig.Instance.BrokerIP}] => [{e.Message}]");
             }
 
             if (connected)
