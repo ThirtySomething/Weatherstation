@@ -27,11 +27,15 @@ See the [server documentation](./Server/Readme.md) for more details.
 
 See the [plugin documentation](./Plugins/Readme.md) for more details.
 
-### ToDos
+## Build instructions
+
+To build and run the software, see [here](./Build.md) for more details.
+
+## ToDos
 
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish
+- Improve MQTT plugin to handle not acknowledged data.
 - Implement server part, consists of
-  - MQTT client subscribing to the same topic as MQTT plugin
   - Writing data to database (MySQL, MariaDB, ...)
   - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
   - Create a HTML frontend with various information
@@ -39,7 +43,7 @@ See the [plugin documentation](./Plugins/Readme.md) for more details.
     - Historized data
     - Graphics
 
-#### Notes for myself
+## Notes for myself
 - http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
 - https://pisquare.osisoft.com/thread/7566
 - https://osipi.wordpress.com/tag/swinging-door-algorithm/

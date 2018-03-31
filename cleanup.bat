@@ -1,18 +1,18 @@
-@echo off
+@ECHO OFF
 REM Memorize startup path
-set "STARTDIR=%~p0"
+SET "STARTDIR=%~p0"
 
-REM For all entries in list, here "RPi-build", "obj\", "bin\" and ".vs"
-for %%i in (RPi-build\ obj\ bin\ .vs\) do (
+REM For all entries in list, here "build", "obj\", "bin\" and ".vs"
+FOR %%i IN (build\ obj\ bin\ .vs\) DO (
 	REM Search in %STARTDIR% recursively for directories matchig pattern
-	for /d /r "%STARTDIR%" %%a in (%%i) do (
+	FOR /d /r "%STARTDIR%" %%a IN (%%i) DO (
 		REM Directory found, delete it
-		if exist "%%a" (
-			echo "Deleting [%%a]"
-			rmdir /s /q "%%a"
+		IF EXIST "%%a" (
+			ECHO.Deleting [%%a]
+			RMDIR /s /q "%%a"
 		)
 	)
 )
 
 REM Switch back to startup directory
-cd %STARTDIR%
+CD %STARTDIR%

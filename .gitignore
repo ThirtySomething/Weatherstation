@@ -1,7 +1,7 @@
 *.user
 .vs
 .vscode
-/RPi-Build
+/build
 /doxygen/Weatherstation.log
 /doxygen/html
 bin

@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.1.0-preview1-final" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.10" />
   </ItemGroup>
 
   <ItemGroup>

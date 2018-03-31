@@ -16,6 +16,6 @@ For more details how to configure the plugins see the Readme in the project of t
 * <code>PluginPath</code> - The path where the client is looking for datasource and datasink plugins, by default in <code>Plugins</code>
 * <code>PluginProductName</code> - Each plugin should have a specified product name to identify them as plugins for this software and to drop off the other DLL files. The default is <code>net.derpaul.tf.plugin</code> and this is valid __FOR ALL__ plugins.
 
-### Remarks
+## Remarks
 
 See also the [server documentation](./../Server/Readme.md). The description to install the client on a Raspi can be found [here](./Install-RPi.md).

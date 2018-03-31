@@ -38,6 +38,7 @@ namespace net.derpaul.tf
 
             try
             {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
                 DBConnection = new SqliteConnection($"Data Source={SQLiteConfig.Instance.DatabaseFilename}");
                 DBConnection.Open();
                 if (DBConnection.State == System.Data.ConnectionState.Open)
