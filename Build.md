@@ -82,6 +82,6 @@ The description for configuring the [client](./Client/Readme.md) or the [server]
 
 * Unfortunately there is somehow a mismatch with the <code>SQLite</code> plugin. So it's necessary to reference <code>SQLitePCLRaw.bundle_green</code>.
 
-Return to [main](./../Readme.md).
+Return to [main](./Readme.md).
 
 [TFBD]:https://www.tinkerforge.com/en/doc/Software/Brickd.html
