@@ -42,11 +42,13 @@ dotnet --help
 
 ## Common prerequisites
 
-Download and install the [Tinkerforge Brick daemon][TFBD] for the operating system where you will run the client and connect the weather station to. For Raspbian this looks for example<pre>
+* Download and install the [Tinkerforge Brick daemon][TFBD] for the operating system where you will run the client and connect the weather station to. For Raspbian this looks for example<pre>
 sudo apt-get install libusb-1.0-0 libudev0 pm-utils
 wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armhf.deb
 sudo dpkg -i brickd_linux_latest_armhf.deb
 </pre>
+
+* Install somewhere a MQTT broker. In my case I'm running [Mosquitto](https://mosquitto.org/) on my Synology NAS.
 
 ## Build the code
 
