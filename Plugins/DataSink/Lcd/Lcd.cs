@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tinkerforge;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to write values to TF LCD20x4 bricklet
@@ -22,12 +22,12 @@ namespace net.derpaul.tf
         /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
-        private static BrickletLCD20x4 _Bricklet { get; set; }
+        private static BrickletLCD20x4 Bricklet { get; set; }
 
         /// <summary>
         /// Internal connection to TF master brick
         /// </summary>
-        private IPConnection _TFConnection { get; set; }
+        private IPConnection TFConnection { get; set; }
 
         /// <summary>
         /// List of identified sensors
@@ -40,7 +40,7 @@ namespace net.derpaul.tf
         public Lcd()
         {
             _TFSensorIdentified = new List<Tuple<int, string>>();
-            _Bricklet = null;
+            Bricklet = null;
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace net.derpaul.tf
         /// </summary>
         public void Shutdown()
         {
-            _Bricklet.ClearDisplay();
-            _Bricklet.BacklightOff();
+            Bricklet.ClearDisplay();
+            Bricklet.BacklightOff();
         }
 
         /// <summary>
@@ -58,20 +58,20 @@ namespace net.derpaul.tf
         /// <param name="SensorValue"></param>
         public void HandleValue(MeasurementValue SensorValue)
         {
-            if (_Bricklet == null)
+            if (Bricklet == null)
             {
                 return;
             }
 
             // Display timestamp
-            _Bricklet.WriteLine(0, 0, SensorValue.Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
+            Bricklet.WriteLine(0, 0, SensorValue.Timestamp.ToString(LcdConfig.Instance.TimestampFormat));
 
             // Calculation of position in dependency of the sort order
             byte posX = (byte)((SensorValue.SortOrder % 2) * 10);
             byte posY = (byte)((SensorValue.SortOrder / 2) + 1);
             string MeasurementValueData = string.Format("{0,7:####.00} {1}", SensorValue.Value, SensorValue.Unit);
 
-            _Bricklet.WriteLine(posY, posX, MeasurementValueData);
+            Bricklet.WriteLine(posY, posX, MeasurementValueData);
         }
 
         /// <summary>
@@ -80,13 +80,7 @@ namespace net.derpaul.tf
         /// <returns></returns>
         public bool Init()
         {
-            var Success = PerformConnect();
-            if (!Success)
-            {
-                return false;
-            }
-
-            return CollectBrickletInformations();
+            return PerformConnect() ? CollectBrickletInformations() : false;
         }
 
         /// <summary>
@@ -97,9 +91,9 @@ namespace net.derpaul.tf
         {
             try
             {
-                _TFConnection.EnumerateCallback -= InstantiateLCDBricklet;
-                _TFConnection.EnumerateCallback += InstantiateLCDBricklet;
-                _TFConnection.Enumerate();
+                TFConnection.EnumerateCallback -= InstantiateLCDBricklet;
+                TFConnection.EnumerateCallback += InstantiateLCDBricklet;
+                TFConnection.Enumerate();
             }
             catch (NotConnectedException e)
             {
@@ -115,11 +109,11 @@ namespace net.derpaul.tf
         /// </summary>
         /// <returns></returns>
         private bool PerformConnect()
-        {
-            _TFConnection = new IPConnection();
+        {   
             try
             {
-                _TFConnection.Connect(LcdConfig.Instance.BrickDaemonIP, LcdConfig.Instance.BrickDaemonPort);
+                TFConnection = new IPConnection();
+                TFConnection.Connect(LcdConfig.Instance.BrickDaemonIP, LcdConfig.Instance.BrickDaemonPort);
             }
             catch (System.Net.Sockets.SocketException e)
             {
@@ -144,13 +138,13 @@ namespace net.derpaul.tf
                 short[] hardwareVersion, short[] firmwareVersion,
                 int deviceIdentifier, short enumerationType)
         {
-            if ((enumerationType == IPConnection.ENUMERATION_TYPE_CONNECTED ||
-               enumerationType == IPConnection.ENUMERATION_TYPE_AVAILABLE) &&
-               (deviceIdentifier == BrickletLCD20x4.DEVICE_IDENTIFIER))
+            if ((enumerationType == IPConnection.ENUMERATION_TYPE_CONNECTED 
+                || enumerationType == IPConnection.ENUMERATION_TYPE_AVAILABLE)
+                && (deviceIdentifier == BrickletLCD20x4.DEVICE_IDENTIFIER))
             {
-                _Bricklet = new BrickletLCD20x4(UID, _TFConnection);
-                _Bricklet.ClearDisplay();
-                _Bricklet.BacklightOn();
+                Bricklet = new BrickletLCD20x4(UID, TFConnection);
+                Bricklet.ClearDisplay();
+                Bricklet.BacklightOn();
             }
         }
     }
