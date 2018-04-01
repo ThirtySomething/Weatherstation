@@ -8,7 +8,7 @@ namespace net.derpaul.tf
     public class TFUtils
     {
         /// <summary>
-        /// Dump method to wait until good moment to start with
+        /// Dumb method to wait until good moment to start with
         /// </summary>
         public static void WaitUntilStart()
         {

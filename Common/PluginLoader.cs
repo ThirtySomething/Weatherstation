@@ -45,13 +45,11 @@ namespace net.derpaul.tf
             string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
             foreach (string pluginFile in pluginFileList)
             {
-                if (productName != FileVersionInfo.GetVersionInfo(pluginFile).ProductName)
+                if (FileVersionInfo.GetVersionInfo(pluginFile).ProductName.Contains(productName))
                 {
-                    continue;
+                    Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
+                    assemblyList.Add(assembly);
                 }
-
-                Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
-                assemblyList.Add(assembly);
             }
 
             return assemblyList;
@@ -68,6 +66,7 @@ namespace net.derpaul.tf
             {
                 return null;
             }
+
             Type pluginType = typeof(PluginType);
             List<Type> pluginTypes = new List<Type>();
             foreach (Assembly assembly in assemblyList)
