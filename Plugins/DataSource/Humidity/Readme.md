@@ -1,6 +1,6 @@
 ## Humidity
 
-The Humidity plugin reads the measurement values of a Tinkerforge Humidity sensor.
+The Humidity plugin reads the measurement values of a Tinkerforge humidity sensor.
 
 Return to [main](./../Readme.md).
 
