@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Data sink - sending data using SQLite
@@ -41,11 +41,9 @@ namespace net.derpaul.tf
                 SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
                 DBConnection = new SqliteConnection($"Data Source={SQLiteConfig.Instance.DatabaseFilename}");
                 DBConnection.Open();
-                if (DBConnection.State == System.Data.ConnectionState.Open)
-                {
-                    success = true;
-                }
-                else
+                success = DBConnection.State == System.Data.ConnectionState.Open;
+                
+                if (!success)
                 {
                     System.Console.WriteLine($"{nameof(Init)}: Database [{SQLiteConfig.Instance.DatabaseFilename}] in invalid state: [{DBConnection.State}]");
                 }
@@ -107,8 +105,8 @@ namespace net.derpaul.tf
             string stm = $"INSERT INTO {sensorValue.Name} (timestamp, value, hash) VALUES (@timestamp, @value, @hash)";
             SqliteCommand command = new SqliteCommand(stm, DBConnection);
             command.Parameters.Add(new SqliteParameter("@timestamp", System.Data.SqlDbType.DateTime) { Value = sensorValue.Timestamp });
-            command.Parameters.Add(new SqliteParameter("@value", System.Data.SqlDbType.DateTime) { Value = sensorValue.Value });
-            command.Parameters.Add(new SqliteParameter("@hash", System.Data.SqlDbType.DateTime) { Value = sensorValue.ToHash() });
+            command.Parameters.Add(new SqliteParameter("@value", System.Data.SqlDbType.Decimal) { Value = sensorValue.Value });
+            command.Parameters.Add(new SqliteParameter("@hash", System.Data.SqlDbType.Text) { Value = sensorValue.ToHash() });
             ExecuteSQLStatement(command);
         }
 
@@ -138,14 +136,12 @@ namespace net.derpaul.tf
 
             try
             {
-                string stm = $"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{sensorValue.Name}'";
+                string stm = $"SELECT name FROM sqlite_master WHERE type = 'table' AND name = @name";
                 SqliteCommand cmd = new SqliteCommand(stm, DBConnection);
+                cmd.Parameters.Add(new SqliteParameter("@name", System.Data.SqlDbType.Text) { Value = sensorValue.Name });
                 SqliteDataReader rdr = cmd.ExecuteReader();
 
-                if (rdr.Read())
-                {
-                    exists = true;
-                }
+                exists = rdr.Read();
                 rdr.Close();
                 cmd.Dispose();
             }
