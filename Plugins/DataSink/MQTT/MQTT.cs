@@ -4,7 +4,7 @@ using System.Text;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Data sink - sending data using MQTT
