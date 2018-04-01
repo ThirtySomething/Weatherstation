@@ -49,7 +49,7 @@ namespace net.derpaul.tf
         protected static string GetConfigFilePath()
         {
             var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
-            return Path.Combine(assemblyDirectory, GetConfigFileName(), ConfigFileExtenstion);
+            return Path.Combine(assemblyDirectory, GetConfigFileName()) + ConfigFileExtenstion;
         }
 
         /// <summary>
