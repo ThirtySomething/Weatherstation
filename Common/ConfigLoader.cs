@@ -78,7 +78,6 @@ namespace net.derpaul.tf
             using (var reader = new StreamReader(FileName))
             {
                 var serializer = new XmlSerializer(typeof(ConfigClass));
-                // FIXME: what if casting this gets you a null value?
                 return (ConfigClass)serializer.Deserialize(reader);
             }
         }
