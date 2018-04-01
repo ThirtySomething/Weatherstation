@@ -45,7 +45,8 @@ namespace net.derpaul.tf
             string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
             foreach (string pluginFile in pluginFileList)
             {
-                if (FileVersionInfo.GetVersionInfo(pluginFile).ProductName.Contains(productName))
+                var name = FileVersionInfo.GetVersionInfo(pluginFile).ProductName;
+                if (name != null && name.Contains(productName))
                 {
                     Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
                     assemblyList.Add(assembly);
