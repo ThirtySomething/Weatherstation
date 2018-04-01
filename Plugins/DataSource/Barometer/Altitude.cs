@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read altitude from barometer sensor
@@ -18,13 +18,11 @@
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, AltitudeConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (_Bricklet != null)
             {
-                return result;
+                int altitudeRaw = _Bricklet.GetAltitude();
+                result.Value = altitudeRaw / 100.0;
             }
-
-            int altitudeRaw = _Bricklet.GetAltitude();
-            result.Value = altitudeRaw / 100.0;
 
             return result;
         }

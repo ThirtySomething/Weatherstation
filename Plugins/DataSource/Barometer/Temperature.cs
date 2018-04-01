@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read temperature using barometer sensor
@@ -20,11 +20,9 @@
 
             if (_Bricklet == null)
             {
-                return result;
+                int temperatureRaw = _Bricklet.GetChipTemperature();
+                result.Value = temperatureRaw / 100.0;
             }
-
-            int temperatureRaw = _Bricklet.GetChipTemperature();
-            result.Value = temperatureRaw / 100.0;
 
             return result;
         }

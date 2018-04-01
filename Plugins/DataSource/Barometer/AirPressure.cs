@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read air pressure from barometer sensor
@@ -18,13 +18,11 @@
         {
             MeasurementValue returnValue = new MeasurementValue(Name, Unit, AirPressureConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (_Bricklet != null)
             {
-                return returnValue;
+                int airPressureRaw = _Bricklet.GetAirPressure();
+                returnValue.Value = airPressureRaw / 1000.0;
             }
-
-            int airPressureRaw = _Bricklet.GetAirPressure();
-            returnValue.Value = airPressureRaw / 1000.0;
 
             return returnValue;
         }

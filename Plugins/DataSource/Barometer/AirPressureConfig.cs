@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Config settings of air pressure sensor

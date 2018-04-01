@@ -1,6 +1,6 @@
 ﻿using Tinkerforge;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read values from barometer sensor
@@ -24,12 +24,10 @@ namespace net.derpaul.tf
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet != null)
+            if (_Bricklet == null)
             {
-                return;
+                _Bricklet = new BrickletBarometer(UID, connection);
             }
-
-            _Bricklet = new BrickletBarometer(UID, connection);
         }
 
         /// <summary>
