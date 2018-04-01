@@ -34,6 +34,6 @@ namespace net.derpaul.tf.plugin
         /// Abstract method, should be implemented in subclasses. Shall retrieve sensor's value.
         /// </summary>
         /// <returns>Measurement value of sensor or 0.0</returns>
-        protected override abstract MeasurementValue ValueGetRaw();
+        protected override abstract MeasurementValue RawValue();
     }
 }

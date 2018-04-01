@@ -15,7 +15,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
-        private static BrickletAmbientLight _Bricklet { get; set; }
+        private static BrickletAmbientLight Bricklet { get; set; }
 
         /// <summary>
         /// The TF sensor type
@@ -29,9 +29,9 @@ namespace net.derpaul.tf.plugin
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet == null)
+            if (Bricklet == null)
             {
-                _Bricklet = new BrickletAmbientLight(UID, connection);
+                Bricklet = new BrickletAmbientLight(UID, connection);
             }
         }
 
@@ -39,13 +39,13 @@ namespace net.derpaul.tf.plugin
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Illuminance or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, AmbientLightConfig.Instance.SortOrder);
 
-            if (_Bricklet != null)
+            if (Bricklet != null)
             {
-                int rawIlluminance = _Bricklet.GetIlluminance();
+                int rawIlluminance = Bricklet.GetIlluminance();
                 result.Value = rawIlluminance / 10.0;
             }
 

@@ -14,7 +14,7 @@
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue returnValue = new MeasurementValue(Name, Unit, AirPressureConfig.Instance.SortOrder);
 

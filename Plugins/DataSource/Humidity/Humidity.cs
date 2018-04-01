@@ -41,7 +41,7 @@ namespace net.derpaul.tf
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Humidity or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, HumidityConfig.Instance.SortOrder);
 

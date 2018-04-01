@@ -221,7 +221,7 @@ namespace net.derpaul.tf
             var pluginData = new List<MeasurementValue>();
             foreach (var currentPlugin in _SensorPlugins)
             {
-                pluginData.Add(currentPlugin.ValueGet());
+                pluginData.Add(currentPlugin.Value());
             }
 
             return pluginData.OrderBy(o => o.SortOrder).ToList();
