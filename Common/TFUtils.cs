@@ -8,25 +8,17 @@ namespace net.derpaul.tf
     public class TFUtils
     {
         /// <summary>
-        /// Dumb method to wait until good moment to start with
+        /// Returns when current timestamp seconds are divisible by number given
         /// </summary>
-        public static void WaitUntilStart()
+        public static void WaitForCleanTimestamp(int divisor, int checkFrequency)
         {
             var currentSeconds = DateTime.Now.Second;
 
-            while (0 < currentSeconds % 5)
+            while (currentSeconds % divisor != 0)
             {
+                System.Threading.Thread.Sleep(checkFrequency);
                 currentSeconds = DateTime.Now.Second;
             }
-        }
-
-        /// <summary>
-        /// Wait until n milliseconds are gone
-        /// </summary>
-        /// <param name="delay"></param>
-        public static void WaitNMilliseconds(int delay)
-        {
-            System.Threading.Thread.Sleep(delay);
         }
     }
 }

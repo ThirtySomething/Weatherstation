@@ -16,20 +16,23 @@ namespace net.derpaul.tf
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClientConfig.Instance.PluginPath);
             var pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.BrickDaemonIP, ClientConfig.Instance.BrickDaemonPort);
 
-            if (pluginHandler.Init() == false)
+            if (!pluginHandler.Init())
             {
                 return;
             }
 
-            TFUtils.WaitUntilStart();
-            do
+            for (;;)
             {
-                while (!System.Console.KeyAvailable)
+                if (!System.Console.KeyAvailable)
                 {
                     pluginHandler.HandleValues(pluginHandler.ValuesRead());
-                    TFUtils.WaitNMilliseconds(ClientConfig.Instance.Delay);
+                    System.Threading.Thread.Sleep(ClientConfig.Instance.Delay);
                 }
-            } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
+                else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+            }
 
             pluginHandler.Shutdown();
 

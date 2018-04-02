@@ -13,12 +13,12 @@ namespace net.derpaul.tf
         /// <summary>
         /// The path to the plugins
         /// </summary>
-        private string _PluginPath { get; set; }
+        private string PluginPath { get; set; }
 
         /// <summary>
         /// List of data sink plugins
         /// </summary>
-        private List<IDataSink> _DataSinkPlugins { get; set; }
+        private List<IDataSink> DataSinkPlugins { get; set; }
 
         /// <summary>
         /// Constructor of TF handler
@@ -26,7 +26,7 @@ namespace net.derpaul.tf
         /// <param name="pluginPath">Path to plugins</param>
         internal PluginHandler(string pluginPath)
         {
-            _PluginPath = pluginPath;
+            PluginPath = pluginPath;
         }
 
         /// <summary>
@@ -35,14 +35,14 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         private bool InitDataSinkPlugins()
         {
-            _DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(_PluginPath, ServerConfig.Instance.PluginProductName);
-            if (_DataSinkPlugins.Count == 0)
+            DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(PluginPath, ServerConfig.Instance.PluginProductName);
+            if (DataSinkPlugins.Count == 0)
             {
-                System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: No datasink plugins found in [{_PluginPath}].");
+                System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: No datasink plugins found in [{PluginPath}].");
                 return false;
             }
 
-            foreach (var currentPlugin in _DataSinkPlugins)
+            foreach (var currentPlugin in DataSinkPlugins)
             {
                 try
                 {
@@ -74,14 +74,12 @@ namespace net.derpaul.tf
         /// <param name="SensorValue"></param>
         internal void HandleValue(MeasurementValue SensorValue)
         {
-            foreach (var currentPlugin in _DataSinkPlugins)
+            foreach (var currentPlugin in DataSinkPlugins)
             {
-                if (!currentPlugin.IsInitialized)
+                if (currentPlugin.IsInitialized)
                 {
-                    continue;
+                    currentPlugin.HandleValue(SensorValue);
                 }
-
-                currentPlugin.HandleValue(SensorValue);
             }
         }
 
@@ -90,14 +88,12 @@ namespace net.derpaul.tf
         /// </summary>
         internal void Shutdown()
         {
-            foreach (var currentPlugin in _DataSinkPlugins)
+            foreach (var currentPlugin in DataSinkPlugins)
             {
-                if (!currentPlugin.IsInitialized)
+                if (currentPlugin.IsInitialized)
                 {
-                    continue;
+                    currentPlugin.Shutdown();
                 }
-
-                currentPlugin.Shutdown();
             }
         }
     }

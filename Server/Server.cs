@@ -39,13 +39,13 @@ namespace net.derpaul.tf
         {
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ServerConfig.Instance.PluginPath);
             pluginHandler = new PluginHandler(pluginPath);
-            bool connected = false;
 
-            if (pluginHandler.Init() == false)
+            if (!pluginHandler.Init())
             {
                 return;
             }
 
+            bool connected = false;
             try
             {
                 MqttClient = new MqttClient(ServerConfig.Instance.BrokerIP);
@@ -61,13 +61,17 @@ namespace net.derpaul.tf
 
             if (connected)
             {
-                do
+                for(;;)
                 {
-                    while (!System.Console.KeyAvailable)
+                    if (!System.Console.KeyAvailable)
                     {
-                        TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
+                        System.Threading.Thread.Sleep(ServerConfig.Instance.Delay);
                     }
-                } while (System.Console.ReadKey(true).Key != ConsoleKey.Escape);
+                    else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    {
+                        break;
+                    }
+                }
             }
 
             pluginHandler.Shutdown();
