@@ -8,7 +8,7 @@
         /// <summary>
         /// IP of MQTT broker to connect to
         /// </summary>
-        public string BrokerIP { get; set; } = "127.0.0.1";
+        public string BrokerIP { get; set; } = "test.mosquitto.org";
 
         /// <summary>
         /// Client ID

@@ -17,6 +17,7 @@ namespace net.derpaul.tf
         /// Load plugins from given path
         /// </summary>
         /// <param name="pluginPath">Path to plugins</param>
+        /// <param name="productName">Product name of plugins</param>
         /// <returns></returns>
         public static List<PluginType> TFPluginsLoad(string pluginPath, string productName)
         {

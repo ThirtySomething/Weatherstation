@@ -219,12 +219,8 @@ namespace net.derpaul.tf
         internal List<MeasurementValue> ValuesRead()
         {
             var pluginData = new List<MeasurementValue>();
-            foreach (var currentPlugin in _SensorPlugins)
-            {
-                pluginData.Add(currentPlugin.ValueGet());
-            }
-
-            return pluginData.OrderBy(o => o.SortOrder).ToList();
+            _SensorPlugins.ForEach(p => pluginData.Add(p.ValueGet()));
+            return pluginData.OrderBy(p => p.SortOrder).ToList();
         }
 
         /// <summary>

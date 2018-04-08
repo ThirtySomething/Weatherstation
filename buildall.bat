@@ -15,5 +15,6 @@ EXIT /B
 :START
 CALL :APA %STARTDIR% %GENERATOR% RUNME
 FOR %%i IN (%ARCHTYPES%) DO (
-	CALL %RUNME% %%i
+	ECHO.Compiling for [%%i]
+	CALL %RUNME% %%i > nul 2>&1
 )
