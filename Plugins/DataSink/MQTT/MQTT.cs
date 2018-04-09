@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Timers;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -22,6 +23,16 @@ namespace net.derpaul.tf
         private MqttClient MqttClient;
 
         /// <summary>
+        /// Timer to check the acknowledge list
+        /// </summary>
+        private Timer RunCheck;
+
+        /// <summary>
+        /// Memorize event handler
+        /// </summary>
+        private ElapsedEventHandler RunCheckEvent;
+
+        /// <summary>
         /// Flags successful initialization
         /// </summary>
         public bool IsInitialized { get; set; } = false;
@@ -41,7 +52,13 @@ namespace net.derpaul.tf
         /// </summary>
         public void Shutdown()
         {
-            MqttClient.Disconnect();
+            lock (Locker)
+            {
+                MqttClient.MqttMsgPublishReceived -= MqttAcknowledgeRecieved;
+                MqttClient.Disconnect();
+                RunCheck.Elapsed -= RunCheckEvent;
+                RunCheck.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -55,6 +72,11 @@ namespace net.derpaul.tf
             try
             {
                 AcknowledgeList = new Dictionary<string, MeasurementValue>();
+
+                RunCheck = new Timer(MQTTConfig.Instance.TimerDelay);
+                RunCheckEvent = new ElapsedEventHandler(CheckAcknowledgeList);
+                RunCheck.Elapsed += RunCheckEvent;
+                RunCheck.Enabled = true;
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
                 MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
@@ -111,6 +133,28 @@ namespace net.derpaul.tf
                 if (AcknowledgeList.ContainsKey(messageHash))
                 {
                     AcknowledgeList.Remove(messageHash);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check in interval the acknowledgelist for not acknowledged entries
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void CheckAcknowledgeList(object sender, ElapsedEventArgs e)
+        {
+            lock (Locker)
+            {
+                var NumberOfValues = AcknowledgeList.Count;
+                if (NumberOfValues > 0)
+                {
+                    System.Console.WriteLine($"Try to resend [{NumberOfValues}] measurement values.");
+                    foreach (var Data in AcknowledgeList)
+                    {
+                        AcknowledgeList.Remove(Data.Key);
+                        PublishSingleValue(Data.Value);
+                    }
                 }
             }
         }

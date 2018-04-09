@@ -24,5 +24,10 @@
         /// Topic to recieve handshake information
         /// </summary>
         public string TopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
+
+        /// <summary>
+        /// Timer interval to check the acknowledge list
+        /// </summary>
+        public int TimerDelay { get; set; } = 10000;
     }
 }

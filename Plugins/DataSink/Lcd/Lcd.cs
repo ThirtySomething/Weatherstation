@@ -48,8 +48,11 @@ namespace net.derpaul.tf
         /// </summary>
         public void Shutdown()
         {
-            _Bricklet.ClearDisplay();
-            _Bricklet.BacklightOff();
+            if (_Bricklet != null)
+            {
+                _Bricklet.ClearDisplay();
+                _Bricklet.BacklightOff();
+            }
         }
 
         /// <summary>
