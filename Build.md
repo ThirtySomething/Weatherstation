@@ -22,23 +22,23 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 * Test the .NET Core installation <pre>
 dotnet --help
 </pre>
-The result should be something like <pre>
-Usage: dotnet [host-options] [path-to-application]
+        The result should be something like <pre>
+        Usage: dotnet [host-options] [path-to-application]
+        
+    path-to-application:
+    The path to an application .dll file to execute.
 
-path-to-application:
-The path to an application .dll file to execute.
+    host-options:
+    --additionalprobingpath <path>      Path containing probing policy and assemblies to probe for
+    --depsfile <path>                   Path to <application>.deps.json file
+    --runtimeconfig <path>              Path to <application>.runtimeconfig.json file
+    --fx-version <version>              Version of the installed Shared Framework to use to run the application.
+    --roll-forward-on-no-candidate-fx   Roll forward on no candidate shared framework is enabled
+    --additional-deps <path>            Path to additonal deps.json file
 
-host-options:
---additionalprobingpath <path>      Path containing probing policy and assemblies to probe for
---depsfile <path>                   Path to <application>.deps.json file
---runtimeconfig <path>              Path to <application>.runtimeconfig.json file
---fx-version <version>              Version of the installed Shared Framework to use to run the application.
---roll-forward-on-no-candidate-fx   Roll forward on no candidate shared framework is enabled
---additional-deps <path>            Path to additonal deps.json file
-
-Common Options:
--h|--help                           Displays this help.
---info                              Displays the host information
+    Common Options:
+    -h|--help                           Displays this help.
+    --info                              Displays the host information
 </pre>
     
 See also [here](https://blogs.msdn.microsoft.com/david/2017/07/20/setting_up_raspian_and_dotnet_core_2_0_on_a_raspberry_pi/) for more information. Maybe this [here](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md) is also necessary.
