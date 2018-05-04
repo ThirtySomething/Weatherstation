@@ -31,6 +31,10 @@ See the [plugin documentation](./Plugins/Readme.md) for more details.
 
 To build and run the software, see [here](./Build.md) for more details.
 
+## Schema overview
+
+![Schema overview](./Documentation/Diagramm.png)
+
 ## ToDos
 
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish
