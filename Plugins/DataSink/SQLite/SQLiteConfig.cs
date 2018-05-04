@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings for MQTT
+    /// Configuration settings of SQLite plugin
     /// </summary>
     public class SQLiteConfig : ConfigLoader<SQLiteConfig>, IConfigSaver
     {

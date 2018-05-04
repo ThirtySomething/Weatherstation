@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config class for settings related to reading the bricklets
+    /// Configuration settings of server reading data via MQTT
     /// </summary>
     public class ServerConfig : ConfigLoader<ServerConfig>, IConfigSaver
     {

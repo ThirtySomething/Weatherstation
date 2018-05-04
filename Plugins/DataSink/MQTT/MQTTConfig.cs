@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings for MQTT
+    /// Configuration settings of MQTT plugin
     /// </summary>
     public class MQTTConfig : ConfigLoader<MQTTConfig>, IConfigSaver
     {

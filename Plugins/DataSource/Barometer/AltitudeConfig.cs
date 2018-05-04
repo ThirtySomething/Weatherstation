@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config settings of barometer sensor
+    /// Configuration settings of altitude sensor
     /// </summary>
     public class AltitudeConfig : ConfigLoader<AltitudeConfig>, IConfigSaver
     {

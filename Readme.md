@@ -33,7 +33,7 @@ To build and run the software, see [here](./Build.md) for more details.
 
 ## Schema overview
 
-![Schema overview](./Documentation/Diagramm.png)
+![Schema overview](./Documentation/Diagram.png)
 
 ## ToDos
 

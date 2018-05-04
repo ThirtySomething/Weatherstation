@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config settings of barometer sensor
+    /// Configuration settings of temperature sensor
     /// </summary>
     public class TemperatureConfig : ConfigLoader<TemperatureConfig>, IConfigSaver
     {

@@ -1,5 +1,8 @@
 ﻿namespace net.derpaul.tf
 {
+    /// <summary>
+    /// Configuration settings of Lcd bricklet of TF weatherstation
+    /// </summary>
     public class LcdConfig : ConfigLoader<LcdConfig>, IConfigSaver
     {
         /// <summary>

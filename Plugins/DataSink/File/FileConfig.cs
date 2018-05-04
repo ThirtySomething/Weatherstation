@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Write collection of Tinkerforge Sensor plugin values to console
+    /// Configuration settings of file plugin to write data to a file
     /// </summary>
     public class FileConfig : ConfigLoader<FileConfig>, IConfigSaver
     {

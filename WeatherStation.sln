@@ -67,6 +67,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 		{5C4119E1-E9F2-4AB4-B0BB-A5A28C2B2D1B} = {5C4119E1-E9F2-4AB4-B0BB-A5A28C2B2D1B}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MariaDB", "Plugins\DataSink\MariaDB\MariaDB.csproj", "{571023EB-0555-47B8-97A8-BB52612EC1BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +211,18 @@ Global
 		{576FE5B9-DDCC-42E3-B12D-C78F9C110145}.Release|x64.Build.0 = Release|Any CPU
 		{576FE5B9-DDCC-42E3-B12D-C78F9C110145}.Release|x86.ActiveCfg = Release|Any CPU
 		{576FE5B9-DDCC-42E3-B12D-C78F9C110145}.Release|x86.Build.0 = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|x64.Build.0 = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Debug|x86.Build.0 = Debug|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x64.ActiveCfg = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x64.Build.0 = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
