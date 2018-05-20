@@ -96,7 +96,7 @@ namespace net.derpaul.tf
                 MqttClient.Publish(ServerConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
                 pluginHandler.HandleValue(measurementValue);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 System.Console.WriteLine($"{nameof(MqttDataRecieved)}: Invalid message [{stringJson}] recieved.");
             }
