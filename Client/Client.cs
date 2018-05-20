@@ -21,12 +21,12 @@ namespace net.derpaul.tf
                 return;
             }
 
-            for (;;)
+            for (; ; )
             {
                 if (!System.Console.KeyAvailable)
                 {
                     pluginHandler.HandleValues(pluginHandler.ValuesRead());
-                    System.Threading.Thread.Sleep(ClientConfig.Instance.Delay);
+                    TFUtils.WaitNMilliseconds(ClientConfig.Instance.Delay);
                 }
                 else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
                 {
