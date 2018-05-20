@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Config settings of ambient light sensor
+    /// Configuration settings of ambient light sensor
     /// </summary>
     public class AmbientLightConfig : ConfigLoader<AmbientLightConfig>, IConfigSaver
     {

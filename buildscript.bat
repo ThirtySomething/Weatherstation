@@ -10,6 +10,7 @@ SET "DESTFRAM=netcoreapp2.0"
 SET "DESTTYPE=Release"
 SET "PLUGINPATH=Plugins"
 SET "DELFILEEXT=json pdb"
+SET "ARCHTYPES=win-x64 linux-x64 linux-arm"
 
 REM Check commandline parameter for architecture
 IF /i [%1] == [] (
@@ -18,8 +19,7 @@ IF /i [%1] == [] (
 	GOTO :START
 )
 
-REM Only portable types and linux-arm are supported
-SET "ARCHTYPES=win-x64 linux-x64 linux-arm"
+REM Only defined types are supported
 FOR %%i IN (%ARCHTYPES%) DO (
 	IF /i [%1] == [%%i] (
 		SET "DESTARCH=%%i"

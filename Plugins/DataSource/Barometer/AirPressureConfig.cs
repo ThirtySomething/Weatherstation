@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Config settings of air pressure sensor
+    /// Configuration settings of air pressure sensor
     /// </summary>
     public class AirPressureConfig : ConfigLoader<AirPressureConfig>, IConfigSaver
     {

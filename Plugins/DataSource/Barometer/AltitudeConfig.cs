@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Config settings of altitude sensor
+    /// Configuration settings of altitude sensor
     /// </summary>
     public class AltitudeConfig : ConfigLoader<AltitudeConfig>, IConfigSaver
     {

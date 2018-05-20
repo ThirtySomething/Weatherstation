@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config class for settings related to reading the bricklets
+    /// Configuration settings of server reading data via MQTT
     /// </summary>
     public class ServerConfig : ConfigLoader<ServerConfig>, IConfigSaver
     {
@@ -23,7 +23,7 @@
         /// <summary>
         /// IP of MQTT broker to connect to
         /// </summary>
-        public string BrokerIP { get; set; } = "127.0.0.1";
+        public string BrokerIP { get; set; } = "test.mosquitto.org";
 
         /// <summary>
         /// Client ID

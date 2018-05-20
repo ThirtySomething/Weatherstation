@@ -1,14 +1,14 @@
 ﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Configuration settings for MQTT
+    /// Configuration settings of MQTT plugin
     /// </summary>
     public class MQTTConfig : ConfigLoader<MQTTConfig>, IConfigSaver
     {
         /// <summary>
         /// IP of MQTT broker to connect to
         /// </summary>
-        public string BrokerIP { get; set; } = "127.0.0.1";
+        public string BrokerIP { get; set; } = "test.mosquitto.org";
 
         /// <summary>
         /// Client ID
@@ -24,5 +24,10 @@
         /// Topic to recieve handshake information
         /// </summary>
         public string TopicAcknowledge { get; set; } = "/tinkerforge/weatherstation/ack";
+
+        /// <summary>
+        /// Timer interval to check the acknowledge list
+        /// </summary>
+        public int TimerDelay { get; set; } = 10000;
     }
 }

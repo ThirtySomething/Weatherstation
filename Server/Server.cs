@@ -90,9 +90,16 @@ namespace net.derpaul.tf
         private void MqttDataRecieved(object sender, MqttMsgPublishEventArgs e)
         {
             string stringJson = Encoding.UTF8.GetString(e.Message);
-            MeasurementValue measurementValue = JsonConvert.DeserializeObject<MeasurementValue>(stringJson);
-            MqttClient.Publish(ServerConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
-            pluginHandler.HandleValue(measurementValue);
+            try
+            {
+                MeasurementValue measurementValue = JsonConvert.DeserializeObject<MeasurementValue>(stringJson);
+                MqttClient.Publish(ServerConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
+                pluginHandler.HandleValue(measurementValue);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"{nameof(MqttDataRecieved)}: Invalid message [{stringJson}] recieved.");
+            }
         }
     }
 }

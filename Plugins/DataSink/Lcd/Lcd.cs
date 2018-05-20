@@ -60,8 +60,12 @@ namespace net.derpaul.tf.plugin
         {
             TimeStampDisplayTimer.Stop();
             TimeStampDisplayTimer.Close();
-            Bricklet.ClearDisplay();
-            Bricklet.BacklightOff();
+            
+            if (Bricklet != null)
+            {
+                Bricklet.ClearDisplay();
+                Bricklet.BacklightOff();
+            }
         }
 
         /// <summary>

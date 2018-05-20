@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config settings for humidity sensor
+    /// Configuration settings of humidity sensor
     /// </summary>
     public class HumidityConfig : ConfigLoader<HumidityConfig>, IConfigSaver
     {

@@ -1,6 +1,6 @@
 ## Data Source Plugins
 
-The data source plugins retrieve the measurement values from the tinkerforge weather station. Each hardware sensor got its own plugin:
+The data source plugins retrieve the measurement values from the Tinkerforge weather station. Each hardware sensor got its own plugin:
 
 * <code>[Ambient light sensor](./AmbientLight/Readme.md)</code> - The luminance
 * <code>[Barometer sensor](./Barometer/Readme.md)</code> - This sensor offers

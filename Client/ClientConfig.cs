@@ -1,7 +1,7 @@
 ﻿namespace net.derpaul.tf
 {
     /// <summary>
-    /// Config class for settings related to reading the bricklets
+    /// Configuration settings of client to read the bricklets
     /// </summary>
     public class ClientConfig : ConfigLoader<ClientConfig>, IConfigSaver
     {
