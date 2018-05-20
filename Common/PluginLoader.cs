@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Diagnostics;
 
 namespace net.derpaul.tf
 {
@@ -37,19 +37,17 @@ namespace net.derpaul.tf
         {
             List<Assembly> assemblyList = new List<Assembly>();
 
-            if (!Directory.Exists(pluginFolder))
+            if (Directory.Exists(pluginFolder))
             {
-                return assemblyList;
-            }
-
-            string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
-            foreach (string pluginFile in pluginFileList)
-            {
-                var name = FileVersionInfo.GetVersionInfo(pluginFile).ProductName;
-                if (name != null && name.Contains(productName))
+                string[] pluginFileList = Directory.GetFiles(pluginFolder, "*.dll");
+                foreach (string pluginFile in pluginFileList)
                 {
-                    Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
-                    assemblyList.Add(assembly);
+                    var name = FileVersionInfo.GetVersionInfo(pluginFile).ProductName;
+                    if (name != null && name.Contains(productName))
+                    {
+                        Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(pluginFile);
+                        assemblyList.Add(assembly);
+                    }
                 }
             }
 
@@ -63,29 +61,28 @@ namespace net.derpaul.tf
         /// <returns>Collection of plugins of type T</returns>
         private static List<Type> GetPluginTypeList(List<Assembly> assemblyList)
         {
-            if (assemblyList == null)
-            {
-                return null;
-            }
-
-            Type pluginType = typeof(PluginType);
             List<Type> pluginTypes = new List<Type>();
-            foreach (Assembly assembly in assemblyList)
+
+            if (assemblyList != null)
             {
-                if (assembly != null)
+                Type pluginType = typeof(PluginType);
+                foreach (Assembly assembly in assemblyList)
                 {
-                    Type[] types = assembly.GetTypes();
-
-                    foreach (Type type in types)
+                    if (assembly != null)
                     {
-                        if (type.IsInterface || type.IsAbstract)
-                        {
-                            continue;
-                        }
+                        Type[] types = assembly.GetTypes();
 
-                        if (type.GetInterface(pluginType.FullName) != null)
+                        foreach (Type type in types)
                         {
-                            pluginTypes.Add(type);
+                            if (type.IsInterface || type.IsAbstract)
+                            {
+                                continue;
+                            }
+
+                            if (type.GetInterface(pluginType.FullName) != null)
+                            {
+                                pluginTypes.Add(type);
+                            }
                         }
                     }
                 }
@@ -100,16 +97,15 @@ namespace net.derpaul.tf
         /// <returns>Collection of plugin objects</returns>
         private static List<PluginType> GetPluginInstanceList(List<Type> pluginTypeList)
         {
-            if (pluginTypeList == null)
-            {
-                return null;
-            }
-
             List<PluginType> pluginInstanceList = new List<PluginType>();
-            foreach (Type pluginType in pluginTypeList)
+
+            if (pluginInstanceList != null)
             {
-                PluginType pluginInstance = (PluginType)Activator.CreateInstance(pluginType);
-                pluginInstanceList.Add(pluginInstance);
+                foreach (Type pluginType in pluginTypeList)
+                {
+                    PluginType pluginInstance = (PluginType)Activator.CreateInstance(pluginType);
+                    pluginInstanceList.Add(pluginInstance);
+                }
             }
             return pluginInstanceList;
         }
