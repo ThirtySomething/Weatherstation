@@ -22,5 +22,14 @@ namespace net.derpaul.tf
                 currentSeconds = DateTime.Now.Second;
             }
         }
+
+        /// <summary>
+        /// Wait until n milliseconds are gone
+        /// </summary>
+        /// <param name="delay"></param>
+        public static void WaitNMilliseconds(int delay)
+        {
+            System.Threading.Thread.Sleep(delay);
+        }
     }
 }

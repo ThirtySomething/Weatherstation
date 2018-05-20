@@ -61,11 +61,11 @@ namespace net.derpaul.tf
 
             if (connected)
             {
-                for(;;)
+                for (; ; )
                 {
                     if (!System.Console.KeyAvailable)
                     {
-                        System.Threading.Thread.Sleep(ServerConfig.Instance.Delay);
+                        TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
                     }
                     else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
