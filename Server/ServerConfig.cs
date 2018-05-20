@@ -23,7 +23,7 @@
         /// <summary>
         /// IP of MQTT broker to connect to
         /// </summary>
-        public string BrokerIP { get; set; } = "localhost";
+        public string BrokerIP { get; set; } = "127.0.0.1";
 
         /// <summary>
         /// Client ID
