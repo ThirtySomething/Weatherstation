@@ -15,6 +15,6 @@
         /// <summary>
         /// Format to display a timestamp
         /// </summary>
-        public string TimestampFormat = "dd.MM.yyyy HH:mm:ss";
+        public string TimestampFormat = "dd.MM.yyyy  HH:mm:ss";
     }
 }
