@@ -18,9 +18,9 @@
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, AltitudeConfig.Instance.SortOrder);
 
-            if (_Bricklet != null)
+            if (Bricklet != null)
             {
-                int altitudeRaw = _Bricklet.GetAltitude();
+                int altitudeRaw = Bricklet.GetAltitude();
                 result.Value = altitudeRaw / 100.0;
             }
 

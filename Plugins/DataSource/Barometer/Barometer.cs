@@ -10,7 +10,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Internal object of TF barometer bricklet
         /// </summary>
-        protected static BrickletBarometer _Bricklet { get; set; }
+        protected static BrickletBarometer Bricklet { get; set; }
 
         /// <summary>
         /// The TF sensor type
@@ -24,9 +24,9 @@ namespace net.derpaul.tf.plugin
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet == null)
+            if (Bricklet == null)
             {
-                _Bricklet = new BrickletBarometer(UID, connection);
+                Bricklet = new BrickletBarometer(UID, connection);
             }
         }
 

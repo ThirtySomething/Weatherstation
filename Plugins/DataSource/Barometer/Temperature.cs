@@ -18,9 +18,9 @@
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, TemperatureConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (Bricklet == null)
             {
-                int temperatureRaw = _Bricklet.GetChipTemperature();
+                int temperatureRaw = Bricklet.GetChipTemperature();
                 result.Value = temperatureRaw / 100.0;
             }
 

@@ -18,9 +18,9 @@
         {
             MeasurementValue returnValue = new MeasurementValue(Name, Unit, AirPressureConfig.Instance.SortOrder);
 
-            if (_Bricklet != null)
+            if (Bricklet != null)
             {
-                int airPressureRaw = _Bricklet.GetAirPressure();
+                int airPressureRaw = Bricklet.GetAirPressure();
                 returnValue.Value = airPressureRaw / 1000.0;
             }
 
