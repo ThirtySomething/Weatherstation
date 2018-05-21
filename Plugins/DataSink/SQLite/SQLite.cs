@@ -8,8 +8,6 @@ namespace net.derpaul.tf.plugin
     /// </summary>
     public class SQLite : IDataSink
     {
-        private SqliteConnection DBConnection { get; set; }
-
         /// <summary>
         /// Get the name of class
         /// </summary>
@@ -21,15 +19,41 @@ namespace net.derpaul.tf.plugin
         public bool IsInitialized { get; set; } = false;
 
         /// <summary>
+        /// Dataobject for types
+        /// </summary>
+        private MeasurementTypes TableTypes = null;
+
+        /// <summary>
+        /// Dataobject for units
+        /// </summary>
+        private MeasurementUnits TableUnits = null;
+
+        /// <summary>
+        /// Dataobject for values
+        /// </summary>
+        private MeasurementValues TableValues = null;
+
+        /// <summary>
         /// Disconnect from MQTT broker
         /// </summary>
         public void Shutdown()
         {
-            DBConnection.Close();
+            if (TableTypes != null)
+            {
+                TableTypes.Shutdown();
+            }
+            if (TableUnits != null)
+            {
+                TableUnits.Shutdown();
+            }
+            if (TableValues != null)
+            {
+                TableValues.Shutdown();
+            }
         }
 
         /// <summary>
-        /// Initialize MQTT client and connect to broker
+        /// Initialize SQLite connection
         /// </summary>
         /// <returns>true on success otherwise false</returns>
         public bool Init()
@@ -39,13 +63,36 @@ namespace net.derpaul.tf.plugin
             try
             {
                 SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
-                DBConnection = new SqliteConnection($"Data Source={SQLiteConfig.Instance.DatabaseFilename}");
+                var DBConnection = new SqliteConnection($"Data Source={SQLiteConfig.Instance.DatabaseFilename}");
                 DBConnection.Open();
                 success = DBConnection.State == System.Data.ConnectionState.Open;
 
                 if (!success)
                 {
                     System.Console.WriteLine($"{nameof(Init)}: Database [{SQLiteConfig.Instance.DatabaseFilename}] in invalid state: [{DBConnection.State}]");
+                }
+                else
+                {
+                    TableTypes = new MeasurementTypes(DBConnection);
+                    TableUnits = new MeasurementUnits(DBConnection);
+                    TableValues = new MeasurementValues(DBConnection);
+
+                    if (!TableTypes.TableExists())
+                    {
+                        TableTypes.TableCreate();
+                    }
+
+                    if (!TableUnits.TableExists())
+                    {
+                        TableUnits.TableCreate();
+                    }
+
+                    if (!TableValues.TableExists())
+                    {
+                        TableValues.TableCreate();
+                    }
+
+                    success = TableTypes.TableExists() && TableUnits.TableExists() && TableValues.TableExists();
                 }
             }
             catch (SqliteException e)
@@ -62,236 +109,21 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Sensor value</param>
         public void HandleValue(MeasurementValue SensorValue)
         {
-            HandleValueData(SensorValue);
-        }
-
-        /// <summary>
-        /// Deals with measurement value
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        private void HandleValueData(MeasurementValue sensorValue)
-        {
-            if (!TablesExists())
-            {
-                TablesCreates();
-            }
-
-            InsertData(sensorValue);
-        }
-
-        /// <summary>
-        /// Execute SQL command
-        /// </summary>
-        /// <param name="command"></param>
-        private void ExecuteSQLStatement(SqliteCommand command)
-        {
-            try
-            {
-                command.ExecuteNonQuery();
-                command.Dispose();
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine($"{nameof(ExecuteSQLStatement)}: Cannot execute command [{command.ToString()}]: [{e.Message}]");
-            }
-        }
-
-        /// <summary>
-        /// Insert data to table
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        private void InsertData(MeasurementValue sensorValue)
-        {
-            var mtId = FindTypeID(sensorValue);
-            var muId = FindUnitID(sensorValue);
-
+            var mtId = TableTypes.FindID(SensorValue);
             if (mtId == -1)
             {
-                InsertType(sensorValue);
-                mtId = FindTypeID(sensorValue);
+                TableTypes.InsertValue(SensorValue);
+                mtId = TableTypes.FindID(SensorValue);
             }
+
+            var muId = TableUnits.FindID(SensorValue);
             if (muId == -1)
             {
-                InsertUnit(sensorValue);
-                muId = FindUnitID(sensorValue);
+                TableUnits.InsertValue(SensorValue);
+                muId = TableUnits.FindID(SensorValue);
             }
 
-            string statement = $"INSERT INTO measurementvalues (mv_mt_id, mv_value, mv_mu_id, mv_timestamp) VALUES (@mv_mt_id, @mv_value, @mv_mu_id, @mv_timestamp)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            command.Parameters.Add(new SqliteParameter("@mv_mt_id", System.Data.SqlDbType.Int) { Value = mtId });
-            command.Parameters.Add(new SqliteParameter("@mv_value", System.Data.SqlDbType.Decimal) { Value = sensorValue.Value });
-            command.Parameters.Add(new SqliteParameter("@mv_mu_id", System.Data.SqlDbType.Int) { Value = muId });
-            command.Parameters.Add(new SqliteParameter("@mv_timestamp", System.Data.SqlDbType.DateTime) { Value = sensorValue.Timestamp });
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Write measurement type to table
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        private void InsertType(MeasurementValue sensorValue)
-        {
-            string statement = $"INSERT INTO measurementtypes (mt_name) VALUES (@mt_name)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            command.Parameters.Add(new SqliteParameter("@mt_name", System.Data.SqlDbType.Text) { Value = sensorValue.Name });
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Write measurement unit to table
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        private void InsertUnit(MeasurementValue sensorValue)
-        {
-            string statement = $"INSERT INTO measurementunits (mu_name) VALUES (@mu_name)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            command.Parameters.Add(new SqliteParameter("@mu_name", System.Data.SqlDbType.Text) { Value = sensorValue.Unit });
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Find measurement type in table
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        /// <returns></returns>
-        private int FindTypeID(MeasurementValue sensorValue)
-        {
-            int typeId = -1;
-
-            try
-            {
-                string statement = $"SELECT mt_id FROM measurementtypes WHERE mt_name = @name";
-                SqliteCommand command = new SqliteCommand(statement, DBConnection);
-                command.Parameters.Add(new SqliteParameter("@name", System.Data.SqlDbType.Text) { Value = sensorValue.Name });
-                SqliteDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    typeId = Convert.ToInt32(reader[0]);
-                }
-                reader.Close();
-                command.Dispose();
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine($"{nameof(FindTypeID)}: Cannot find id for [{sensorValue.Name}]: [{e.Message}]");
-            }
-
-            return typeId;
-        }
-
-        /// <summary>
-        /// Find measurement unit in table
-        /// </summary>
-        /// <param name="sensorValue"></param>
-        /// <returns></returns>
-        private int FindUnitID(MeasurementValue sensorValue)
-        {
-            int unitId = -1;
-
-            try
-            {
-                string statement = $"SELECT mu_id FROM measurementunits WHERE mu_name = @name";
-                SqliteCommand command = new SqliteCommand(statement, DBConnection);
-                command.Parameters.Add(new SqliteParameter("@name", System.Data.SqlDbType.Text) { Value = sensorValue.Unit });
-                SqliteDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    unitId = Convert.ToInt32(reader[0]);
-                }
-                reader.Close();
-                command.Dispose();
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine($"{nameof(FindUnitID)}: Cannot find id for [{sensorValue.Unit}]: [{e.Message}]");
-            }
-
-            return unitId;
-        }
-
-        /// <summary>
-        /// Create tables for measurements
-        /// </summary>
-        private void TablesCreates()
-        {
-            TableCreateMeasurementTypes();
-            TableCreateMeasurementUnits();
-            TableCreateMeasurementValues();
-        }
-
-        /// <summary>
-        /// Create table for measurement types
-        /// </summary>
-        private void TableCreateMeasurementTypes()
-        {
-            string statement = $"CREATE TABLE measurementtypes (mt_id INTEGER PRIMARY KEY AUTOINCREMENT, mt_name VARCHAR(50) NOT NULL)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-
-            statement = $"CREATE INDEX ndx_measurementtypes ON measurementtypes (mt_name ASC)";
-            command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Create table for measurement units
-        /// </summary>
-        private void TableCreateMeasurementUnits()
-        {
-            string statement = $"CREATE TABLE measurementunits (mu_id INTEGER PRIMARY KEY AUTOINCREMENT, mu_name VARCHAR(50) NOT NULL)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-
-            statement = $"CREATE INDEX ndx_measurementunits ON measurementunits (mu_name ASC)";
-            command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Create table for measurement values
-        /// </summary>
-        private void TableCreateMeasurementValues()
-        {
-            string statement = $"CREATE TABLE measurementvalues (mv_id INTEGER PRIMARY KEY AUTOINCREMENT, mv_mt_id INTEGER REFERENCES measurementtypes(mt_id), mv_value DOUBLE, mv_mu_id INTEGER REFERENCES measurementunits(mu_id), mv_timestamp DATETIME)";
-            SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-
-            statement = $"CREATE INDEX ndx_mv_type ON measurementvalues (mv_mt_id ASC, mv_timestamp)";
-            command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-
-            statement = $"CREATE INDEX ndx_mv_unit ON measurementvalues (mv_mu_id ASC, mv_timestamp)";
-            command = new SqliteCommand(statement, DBConnection);
-            ExecuteSQLStatement(command);
-        }
-
-        /// <summary>
-        /// Check if table exists in SQLite database
-        /// </summary>
-        /// <returns></returns>
-        private bool TablesExists()
-        {
-            bool exists = false;
-
-            try
-            {
-                string statement = $"SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'measurementvalues'";
-                SqliteCommand command = new SqliteCommand(statement, DBConnection);
-                SqliteDataReader reader = command.ExecuteReader();
-
-                exists = reader.Read();
-
-                reader.Close();
-                command.Dispose();
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine($"{nameof(TablesExists)}: Failure check existence of table [measurementvalues]: [{e.Message}]");
-            }
-
-            return exists;
+            TableValues.InsertValue(SensorValue, mtId, muId);
         }
     }
 }
