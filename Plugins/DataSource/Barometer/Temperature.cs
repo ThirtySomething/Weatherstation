@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read temperature using barometer sensor
@@ -14,17 +14,15 @@
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, TemperatureConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (Bricklet != null)
             {
-                return result;
+                int temperatureRaw = Bricklet.GetChipTemperature();
+                result.Value = temperatureRaw / 100.0;
             }
-
-            int temperatureRaw = _Bricklet.GetChipTemperature();
-            result.Value = temperatureRaw / 100.0;
 
             return result;
         }

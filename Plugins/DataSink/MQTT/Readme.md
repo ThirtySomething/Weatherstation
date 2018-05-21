@@ -1,6 +1,6 @@
 ## MQTT
 
-The MQTT plugin publishes via MQTT the measurement values.
+The MQTT plugin publishes the measurement values via MQTT.
 
 Return to [main](./../Readme.md).
 

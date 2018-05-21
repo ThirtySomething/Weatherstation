@@ -51,9 +51,9 @@ wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armh
 sudo dpkg -i brickd_linux_latest_armhf.deb
 </pre>
 
-* Install somewhere a MQTT broker. In my case I'm running [Mosquitto](https://mosquitto.org/) on my Synology NAS.
+* Install a MQTT broker somewhere. In my case I'm running [Mosquitto](https://mosquitto.org/) on my Synology NAS.
 
-## Build the code
+## Build the project
 
 * The complete code can be build on any Windows system. There is a cross compile possible and everything is prepared in the <code>buildscript.bat</code> script. Possible options for the build script are
   * <code>linux-arm</code>
@@ -88,15 +88,15 @@ Both programs, the client as well the server, are running in an endless loop. To
 
 The config files are named like the plugins with <code>Config.config</code> at the end. See the [plugins](./Plugins/Readme.md) and their configs for more details.
 
-The description for configuring the [client](./Client/Readme.md) or the [server](./Server/Readme.md) are found in their directories.
+The description for configuring the [client](./Client/Readme.md) or the [server](./Server/Readme.md) can be found in their respective directories.
 
 ## Caveats
 
-* You cannot run the client and the server at one machine using the same plugin directory. The plugins cannot be used simultaneously by the client and the server. If you want to run both on the same machine, you need to have two plugin directories and to configure one for the client and the other for the server.
+* You cannot run the client and the server on one machine using the same plugin directory. The plugins cannot be used simultaneously by the client and the server. If you want to run both on the same machine, you need to have two plugin directories and to configure one for the client and the other for the server.
 
 * Some of the plugins are using NuGet packages. During the deployment the plugins have a different deployment location than the client program. Some of the DLLs will load additional dependencies - but somehow they are not taken from the plugin path. Caused by this the NuGet packages are also added to the client/server project. This solved the issue, but it's not a good solution.
 
-* Unfortunately there is somehow a mismatch with the <code>SQLite</code> plugin. So it's necessary to reference <code>SQLitePCLRaw.bundle_green</code>.
+* Unfortunately there is somehow a dependency mismatch with the <code>SQLite</code> plugin. So it's necessary to reference <code>SQLitePCLRaw.bundle_green</code>.
 
 Return to [main](./Readme.md).
 

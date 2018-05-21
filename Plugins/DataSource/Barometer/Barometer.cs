@@ -1,6 +1,6 @@
 ﻿using Tinkerforge;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read values from barometer sensor
@@ -10,7 +10,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Internal object of TF barometer bricklet
         /// </summary>
-        protected static BrickletBarometer _Bricklet { get; set; }
+        protected static BrickletBarometer Bricklet { get; set; }
 
         /// <summary>
         /// The TF sensor type
@@ -24,18 +24,16 @@ namespace net.derpaul.tf
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet != null)
+            if (Bricklet == null)
             {
-                return;
+                Bricklet = new BrickletBarometer(UID, connection);
             }
-
-            _Bricklet = new BrickletBarometer(UID, connection);
         }
 
         /// <summary>
         /// Abstract method, should be implemented in subclasses. Shall retrieve sensor's value.
         /// </summary>
         /// <returns>Measurement value of sensor or 0.0</returns>
-        protected override abstract MeasurementValue ValueGetRaw();
+        protected override abstract MeasurementValue RawValue();
     }
 }

@@ -1,6 +1,6 @@
 ## Barometer
 
-The Barometer plugin reads the measurement values of a Tinkerforge Barometer sensor. This sensor offers more than one value, so for each value a own class is implemented:
+The Barometer plugin reads the measurement values of a Tinkerforge Barometer sensor. This sensor offers more than one value, each is represented by its own class implementation:
 
 * AirPressure
 * Altitude
@@ -24,4 +24,4 @@ For the altitude the following settings are available:
 
 For the temperature the following settings are available:
 
-* <code>SortOrder</code> - The sort order on the Tinkerforge lcd display, default is <code>0</code>
+* <code>SortOrder</code> - The sort order on the Tinkerforge lcd display, default is <code>1</code>

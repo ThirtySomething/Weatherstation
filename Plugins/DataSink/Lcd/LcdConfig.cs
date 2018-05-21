@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+﻿namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Configuration settings of Lcd bricklet of TF weatherstation
@@ -8,7 +8,7 @@
         /// <summary>
         /// IP address TF brick daemon to connect to
         /// </summary>
-        public string BrickDaemonIP { get; set; } = "localhost";
+        public string BrickDaemonIP { get; set; } = "127.0.0.1";
 
         /// <summary>
         /// Port address TF brick daemon to connect to

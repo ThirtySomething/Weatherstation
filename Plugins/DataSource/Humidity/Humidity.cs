@@ -1,6 +1,6 @@
 ﻿using Tinkerforge;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read values from humidity sensor
@@ -15,7 +15,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
-        private static BrickletHumidity _Bricklet { get; set; }
+        private static BrickletHumidity Bricklet { get; set; }
 
         /// <summary>
         /// The TF sensor type
@@ -29,29 +29,25 @@ namespace net.derpaul.tf
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet != null)
+            if (Bricklet == null)
             {
-                return;
+                Bricklet = new BrickletHumidity(UID, connection);
             }
-
-            _Bricklet = new BrickletHumidity(UID, connection);
         }
 
         /// <summary>
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Humidity or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, HumidityConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (Bricklet != null)
             {
-                return result;
+                int humidityRaw = Bricklet.GetHumidity();
+                result.Value = humidityRaw / 10.0;
             }
-
-            int humidityRaw = _Bricklet.GetHumidity();
-            result.Value = humidityRaw / 10.0;
 
             return result;
         }

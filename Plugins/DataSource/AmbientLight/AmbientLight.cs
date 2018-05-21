@@ -1,6 +1,6 @@
 ﻿using Tinkerforge;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read values from ambient light sensor
@@ -15,7 +15,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
-        private static BrickletAmbientLight _Bricklet { get; set; }
+        private static BrickletAmbientLight Bricklet { get; set; }
 
         /// <summary>
         /// The TF sensor type
@@ -29,29 +29,25 @@ namespace net.derpaul.tf
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
-            if (_Bricklet != null)
+            if (Bricklet == null)
             {
-                return;
+                Bricklet = new BrickletAmbientLight(UID, connection);
             }
-
-            _Bricklet = new BrickletAmbientLight(UID, connection);
         }
 
         /// <summary>
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Illuminance or 0.0</returns>
-        protected override MeasurementValue ValueGetRaw()
+        protected override MeasurementValue RawValue()
         {
             MeasurementValue result = new MeasurementValue(Name, Unit, AmbientLightConfig.Instance.SortOrder);
 
-            if (_Bricklet == null)
+            if (Bricklet != null)
             {
-                return result;
+                int rawIlluminance = Bricklet.GetIlluminance();
+                result.Value = rawIlluminance / 10.0;
             }
-
-            int illuminanceRaw = _Bricklet.GetIlluminance();
-            result.Value = illuminanceRaw / 10.0;
 
             return result;
         }

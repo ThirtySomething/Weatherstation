@@ -49,8 +49,7 @@ namespace net.derpaul.tf
         protected static string GetConfigFilePath()
         {
             var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
-            var configFilePath = Path.Combine(assemblyDirectory, GetConfigFileName()) + ConfigFileExtenstion;
-            return configFilePath;
+            return Path.Combine(assemblyDirectory, GetConfigFileName()) + ConfigFileExtenstion;
         }
 
         /// <summary>
@@ -76,9 +75,9 @@ namespace net.derpaul.tf
                 return config;
             }
 
-            var serializer = new XmlSerializer(typeof(ConfigClass));
             using (var reader = new StreamReader(FileName))
             {
+                var serializer = new XmlSerializer(typeof(ConfigClass));
                 return (ConfigClass)serializer.Deserialize(reader);
             }
         }

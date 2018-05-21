@@ -39,13 +39,13 @@ namespace net.derpaul.tf
         /// Read the value of the sensor, will catch TF exceptions
         /// </summary>
         /// <returns>Sensor value or 0.0</returns>
-        public MeasurementValue ValueGet()
+        public MeasurementValue Value()
         {
             var value = new MeasurementValue();
 
             try
             {
-                value = ValueGetRaw();
+                value = RawValue();
             }
             catch (TinkerforgeException e)
             {
@@ -59,6 +59,6 @@ namespace net.derpaul.tf
         /// Read the value of the sensor without paying attention to exceptions
         /// </summary>
         /// <returns>Sensor name and value or 0.0</returns>
-        protected abstract MeasurementValue ValueGetRaw();
+        protected abstract MeasurementValue RawValue();
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
+using System;
 
-namespace net.derpaul.tf
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Data sink - sending data using SQLite
@@ -41,11 +41,9 @@ namespace net.derpaul.tf
                 SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
                 DBConnection = new SqliteConnection($"Data Source={SQLiteConfig.Instance.DatabaseFilename}");
                 DBConnection.Open();
-                if (DBConnection.State == System.Data.ConnectionState.Open)
-                {
-                    success = true;
-                }
-                else
+                success = DBConnection.State == System.Data.ConnectionState.Open;
+
+                if (!success)
                 {
                     System.Console.WriteLine($"{nameof(Init)}: Database [{SQLiteConfig.Instance.DatabaseFilename}] in invalid state: [{DBConnection.State}]");
                 }
@@ -104,25 +102,25 @@ namespace net.derpaul.tf
         /// <param name="sensorValue"></param>
         private void InsertData(MeasurementValue sensorValue)
         {
-            var mtid = FindTypeID(sensorValue);
-            var muid = FindUnitID(sensorValue);
+            var mtId = FindTypeID(sensorValue);
+            var muId = FindUnitID(sensorValue);
 
-            if (mtid == -1)
+            if (mtId == -1)
             {
                 InsertType(sensorValue);
-                mtid = FindTypeID(sensorValue);
+                mtId = FindTypeID(sensorValue);
             }
-            if (muid == -1)
+            if (muId == -1)
             {
                 InsertUnit(sensorValue);
-                muid = FindUnitID(sensorValue);
+                muId = FindUnitID(sensorValue);
             }
 
             string statement = $"INSERT INTO measurementvalues (mv_mt_id, mv_value, mv_mu_id, mv_timestamp) VALUES (@mv_mt_id, @mv_value, @mv_mu_id, @mv_timestamp)";
             SqliteCommand command = new SqliteCommand(statement, DBConnection);
-            command.Parameters.Add(new SqliteParameter("@mv_mt_id", System.Data.SqlDbType.Int) { Value = mtid });
+            command.Parameters.Add(new SqliteParameter("@mv_mt_id", System.Data.SqlDbType.Int) { Value = mtId });
             command.Parameters.Add(new SqliteParameter("@mv_value", System.Data.SqlDbType.Decimal) { Value = sensorValue.Value });
-            command.Parameters.Add(new SqliteParameter("@mv_mu_id", System.Data.SqlDbType.Int) { Value = muid });
+            command.Parameters.Add(new SqliteParameter("@mv_mu_id", System.Data.SqlDbType.Int) { Value = muId });
             command.Parameters.Add(new SqliteParameter("@mv_timestamp", System.Data.SqlDbType.DateTime) { Value = sensorValue.Timestamp });
             ExecuteSQLStatement(command);
         }
@@ -158,7 +156,7 @@ namespace net.derpaul.tf
         /// <returns></returns>
         private int FindTypeID(MeasurementValue sensorValue)
         {
-            int typeid = -1;
+            int typeId = -1;
 
             try
             {
@@ -169,7 +167,7 @@ namespace net.derpaul.tf
 
                 if (reader.Read())
                 {
-                    typeid = Convert.ToInt32(reader[0]);
+                    typeId = Convert.ToInt32(reader[0]);
                 }
                 reader.Close();
                 command.Dispose();
@@ -179,7 +177,7 @@ namespace net.derpaul.tf
                 System.Console.WriteLine($"{nameof(FindTypeID)}: Cannot find id for [{sensorValue.Name}]: [{e.Message}]");
             }
 
-            return typeid;
+            return typeId;
         }
 
         /// <summary>
@@ -189,7 +187,7 @@ namespace net.derpaul.tf
         /// <returns></returns>
         private int FindUnitID(MeasurementValue sensorValue)
         {
-            int unitid = -1;
+            int unitId = -1;
 
             try
             {
@@ -200,7 +198,7 @@ namespace net.derpaul.tf
 
                 if (reader.Read())
                 {
-                    unitid = Convert.ToInt32(reader[0]);
+                    unitId = Convert.ToInt32(reader[0]);
                 }
                 reader.Close();
                 command.Dispose();
@@ -210,7 +208,7 @@ namespace net.derpaul.tf
                 System.Console.WriteLine($"{nameof(FindUnitID)}: Cannot find id for [{sensorValue.Unit}]: [{e.Message}]");
             }
 
-            return unitid;
+            return unitId;
         }
 
         /// <summary>
@@ -283,10 +281,8 @@ namespace net.derpaul.tf
                 SqliteCommand command = new SqliteCommand(statement, DBConnection);
                 SqliteDataReader reader = command.ExecuteReader();
 
-                if (reader.Read())
-                {
-                    exists = true;
-                }
+                exists = reader.Read();
+
                 reader.Close();
                 command.Dispose();
             }
