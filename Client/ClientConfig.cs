@@ -1,4 +1,6 @@
-﻿namespace net.derpaul.tf
+﻿using System.Xml.Serialization;
+
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Configuration settings of client to read the bricklets
@@ -27,7 +29,9 @@
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs
+        /// This is hardcoded and not configurable!
         /// </summary>
-        public string PluginProductName { get; set; } = "net.derpaul.tf.plugin";
+        [XmlIgnore]
+        public string PluginProductName { get; } = "net.derpaul.tf.plugin";
     }
 }

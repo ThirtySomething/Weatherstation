@@ -18,7 +18,7 @@
         /// <summary>
         /// Topic to publish data to
         /// </summary>
-        public string TopicData { get; set; } = "/tinkerforge/weatherstation/data";
+        public string TopicData { get; set; } = "/tinkerforge/weatherstation/dta";
 
         /// <summary>
         /// Topic to recieve handshake information

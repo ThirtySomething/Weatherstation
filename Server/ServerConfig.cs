@@ -1,4 +1,6 @@
-﻿namespace net.derpaul.tf
+﻿using System.Xml.Serialization;
+
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Configuration settings of server reading data via MQTT
@@ -17,8 +19,10 @@
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs
+        /// This is hardcoded and not configurable!
         /// </summary>
-        public string PluginProductName { get; set; } = "net.derpaul.tf.plugin";
+        [XmlIgnore]
+        public string PluginProductName { get; } = "net.derpaul.tf.plugin";
 
         /// <summary>
         /// IP of MQTT broker to connect to
@@ -33,7 +37,7 @@
         /// <summary>
         /// Topic to publish data to
         /// </summary>
-        public string TopicData { get; set; } = "/tinkerforge/weatherstation/data";
+        public string TopicData { get; set; } = "/tinkerforge/weatherstation/dta";
 
         /// <summary>
         /// Topic to send handshake information
