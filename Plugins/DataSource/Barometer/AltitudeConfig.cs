@@ -3,11 +3,19 @@
     /// <summary>
     /// Configuration settings of altitude sensor
     /// </summary>
-    public class AltitudeConfig : ConfigLoader<AltitudeConfig>, IConfigSaver
+    public class AltitudeConfig : ConfigLoader<AltitudeConfig>, IConfigObject
     {
+        /// <summary>
+        /// To set default values
+        /// </summary>
+        public void SetDefaults()
+        {
+            SortOrder = 4;
+        }
+
         /// <summary>
         /// Sort order for altitude
         /// </summary>
-        public int SortOrder = 4;
+        public int SortOrder { get; set; }
     }
 }

@@ -3,11 +3,19 @@
     /// <summary>
     /// Configuration settings of humidity sensor
     /// </summary>
-    public class HumidityConfig : ConfigLoader<HumidityConfig>, IConfigSaver
+    public class HumidityConfig : ConfigLoader<HumidityConfig>, IConfigObject
     {
+        /// <summary>
+        /// To set default values
+        /// </summary>
+        public void SetDefaults()
+        {
+            SortOrder = 2;
+        }
+
         /// <summary>
         /// Sort order
         /// </summary>
-        public int SortOrder = 2;
+        public int SortOrder { get; set; }
     }
 }

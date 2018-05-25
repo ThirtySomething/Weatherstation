@@ -35,6 +35,10 @@ To build and run the software, see [here](./Build.md) for more details.
 
 ![Schema overview](./Documentation/Diagram.png)
 
+## ERM overview
+
+![ERM overview](./Documentation/DataModel.png)
+
 ## ToDos
 
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish

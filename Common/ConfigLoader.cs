@@ -10,7 +10,7 @@ namespace net.derpaul.tf
     /// Generic class as base for config files
     /// </summary>
     /// <typeparam name="ConfigClass"></typeparam>
-    public class ConfigLoader<ConfigClass> where ConfigClass : IConfigSaver, new()
+    public class ConfigLoader<ConfigClass> where ConfigClass : IConfigObject, new()
     {
         /// <summary>
         /// Extension for config files
@@ -71,6 +71,7 @@ namespace net.derpaul.tf
             if (!File.Exists(fileName))
             {
                 var config = new ConfigClass();
+                config.SetDefaults();
                 config.Save();
                 return config;
             }
