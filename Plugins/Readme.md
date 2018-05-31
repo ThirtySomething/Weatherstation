@@ -1,4 +1,4 @@
-## Plugins
+# Plugins
 
 The plugin system, based on this article of [Christoph Gattnar][Plugin], knows two types of plugins:
 

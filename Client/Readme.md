@@ -1,4 +1,8 @@
-## Client
+# Client
+
+The client is running on the device where the weatherstations is connected directly via USB. The client will collect the data from the sensors ([data source plugins](./../Plugins/DataSource/Readme.md)) and will submit the data to the loaded output plugins ([data sink plugins](./../Plugins/DataSink/Readme.md)).
+
+## Details
 
 The client reads data from [data source plugins](./../Plugins/DataSource/Readme.md) and sends it to [data sink plugins](./../Plugins/DataSink/Readme.md).
 
@@ -10,11 +14,11 @@ Return to [main](./../Readme.md).
 
 For more details how to configure the plugins see the Readme in the project of the plugin. For the client the following settings are available:
 
-* <code>Delay</code> - time interval where the next measurement value is picked
-* <code>BrickDaemonIP</code> - The IP of the system where the Tinkerforge Brick daemon is running, usually the same as where the master brick is connected to: <code>127.0.0.1</code>
-* <code>BrickDaemonPort</code> - The port of the Tinkerforge Brick daemon, the default is <code>4223</code>
-* <code>PluginPath</code> - The path where the client is looking for datasource and datasink plugins, by default in a subdirectory called <code>Plugins</code>
-* <code>PluginProductName</code> - Each plugin should have a specified product name to identify them as plugins for this software and to drop off the other DLL files. The default is <code>net.derpaul.tf.plugin.[name]</code> and this is valid __FOR ALL__ plugins.
+* `Delay` - time interval where the next measurement value is picked
+* `BrickDaemonIP` - The IP of the system where the Tinkerforge Brick daemon is running, usually the same as where the master brick is connected to: `127.0.0.1`
+* `BrickDaemonPort` - The port of the Tinkerforge Brick daemon, the default is `4223`
+* `PluginPath` - The path where the client is looking for datasource and datasink plugins, by default in a subdirectory called `Plugins`
+* `PluginProductName` - Each plugin should have a specified product name to identify them as plugins for this software and to drop off the other DLL files. The default is `net.derpaul.tf.plugin.[name]` and this is valid __FOR ALL__ plugins.
 
 ## Remarks
 

@@ -1,4 +1,4 @@
-## Barometer
+# Barometer
 
 The Barometer plugin reads the measurement values of a Tinkerforge Barometer sensor. This sensor offers more than one value, each is represented by its own class implementation:
 
@@ -12,16 +12,16 @@ Return to [main](./../Readme.md).
 
 For the air pessure the following settings are available:
 
-* <code>SortOrder</code> - The sort order on the Tinkerforge lcd display, default is <code>1</code>
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `1`
 
 ## AltitudeConfig.config
 
 For the altitude the following settings are available:
 
-* <code>SortOrder</code> - The sort order on the Tinkerforge lcd display, default is <code>4</code>
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `4`
 
 ## TemperatureConfig.config
 
 For the temperature the following settings are available:
 
-* <code>SortOrder</code> - The sort order on the Tinkerforge lcd display, default is <code>1</code>
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `1`

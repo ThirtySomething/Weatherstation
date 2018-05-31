@@ -1,4 +1,4 @@
-## MariaDB
+# MariaDB
 
 The MariaDB plugin writes the measurement values to a MariaDB database.
 

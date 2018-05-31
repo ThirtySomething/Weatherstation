@@ -1,6 +1,6 @@
-## Server
+# Server
 
-The server is responsible for:
+The server is the receiver of the transmitted measurement values and has no direct connection to the weatherstation. In detail the server is responsible for:
 
 * Picking up data via MQTT
 * Push received data to [data sinks](./../Plugins/DataSink/Readme.md)
@@ -13,13 +13,13 @@ Return to [main](./../Readme.md).
 
 For more details how to configure the plugins see the Readme in the project of the plugin. For the server the following settings are available:
 
-* <code>Delay</code> - time interval at which the next keypress is checked
-* <code>PluginPath</code> - The path where the client is looking for datasource and datasink plugins, by default in a subdirectory called <code>Plugins</code>
-* <code>PluginProductName</code> - Each plugin should have a specified product name to identify them as plugins for this software and to ignore non-plugin DLL files. The default is <code>net.derpaul.tf.plugin.[name]</code> and this is valid __FOR ALL__ plugins.
-* <code>BrokerIP</code> - The IP of the system where the MQTT broker is running. The default is: <code>127.0.0.1</code>
-* <code>ClientID</code> - The client ID signaled to the broker, default is: <code>WeatherMQTTClient</code>
-* <code>TopicData</code> - The MQTT message topic to subscribe where the client publishs the measurement values, by default <code>/tinkerforge/weatherstation/data</code>
-* <code>TopicAcknowledge</code> - The MQTT message topic to publish a successful recieve of a measurement value. Default is <code>/tinkerforge/weatherstation/ack</code>
+* `Delay` - time interval at which the next keypress is checked
+* `PluginPath` - The path where the client is looking for datasource and datasink plugins, by default in a subdirectory called `Plugins`
+* `PluginProductName` - Each plugin should have a specified product name to identify them as plugins for this software and to ignore non-plugin DLL files. The default is `net.derpaul.tf.plugin.[name]` and this is valid __FOR ALL__ plugins.
+* `BrokerIP` - The IP of the system where the MQTT broker is running. The default is: `127.0.0.1`
+* `ClientID` - The client ID signaled to the broker, default is: `WeatherMQTTClient`
+* `TopicData` - The MQTT message topic to subscribe where the client publishs the measurement values, by default `/tinkerforge/weatherstation/data`
+* `TopicAcknowledge` - The MQTT message topic to publish a successful recieve of a measurement value. Default is `/tinkerforge/weatherstation/ack`
 
 ## Remarks
 

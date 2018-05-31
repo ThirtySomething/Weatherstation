@@ -55,20 +55,20 @@ sudo dpkg -i brickd_linux_latest_armhf.deb
 
 ## Build the project
 
-* The complete code can be build on any Windows system. There is a cross compile possible and everything is prepared in the <code>buildscript.bat</code> script. Possible options for the build script are
-  * <code>linux-arm</code>
-  * <code>linux-x64</code>
-  * <code>win-x64</code>
+* The complete code can be build on any Windows system. There is a cross compile possible and everything is prepared in the `buildscript.bat` script. Possible options for the build script are
+  * `linux-arm`
+  * `linux-x64`
+  * `win-x64`
 
 * The build process will build the client as well as the server and all available plugins for the given destination/architecture.
 
 * Compile the code for the desired destination(s).
 
-* After the build process is finished, copy the folder <code>./build/linux-arm/</code> to your Raspi.
+* After the build process is finished, copy the folder `./build/linux-arm/` to your Raspi.
 
-* For the server you need to remove the following plugins from the <code>Plugins</code> folder:
-  * <code>Lcd.dll</code> - Remove this because on the server you usually don't have the Tinkerforge display of the weather station.
-  * <code>MQTT.dll</code> - Remove this unless you want to re-publish the data to another broker/topic. Don't remove <code>M2Mqtt.dll</code> because it's used by the server to deal with MQTT.
+* For the server you need to remove the following plugins from the `Plugins` folder:
+  * `Lcd.dll` - Remove this because on the server you usually don't have the Tinkerforge display of the weather station.
+  * `MQTT.dll` - Remove this unless you want to re-publish the data to another broker/topic. Don't remove `M2Mqtt.dll` because it's used by the server to deal with MQTT.
 
 ## First run
 
@@ -78,7 +78,7 @@ dotnet Client.dll
 or the server <pre>
 dotnet Server.dll
 </pre>
-Execute this commands on the command line in the <code>build</code> path of your architecture. Then abort the loop by pressing the escape button. In the next step configure each <code>*.config</code> file to fit your needs. For further details see the [plugins](./Plugins/Readme.md) documentation.
+Execute this commands on the command line in the `build` path of your architecture. Then abort the loop by pressing the escape button. In the next step configure each `*.config` file to fit your needs. For further details see the [plugins](./Plugins/Readme.md) documentation.
 
 ## Abort the program
 
@@ -86,7 +86,7 @@ Both programs, the client as well the server, are running in an endless loop. To
 
 ## Configuration
 
-The config files are named like the plugins with <code>Config.config</code> at the end. See the [plugins](./Plugins/Readme.md) and their configs for more details.
+The config files are named like the plugins with `Config.config` at the end. See the [plugins](./Plugins/Readme.md) and their configs for more details.
 
 The description for configuring the [client](./Client/Readme.md) or the [server](./Server/Readme.md) can be found in their respective directories.
 
@@ -96,7 +96,7 @@ The description for configuring the [client](./Client/Readme.md) or the [server]
 
 * Some of the plugins are using NuGet packages. During the deployment the plugins have a different deployment location than the client program. Some of the DLLs will load additional dependencies - but somehow they are not taken from the plugin path. Caused by this the NuGet packages are also added to the client/server project. This solved the issue, but it's not a good solution.
 
-* Unfortunately there is somehow a dependency mismatch with the <code>SQLite</code> plugin. So it's necessary to reference <code>SQLitePCLRaw.bundle_green</code>.
+* Unfortunately there is somehow a dependency mismatch with the `SQLite` plugin. So it's necessary to reference `SQLitePCLRaw.bundle_green`.
 
 Return to [main](./Readme.md).
 
