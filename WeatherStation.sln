@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MariaDB", "Plugins\DataSink\MariaDB\MariaDB.csproj", "{571023EB-0555-47B8-97A8-BB52612EC1BF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLiteDM", "Plugins\DataSink\SQLiteDM\SQLiteDM.csproj", "{69807D17-E918-47FE-9395-FB4907CB532B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +225,18 @@ Global
 		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x64.Build.0 = Release|Any CPU
 		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{571023EB-0555-47B8-97A8-BB52612EC1BF}.Release|x86.Build.0 = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|x64.Build.0 = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Debug|x86.Build.0 = Debug|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|x64.ActiveCfg = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|x64.Build.0 = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|x86.ActiveCfg = Release|Any CPU
+		{69807D17-E918-47FE-9395-FB4907CB532B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<AssemblyName>SQLiteDM</AssemblyName>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="programmersdigest.DataMapper" Version="0.4.7" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0-preview1-final" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
