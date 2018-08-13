@@ -8,7 +8,7 @@ Return to [main](./../Readme.md).
 
 For the MQTT plugin the following settings are available:
 
-* `BrokerIP` - The IP of the system where the MQTT broker is running. The default is: `127.0.0.1`
+* `BrokerIP` - The IP of the system where the MQTT broker is running. The default is: `test.mosquitto.org`
 * `ClientID` - The client ID signaled to the broker, default is: `WeatherMQTTClient`
 * `TopicData` - The MQTT message topic where to publish measurement values to, by default `/tinkerforge/weatherstation/data`
 * `TopicAcknowledge` - The MQTT message topic to subscribe to. The server will publish a successful recieve on this topic. Default is `/tinkerforge/weatherstation/ack`

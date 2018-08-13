@@ -12,4 +12,4 @@ Return to [main](./../../Readme.md).
 
 ## Remark
 
-The data sink plugins can be used on client side as well as on server side.
+The data sink plugins can be used on device side as well as on remote device side.

@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Configuration settings of server reading data via MQTT
     /// </summary>
-    public class ServerConfig : ConfigLoader<ServerConfig>, IConfigObject
+    public class RemoteDeviceConfig : ConfigLoader<RemoteDeviceConfig>, IConfigObject
     {
         /// <summary>
         /// To set default values

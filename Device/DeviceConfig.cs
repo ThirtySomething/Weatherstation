@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Configuration settings of client to read the bricklets
     /// </summary>
-    public class ClientConfig : ConfigLoader<ClientConfig>, IConfigObject
+    public class DeviceConfig : ConfigLoader<DeviceConfig>, IConfigObject
     {
         /// <summary>
         /// To set default values

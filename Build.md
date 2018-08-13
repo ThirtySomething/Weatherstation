@@ -45,7 +45,7 @@ See also [here](https://blogs.msdn.microsoft.com/david/2017/07/20/setting_up_ras
 
 ## Common prerequisites
 
-* Download and install the [Tinkerforge Brick daemon][TFBD] for the operating system where you will run the client and connect the weather station to. For Raspbian this looks for example <pre>
+* Download and install the [Tinkerforge Brick daemon][TFBD] for the operating system where you will run the device and connect the weather station to. For Raspbian this looks for example <pre>
 sudo apt-get install libusb-1.0-0 libudev0 pm-utils
 wget http://download.tinkerforge.com/tools/brickd/linux/brickd_linux_latest_armhf.deb
 sudo dpkg -i brickd_linux_latest_armhf.deb
@@ -60,41 +60,41 @@ sudo dpkg -i brickd_linux_latest_armhf.deb
   * `linux-x64`
   * `win-x64`
 
-* The build process will build the client as well as the server and all available plugins for the given destination/architecture.
+* The build process will build the device as well as the remote device and all available plugins for the given destination/architecture.
 
 * Compile the code for the desired destination(s).
 
 * After the build process is finished, copy the folder `./build/linux-arm/` to your Raspi.
 
-* For the server you need to remove the following plugins from the `Plugins` folder:
-  * `Lcd.dll` - Remove this because on the server you usually don't have the Tinkerforge display of the weather station.
-  * `MQTT.dll` - Remove this unless you want to re-publish the data to another broker/topic. Don't remove `M2Mqtt.dll` because it's used by the server to deal with MQTT.
+* For the remote device you need to remove the following plugins from the `Plugins` folder:
+  * `Lcd.dll` - Remove this because on the remote device you usually don't have the Tinkerforge display of the weather station.
+  * `MQTT.dll` - Remove this unless you want to re-publish the data to another broker/topic. Don't remove `M2Mqtt.dll` because it's used by the remote device to deal with MQTT.
 
 ## First run
 
-On the first run some config files with default values are created. Start the client <pre>
-dotnet Client.dll
+On the first run some config files with default values are created. Start the device <pre>
+dotnet device.dll
 </pre>
-or the server <pre>
-dotnet Server.dll
+or the remote device <pre>
+dotnet RemoteDevice.dll
 </pre>
 Execute this commands on the command line in the `build` path of your architecture. Then abort the loop by pressing the escape button. In the next step configure each `*.config` file to fit your needs. For further details see the [plugins](./Plugins/Readme.md) documentation.
 
 ## Abort the program
 
-Both programs, the client as well the server, are running in an endless loop. To abort the loop, just hit the escape button.
+Both programs, the device as well the remote device, are running in an endless loop. To abort the loop, just hit the escape button.
 
 ## Configuration
 
 The config files are named like the plugins with `Config.config` at the end. See the [plugins](./Plugins/Readme.md) and their configs for more details.
 
-The description for configuring the [client](./Client/Readme.md) or the [server](./Server/Readme.md) can be found in their respective directories.
+The description for configuring the [device](./Device/Readme.md) or the [remote device](./RemoteDevice/Readme.md) can be found in their respective directories.
 
 ## Caveats
 
-* You cannot run the client and the server on one machine using the same plugin directory. The plugins cannot be used simultaneously by the client and the server. If you want to run both on the same machine, you need to have two plugin directories and to configure one for the client and the other for the server.
+* You cannot run the device and the remote device at one machine using the same plugin directory. The plugins cannot be used simultaneously by the device and the remote device. If you want to run both on the same machine, you need to have two plugin directories and to configure one for the device and the other for the remote device.
 
-* Some of the plugins are using NuGet packages. During the deployment the plugins have a different deployment location than the client program. Some of the DLLs will load additional dependencies - but somehow they are not taken from the plugin path. Caused by this the NuGet packages are also added to the client/server project. This solved the issue, but it's not a good solution.
+* Some of the plugins are using NuGet packages. During the deployment the plugins have a different deployment location than the device program. Some of the DLLs will load additional dependencies - but somehow they are not taken from the plugin path. Caused by this the NuGet packages are also added to the device/remote device project. This solved the issue, but it's not a good solution.
 
 * Unfortunately there is somehow a dependency mismatch with the `SQLite` plugin. So it's necessary to reference `SQLitePCLRaw.bundle_green`.
 
