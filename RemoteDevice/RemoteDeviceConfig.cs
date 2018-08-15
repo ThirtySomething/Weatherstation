@@ -3,7 +3,7 @@
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings of server reading data via MQTT
+    /// Configuration settings of remote device reading data via MQTT
     /// </summary>
     public class RemoteDeviceConfig : ConfigLoader<RemoteDeviceConfig>, IConfigObject
     {
@@ -15,7 +15,7 @@ namespace net.derpaul.tf
             Delay = 1000;
             PluginPath = "Plugins";
             BrokerIP = "test.mosquitto.org";
-            ClientID = "WeatherMQTTServer";
+            ClientID = "WeatherMQTTRemoteDevice";
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
         }

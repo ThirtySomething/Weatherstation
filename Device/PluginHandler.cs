@@ -145,7 +145,7 @@ namespace net.derpaul.tf
                 return false;
             }
 
-            SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(PluginPath, ClientConfig.Instance.PluginProductName);
+            SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(PluginPath, DeviceConfig.Instance.PluginProductName);
             if (SensorPlugins.Count == 0)
             {
                 System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No sensor plugins found in [{PluginPath}].");
@@ -172,7 +172,7 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         private bool InitDataSinkPlugins()
         {
-            DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(PluginPath, ClientConfig.Instance.PluginProductName);
+            DataSinkPlugins = PluginLoader<IDataSink>.TFPluginsLoad(PluginPath, DeviceConfig.Instance.PluginProductName);
             if (DataSinkPlugins.Count == 0)
             {
                 System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: No datasink plugins found in [{PluginPath}].");

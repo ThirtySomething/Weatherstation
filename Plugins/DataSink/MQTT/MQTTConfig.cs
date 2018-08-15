@@ -11,7 +11,7 @@
         public void SetDefaults()
         {
             BrokerIP = "test.mosquitto.org";
-            ClientID = "WeatherMQTTClient";
+            ClientID = "WeatherMQTTDevice";
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
             TimerDelay = 10000;

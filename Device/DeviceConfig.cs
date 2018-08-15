@@ -3,7 +3,7 @@
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings of client to read the bricklets
+    /// Configuration settings of device to read the bricklets
     /// </summary>
     public class DeviceConfig : ConfigLoader<DeviceConfig>, IConfigObject
     {
@@ -21,12 +21,12 @@ namespace net.derpaul.tf
         /// <summary>
         /// Delay between reading/sending values in milliseconds
         /// </summary>
-        public int Delay { get; set; } 
+        public int Delay { get; set; }
 
         /// <summary>
         /// IP address TF brick daemon to connect to
         /// </summary>
-        public string BrickDaemonIP { get; set; } 
+        public string BrickDaemonIP { get; set; }
 
         /// <summary>
         /// Port address TF brick daemon to connect to
