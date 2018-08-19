@@ -15,4 +15,4 @@ Common stuff is
 * A generic `PluginLoader.cs`
 * An abstract base class `SensorBase.cs` for the datasource plugins
 * An abstract base class `TFSensor.cs` to access the Tinkerforge sensors
-* An utility class `TFUtils.cs` containing some helper stuff
+* A utility class `TFUtils.cs` containing some helper stuff
