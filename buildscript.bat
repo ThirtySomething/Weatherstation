@@ -2,6 +2,8 @@
 @ECHO OFF
 REM Memorize master directory
 SET "STARTDIR=%~dp0"
+REM Disable telemetry data collection for M$
+SET "DOTNET_CLI_TELEMETRY_OPTOUT=1"
 ECHO.Root directory [%STARTDIR%]
 
 REM Variable settings
@@ -14,7 +16,7 @@ SET "ARCHTYPES=win-x64 linux-x64 linux-arm"
 
 REM Check commandline parameter for architecture
 IF /i [%1] == [] (
-	REM Default architecture will be for raspbian => Linux on AR, 32-bit
+	REM Default architecture will be for Raspbian => Linux on ARM, 32-bit
 	SET "DESTARCH=linux-arm"
 	GOTO :START
 )
