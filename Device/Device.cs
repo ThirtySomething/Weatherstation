@@ -6,15 +6,15 @@ namespace net.derpaul.tf
     /// <summary>
     /// Main program to handle data of TF weather station
     /// </summary>
-    internal class Client
+    internal class Device
     {
         /// <summary>
         /// Main entry point
         /// </summary>
         private static void Main()
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ClientConfig.Instance.PluginPath);
-            var pluginHandler = new PluginHandler(pluginPath, ClientConfig.Instance.BrickDaemonIP, ClientConfig.Instance.BrickDaemonPort);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeviceConfig.Instance.PluginPath);
+            var pluginHandler = new PluginHandler(pluginPath, DeviceConfig.Instance.BrickDaemonIP, DeviceConfig.Instance.BrickDaemonPort);
 
             if (!pluginHandler.Init())
             {
@@ -26,7 +26,7 @@ namespace net.derpaul.tf
                 if (!System.Console.KeyAvailable)
                 {
                     pluginHandler.HandleValues(pluginHandler.ValuesRead());
-                    TFUtils.WaitNMilliseconds(ClientConfig.Instance.Delay);
+                    TFUtils.WaitNMilliseconds(DeviceConfig.Instance.Delay);
                 }
                 else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
                 {

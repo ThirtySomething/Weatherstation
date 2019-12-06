@@ -10,7 +10,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Recieve data via MQTT and push them to data sink plugins
     /// </summary>
-    public class Server
+    public class RemoteDevice
     {
         /// <summary>
         /// The plugin handler
@@ -27,8 +27,8 @@ namespace net.derpaul.tf
         /// </summary>
         private static void Main()
         {
-            var Server = new Server();
-            Server.Run();
+            var RemoteDevice = new RemoteDevice();
+            RemoteDevice.Run();
             Environment.Exit(0);
         }
 
@@ -37,7 +37,7 @@ namespace net.derpaul.tf
         /// </summary>
         private void Run()
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ServerConfig.Instance.PluginPath);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, RemoteDeviceConfig.Instance.PluginPath);
             pluginHandler = new PluginHandler(pluginPath);
 
             if (!pluginHandler.Init())
@@ -48,15 +48,15 @@ namespace net.derpaul.tf
             bool connected = false;
             try
             {
-                MqttClient = new MqttClient(ServerConfig.Instance.BrokerIP);
+                MqttClient = new MqttClient(RemoteDeviceConfig.Instance.BrokerIP);
                 MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
-                MqttClient.Connect(ServerConfig.Instance.ClientID);
-                MqttClient.Subscribe(new string[] { ServerConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                MqttClient.Connect(RemoteDeviceConfig.Instance.ClientID);
+                MqttClient.Subscribe(new string[] { RemoteDeviceConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
                 connected = true;
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{nameof(Run)}: Cannot connect to broker [{ServerConfig.Instance.BrokerIP}] => [{e.Message}]");
+                System.Console.WriteLine($"{nameof(Run)}: Cannot connect to broker [{RemoteDeviceConfig.Instance.BrokerIP}] => [{e.Message}]");
             }
 
             if (connected)
@@ -65,7 +65,7 @@ namespace net.derpaul.tf
                 {
                     if (!System.Console.KeyAvailable)
                     {
-                        TFUtils.WaitNMilliseconds(ServerConfig.Instance.Delay);
+                        TFUtils.WaitNMilliseconds(RemoteDeviceConfig.Instance.Delay);
                     }
                     else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
@@ -93,7 +93,7 @@ namespace net.derpaul.tf
             try
             {
                 MeasurementValue measurementValue = JsonConvert.DeserializeObject<MeasurementValue>(stringJson);
-                MqttClient.Publish(ServerConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
+                MqttClient.Publish(RemoteDeviceConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
                 pluginHandler.HandleValue(measurementValue);
             }
             catch (Exception)

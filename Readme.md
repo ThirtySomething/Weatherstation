@@ -1,9 +1,9 @@
 # Weatherstation
 
 This project will address a [Tinkerforge weather station][TFURL]. There are
-  - The client for reading the data of the weather station.
-  - The server for dealing with the data in form of saving them, historize them and compress them somehow.
-  - The UI for displaying the data processed by the server.
+  - The device for reading the data of the weather station.
+  - The remote device for dealing with the data in form of saving them, historize them and compress them somehow.
+  - The UI for displaying the data processed by the remote device.
 
 ## General information
 
@@ -15,13 +15,13 @@ This project will address a [Tinkerforge weather station][TFURL]. There are
 
 As training for my developer skills, I'm using my [Tinkerforge weather station][TFURL] for excercising.
 
-## Client
+## Device
 
-See the [client documentation](./Client/Readme.md) for more details.
+See the [device documentation](./Device/Readme.md) for more details.
 
-## Server
+## Remote device
 
-See the [server documentation](./Server/Readme.md) for more details.
+See the [remote device documentation](./RemoteDevice/Readme.md) for more details.
 
 ## Plugins
 
@@ -41,9 +41,9 @@ To build and run the software, see [here](./Build.md) for more details.
 
 ## ToDos
 
-- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at client before publish
+- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at device before publish
 - Improve MQTT plugin to handle not acknowledged data.
-- Implement server part, consists of
+- Implement remote device part, consists of
   - Writing data to database (MySQL, MariaDB, ...)
   - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
   - Create a HTML frontend with various information

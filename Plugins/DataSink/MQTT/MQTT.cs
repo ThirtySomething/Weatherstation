@@ -120,7 +120,7 @@ namespace net.derpaul.tf.plugin
         }
 
         /// <summary>
-        /// Handles response of server and removes measurement values from internal acknowledge list
+        /// Handles response of remote device and removes measurement values from internal acknowledge list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -1,7 +1,7 @@
 @ECHO OFF
 REM Memorize startup path
 SET "STARTDIR=%~p0"
-SET "KILLDIRS=bin\ build\ html\ obj\ bin\ .vs\"
+SET "KILLDIRS=bin\ build\ html\ obj\ bin\ .vs\ .vscode\"
 SET "KILLFILES=log"
 
 REM For all entries in list %KILLDIRS%

@@ -1,22 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>net.derpaul.tf</RootNamespace>
+    <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	<AssemblyName>Server</AssemblyName>
+	<AssemblyName>SQLiteDM</AssemblyName>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.1.0-preview1-final" />
+    <PackageReference Include="programmersdigest.DataMapper" Version="0.4.7" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0-preview1-final" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

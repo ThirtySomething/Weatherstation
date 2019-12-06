@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("net.derpaul.tf.client")]
+[assembly: AssemblyTitle("net.derpaul.tf.remotedevice")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("net.derpaul.tf.client")]
+[assembly: AssemblyProduct("net.derpaul.tf.remotedevice")]
 [assembly: AssemblyCopyright("Copyright © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6d763291-4d0b-4343-803d-ce766adcc56d")] 
+[assembly: Guid("8cd4fc80-6b0b-4886-ac44-9342ad696355")] 
 
 // Version information for an assembly consists of the following four values:
 //

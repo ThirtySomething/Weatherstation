@@ -1,6 +1,6 @@
 # Common
 
-Here is common used software stuff collected. This library will be used from the client as well as from the server.
+Here is common used software stuff collected. This library will be used from the device as well as from the remote device.
 
 ## Details
 

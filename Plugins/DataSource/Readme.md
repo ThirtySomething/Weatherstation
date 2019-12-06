@@ -13,4 +13,4 @@ Return to [main](./../../Readme.md).
 
 ## Remark
 
-The data source plugins can be used only on client side.
+The data source plugins can be used only on device side.
