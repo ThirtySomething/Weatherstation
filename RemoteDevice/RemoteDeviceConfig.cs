@@ -15,6 +15,7 @@ namespace net.derpaul.tf
             Delay = 1000;
             PluginPath = "Plugins";
             BrokerIP = "test.mosquitto.org";
+            BrokerPort = 1883;
             ClientID = "WeatherMQTTRemoteDevice";
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
@@ -34,6 +35,11 @@ namespace net.derpaul.tf
         /// IP of MQTT broker to connect to
         /// </summary>
         public string BrokerIP { get; set; }
+
+        /// <summary>
+        /// Port of MQTT broker to connect to
+        /// </summary>
+        public int BrokerPort { get; set; }
 
         /// <summary>
         /// Client ID

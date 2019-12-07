@@ -78,7 +78,7 @@ namespace net.derpaul.tf.plugin
                 RunCheck.Elapsed += RunCheckEvent;
                 RunCheck.Enabled = true;
 
-                MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP);
+                MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP, MQTTConfig.Instance.BrokerPort, false, null, null, MqttSslProtocols.None);
                 MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
                 MqttClient.Connect(MQTTConfig.Instance.ClientID);
                 MqttClient.Subscribe(new string[] { MQTTConfig.Instance.TopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });

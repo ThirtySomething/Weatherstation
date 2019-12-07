@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<AssemblyName>SQLite</AssemblyName>
@@ -9,18 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0-preview1-final" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.10" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.0" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

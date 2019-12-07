@@ -8,7 +8,7 @@ ECHO.Root directory [%STARTDIR%]
 
 REM Variable settings
 SET "DESTPATH=build"
-SET "DESTFRAM=netcoreapp2.0"
+SET "DESTFRAM=netcoreapp3.1"
 SET "DESTTYPE=Release"
 SET "PLUGINPATH=Plugins"
 SET "DELFILEEXT=json pdb"

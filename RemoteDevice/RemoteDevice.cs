@@ -48,7 +48,7 @@ namespace net.derpaul.tf
             bool connected = false;
             try
             {
-                MqttClient = new MqttClient(RemoteDeviceConfig.Instance.BrokerIP);
+                MqttClient = new MqttClient(RemoteDeviceConfig.Instance.BrokerIP, RemoteDeviceConfig.Instance.BrokerPort, false, null, null, MqttSslProtocols.None, null);
                 MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
                 MqttClient.Connect(RemoteDeviceConfig.Instance.ClientID);
                 MqttClient.Subscribe(new string[] { RemoteDeviceConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });

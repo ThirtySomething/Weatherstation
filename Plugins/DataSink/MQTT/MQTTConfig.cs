@@ -11,6 +11,7 @@
         public void SetDefaults()
         {
             BrokerIP = "test.mosquitto.org";
+            BrokerPort = 1883;
             ClientID = "WeatherMQTTDevice";
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
@@ -21,6 +22,11 @@
         /// IP of MQTT broker to connect to
         /// </summary>
         public string BrokerIP { get; set; }
+
+        /// <summary>
+        /// Port of MQTT broker to connect to
+        /// </summary>
+        public int BrokerPort { get; set; }
 
         /// <summary>
         /// Client ID
