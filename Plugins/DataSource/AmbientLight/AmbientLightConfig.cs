@@ -10,7 +10,7 @@
         /// </summary>
         public void SetDefaults()
         {
-            SortOrder = 3;
+            SortOrder = 4;
         }
 
         /// <summary>

@@ -40,7 +40,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Default constructor
         /// </summary>
-        public MeasurementValue() : this("", "", 0)
+        public MeasurementValue() : this("", "", 1)
         {
         }
 
@@ -51,9 +51,13 @@ namespace net.derpaul.tf
         {
             Name = sensorName;
             Timestamp = DateTime.Now;
-            SortOrder = sortOrder;
             Unit = valueUnit;
             Value = 0.0;
+            SortOrder = (sortOrder - 1);
+            if (SortOrder < 0)
+            {
+                SortOrder = 0;
+            }
         }
 
         /// <summary>

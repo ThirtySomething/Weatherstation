@@ -8,4 +8,4 @@ Return to [main](./../Readme.md).
 
 For the AmbientLight plugin the following settings are available:
 
-* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `3`
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `4`

@@ -188,6 +188,7 @@ namespace net.derpaul.tf.plugin
                 Bricklet = new BrickletLCD20x4(UID, TFConnection);
                 Bricklet.ClearDisplay();
                 Bricklet.BacklightOn();
+                Bricklet.WriteLine(0, 0, DateTime.Now.ToString(LcdConfig.Instance.TimestampFormat));
             }
         }
     }

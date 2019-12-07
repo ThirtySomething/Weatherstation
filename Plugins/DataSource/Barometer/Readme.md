@@ -12,13 +12,13 @@ Return to [main](./../Readme.md).
 
 For the air pessure the following settings are available:
 
-* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `1`
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `2`
 
 ## AltitudeConfig.config
 
 For the altitude the following settings are available:
 
-* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `4`
+* `SortOrder` - The sort order on the Tinkerforge lcd display, default is `5`
 
 ## TemperatureConfig.config
 
