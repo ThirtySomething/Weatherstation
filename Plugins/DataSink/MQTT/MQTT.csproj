@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
-	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	<AssemblyName>MQTT</AssemblyName>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <AssemblyName>MQTT</AssemblyName>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common\Common.csproj" />
+    </ItemGroup>
 
 </Project>

@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("net.derpaul.tf.plugin.mariadb")]
+[assembly: AssemblyTitle("net.derpaul.tf.plugin.database")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("net.derpaul.tf.plugin.mariadb")]
+[assembly: AssemblyProduct("net.derpaul.tf.plugin.database")]
 [assembly: AssemblyCopyright("Copyright © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fe53f92b-30bf-443b-b5da-9ee8089fcdde")] 
+[assembly: Guid("9A19103F-16F7-4668-BE54-9A1E7A4F7556")]
 
 // Version information for an assembly consists of the following four values:
 //

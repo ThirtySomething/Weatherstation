@@ -1,19 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>net.derpaul.tf</RootNamespace>
+        <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-        <AssemblyName>Common</AssemblyName>
+        <AssemblyName>Database</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <ApplicationIcon />
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="M2MqttDotnetCore" Version="1.0.7" />
+        <ProjectReference Include="..\..\..\Common\Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Model\" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
         <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-        <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
-        <PackageReference Include="Tinkerforge" Version="2.1.17" />
     </ItemGroup>
 
 </Project>

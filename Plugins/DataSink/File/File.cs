@@ -41,7 +41,7 @@ namespace net.derpaul.tf.plugin
         }
 
         /// <summary>
-        /// Console does not require an init
+        /// Open file for appending
         /// </summary>
         /// <returns>signal success with true</returns>
         public bool Init()
