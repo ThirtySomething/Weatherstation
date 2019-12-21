@@ -51,7 +51,6 @@ To build and run the software, see [here](./Build.md) for more details.
 
 ## ToDos
 
-- Get SQLite plugin working again using [EF Core][EFCore].
 - Create MariaDB plugin based on experience of SQLite plugin.
 - Get MQTT plugin working again using IP and port.
 - Improve MQTT plugin to handle not acknowledged data.
