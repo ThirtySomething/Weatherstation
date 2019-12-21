@@ -1,0 +1,28 @@
+@startuml DataModel
+hide circle
+
+entity MeasurementType
+{
+    * integer ID
+    string Name
+}
+
+entity MeasurementUnit
+{
+    * integer ID
+    string Name
+}
+
+entity MeasurementValue
+{
+    * integer ID
+    integer MeasurementTypeID
+    double Value
+    integer MeasurementUnitID
+    DateTime RecordTime
+}
+
+MeasurementValue }|--|| MeasurementType
+MeasurementValue }|--|| MeasurementUnit
+
+@enduml
