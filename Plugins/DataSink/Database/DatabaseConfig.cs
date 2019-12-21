@@ -12,7 +12,8 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         public enum SupportedDatabaseTypes
         {
-            DBSQLite = 1
+            DBSQLite = 1,
+            MariaDB = 2
         }
 
         /// <summary>
@@ -24,12 +25,25 @@ namespace net.derpaul.tf.plugin
         }
 
         /// <summary>
+        /// Parameter object for MariaDB databases
+        /// </summary>
+        public class ParamMariaDB
+        {
+            public string Server { get; set; }
+            public string UserId { get; set; }
+            public string Password { get; set; }
+            public string Database { get; set; }
+        }
+
+        /// <summary>
         /// To set default values
         /// </summary>
         public void SetDefaults()
         {
             DatabaseType = SupportedDatabaseTypes.DBSQLite;
             DatabaseParameters = "{Filename: \"weatherdata.db\"}";
+            //DatabaseType = SupportedDatabaseTypes.MariaDB;
+            //DatabaseParameters = "{Server: \"localhost\", UserId: \"wetter\", Password: \"wetter\", Database: \"wetter\"}";
         }
 
         /// <summary>

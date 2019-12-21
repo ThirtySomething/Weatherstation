@@ -26,29 +26,61 @@ namespace net.derpaul.tf.plugin
         public DbSet<DBMeasurementValue> DBMeasurementValues { get; set; }
 
         /// <summary>
-        /// Overwritten method, select correct database type and corresponding options
+        /// Select correct database type and corresponding options
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             switch (DatabaseConfig.Instance.DatabaseType)
             {
                 case DatabaseConfig.SupportedDatabaseTypes.DBSQLite:
-                    try
-                    {
-                        DatabaseConfig.ParamSQLite Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamSQLite>(DatabaseConfig.Instance.DatabaseParameters);
-                        optionsBuilder.UseSqlite($"Filename={Options.Filename}", options =>
-                        {
-                            options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-                        });
-                    }
-                    catch (Exception e)
-                    {
-                        System.Console.WriteLine($"{nameof(OnConfiguring)}: Invalid config object [{DatabaseConfig.Instance.DatabaseParameters}] for SQLite recieved - exception [{e.Message}].");
-                    }
+                    ConnectToSQLite(optionsBuilder);
+                    break;
+                case DatabaseConfig.SupportedDatabaseTypes.MariaDB:
+                    ConnectToMariaDB(optionsBuilder);
                     break;
             }
 
             base.OnConfiguring(optionsBuilder);
+        }
+
+        /// <summary>
+        /// Handle connection to MariaDB database
+        /// </summary>
+        /// <param name="optionsBuilder">Connection options object</param>
+        private void ConnectToMariaDB(DbContextOptionsBuilder optionsBuilder)
+        {
+            try
+            {
+                DatabaseConfig.ParamMariaDB Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamMariaDB>(DatabaseConfig.Instance.DatabaseParameters);
+                optionsBuilder.UseMySql ($"Server={Options.Server};User Id={Options.UserId};Password={Options.Password};Database={Options.Database}", options =>
+                {
+                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                });
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"{nameof(OnConfiguring)}: Invalid config object [{DatabaseConfig.Instance.DatabaseParameters}] for MariaDB recieved - exception [{e.Message}].");
+            }
+        }
+
+        /// <summary>
+        /// Handle connection to SQLite database
+        /// </summary>
+        /// <param name="optionsBuilder">Connection options object</param>
+        private void ConnectToSQLite(DbContextOptionsBuilder optionsBuilder)
+        {
+            try
+            {
+                DatabaseConfig.ParamSQLite Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamSQLite>(DatabaseConfig.Instance.DatabaseParameters);
+                optionsBuilder.UseSqlite($"Filename={Options.Filename}", options =>
+                {
+                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                });
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"{nameof(OnConfiguring)}: Invalid config object [{DatabaseConfig.Instance.DatabaseParameters}] for SQLite recieved - exception [{e.Message}].");
+            }
         }
 
         /// <summary>
@@ -58,7 +90,7 @@ namespace net.derpaul.tf.plugin
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Entity for measurement types
-            modelBuilder.Entity<DBMeasurementType>().ToTable("MeasurementType", "Weatherdata");
+            modelBuilder.Entity<DBMeasurementType>().ToTable("MeasurementType", null);
             modelBuilder.Entity<DBMeasurementType>(entity =>
             {
                 entity.HasKey(e => e.ID);
@@ -66,7 +98,7 @@ namespace net.derpaul.tf.plugin
             });
 
             // Entity for measurement units
-            modelBuilder.Entity<DBMeasurementUnit>().ToTable("MeasurementUnit", "Weatherdata");
+            modelBuilder.Entity<DBMeasurementUnit>().ToTable("MeasurementUnit", null);
             modelBuilder.Entity<DBMeasurementUnit>(entity =>
             {
                 entity.HasKey(e => e.ID);
@@ -74,7 +106,7 @@ namespace net.derpaul.tf.plugin
             });
 
             // Entity for measurement values
-            modelBuilder.Entity<DBMeasurementValue>().ToTable("MeasurementValue", "Weatherdata");
+            modelBuilder.Entity<DBMeasurementValue>().ToTable("MeasurementValue", null);
             modelBuilder.Entity<DBMeasurementValue>(entity =>
             {
                 entity.HasKey(e => e.ID);
