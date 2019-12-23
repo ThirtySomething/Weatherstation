@@ -5,7 +5,7 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Entity for measurement types
     /// </summary>
-    public class DBMeasurementType
+    public class MType
     {
         /// <summary>
         /// ID as primary key
@@ -20,6 +20,6 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Used for foreign key setup
         /// </summary>
-        public ICollection<DBMeasurementValue> MeasurementValues { get; set; }
+        public ICollection<MValue> Values { get; set; }
     }
 }

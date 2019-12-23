@@ -1,29 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Database model for weatherstation data
     /// </summary>
-    public class DBMeasurementModel : DbContext
+    public class MModel : DbContext
     {
         /// <summary>
         /// Entity for measurement types
         /// </summary>
-        public DbSet<DBMeasurementType> DBMeasurementTypes { get; set; }
+        public DbSet<MType> DBMeasurementTypes { get; set; }
 
         /// <summary>
         /// Entity for measurement units
         /// </summary>
-        public DbSet<DBMeasurementUnit> DBMeasurementUnits { get; set; }
+        public DbSet<MUnit> DBMeasurementUnits { get; set; }
 
         /// <summary>
         /// Entity for measurement values
         /// </summary>
-        public DbSet<DBMeasurementValue> DBMeasurementValues { get; set; }
+        public DbSet<MValue> DBMeasurementValues { get; set; }
 
         /// <summary>
         /// Select correct database type and corresponding options
@@ -51,15 +53,19 @@ namespace net.derpaul.tf.plugin
         {
             try
             {
-                DatabaseConfig.ParamMariaDB Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamMariaDB>(DatabaseConfig.Instance.DatabaseParameters);
+                DatabaseConfig.ParamMariaDB Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamMariaDB>(DatabaseConfig.Instance.DatabaseOptions);
                 optionsBuilder.UseMySql ($"Server={Options.Server};User Id={Options.UserId};Password={Options.Password};Database={Options.Database}", options =>
                 {
-                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)
+                        .ServerVersion(new Version(10, 4, 11), ServerType.MariaDb)
+                        .CharSetBehavior(CharSetBehavior.AppendToAllColumns);
+                        //.AnsiCharSet(CharSet.Latin1)
+                        //.UnicodeCharSet(CharSet.Utf8mb4);
                 });
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{nameof(OnConfiguring)}: Invalid config object [{DatabaseConfig.Instance.DatabaseParameters}] for MariaDB recieved - exception [{e.Message}].");
+                System.Console.WriteLine($"{nameof(ConnectToMariaDB)}: Invalid config object [{DatabaseConfig.Instance.DatabaseOptions}] for MariaDB recieved - exception [{e.Message}].");
             }
         }
 
@@ -71,7 +77,7 @@ namespace net.derpaul.tf.plugin
         {
             try
             {
-                DatabaseConfig.ParamSQLite Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamSQLite>(DatabaseConfig.Instance.DatabaseParameters);
+                DatabaseConfig.ParamSQLite Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamSQLite>(DatabaseConfig.Instance.DatabaseOptions);
                 optionsBuilder.UseSqlite($"Filename={Options.Filename}", options =>
                 {
                     options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
@@ -79,7 +85,7 @@ namespace net.derpaul.tf.plugin
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"{nameof(OnConfiguring)}: Invalid config object [{DatabaseConfig.Instance.DatabaseParameters}] for SQLite recieved - exception [{e.Message}].");
+                System.Console.WriteLine($"{nameof(ConnectToSQLite)}: Invalid config object [{DatabaseConfig.Instance.DatabaseOptions}] for SQLite recieved - exception [{e.Message}].");
             }
         }
 
@@ -90,40 +96,40 @@ namespace net.derpaul.tf.plugin
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Entity for measurement types
-            modelBuilder.Entity<DBMeasurementType>().ToTable("MeasurementType", null);
-            modelBuilder.Entity<DBMeasurementType>(entity =>
+            modelBuilder.Entity<MType>().ToTable("MType", null);
+            modelBuilder.Entity<MType>(entity =>
             {
                 entity.HasKey(e => e.ID);
                 entity.HasIndex(e => e.Name).IsUnique();
             });
 
             // Entity for measurement units
-            modelBuilder.Entity<DBMeasurementUnit>().ToTable("MeasurementUnit", null);
-            modelBuilder.Entity<DBMeasurementUnit>(entity =>
+            modelBuilder.Entity<MUnit>().ToTable("MUnit", null);
+            modelBuilder.Entity<MUnit>(entity =>
             {
                 entity.HasKey(e => e.ID);
                 entity.HasIndex(e => e.Name).IsUnique();
             });
 
             // Entity for measurement values
-            modelBuilder.Entity<DBMeasurementValue>().ToTable("MeasurementValue", null);
-            modelBuilder.Entity<DBMeasurementValue>(entity =>
+            modelBuilder.Entity<MValue>().ToTable("MValue", null);
+            modelBuilder.Entity<MValue>(entity =>
             {
                 entity.HasKey(e => e.ID);
                 entity.Property(e => e.RecordTime).HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
 
             // Foreign key from measurement value to measurement type
-            modelBuilder.Entity<DBMeasurementType>()
-                    .HasMany(c => c.MeasurementValues)
-                    .WithOne(e => e.MeasurementType)
+            modelBuilder.Entity<MType>()
+                    .HasMany(c => c.Values)
+                    .WithOne(e => e.Type)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.SetNull);
 
             // Foreign key from measurement value to measurement unit
-            modelBuilder.Entity<DBMeasurementUnit>()
-                    .HasMany(c => c.MeasurementValues)
-                    .WithOne(e => e.MeasurementUnit)
+            modelBuilder.Entity<MUnit>()
+                    .HasMany(c => c.Values)
+                    .WithOne(e => e.Unit)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.SetNull);
 

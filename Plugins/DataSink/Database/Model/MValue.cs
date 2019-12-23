@@ -5,7 +5,7 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Entity for measurement values
     /// </summary>
-    public class DBMeasurementValue
+    public class MValue
     {
         /// <summary>
         /// ID as primary key
@@ -15,7 +15,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// The measurement type of value
         /// </summary>
-        public DBMeasurementType MeasurementType { get; set; }
+        public MType Type { get; set; }
 
         /// <summary>
         /// The measurement value
@@ -25,7 +25,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// The measurement unit of value
         /// </summary>
-        public DBMeasurementUnit MeasurementUnit { get; set; }
+        public MUnit Unit { get; set; }
 
         /// <summary>
         /// The timestamp of recording

@@ -20,7 +20,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Reference to the database model
         /// </summary>
-        private DBMeasurementModel DBInstance;
+        private MModel DBInstance;
 
         /// <summary>
         /// Initialize DB connection
@@ -28,12 +28,10 @@ namespace net.derpaul.tf.plugin
         /// <returns>signal success with true</returns>
         public bool Init()
         {
-            bool success = false;
+            DBInstance = new MModel();
+            DBInstance.Database.EnsureCreated();
 
-            DBInstance = new DBMeasurementModel();
-            success = DBInstance.Database.EnsureCreated();
-
-            return success;
+            return true;
         }
 
         /// <summary>
@@ -53,12 +51,12 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         /// <param name="MType">Used measurement type - the sensor name</param>
         /// <param name="MUnit">used measurement unit</param>
-        private void WriteSensorData(MeasurementValue SensorValue, DBMeasurementType MType, DBMeasurementUnit MUnit)
+        private void WriteSensorData(MeasurementValue SensorValue, MType MType, MUnit MUnit)
         {
-            var MValue = new DBMeasurementValue
+            var MValue = new MValue
             {
-                MeasurementType = MType,
-                MeasurementUnit = MUnit,
+                Type = MType,
+                Unit = MUnit,
                 RecordTime = SensorValue.Timestamp,
                 Value = SensorValue.Value
             };
@@ -79,12 +77,12 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         /// <returns>Referenced measurement type object</returns>
-        public DBMeasurementType DetermineMeasurementType(MeasurementValue SensorValue)
+        public MType DetermineMeasurementType(MeasurementValue SensorValue)
         {
             var MType = DBInstance.DBMeasurementTypes.Where(a => a.Name == SensorValue.Name).FirstOrDefault();
             if (MType == null)
             {
-                MType = new DBMeasurementType{Name = SensorValue.Name};
+                MType = new MType{Name = SensorValue.Name};
                 DBInstance.Add(MType);
                 DBInstance.SaveChanges();
             }
@@ -97,12 +95,12 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         /// <returns>Referenced measurement unit object</returns>
-        public DBMeasurementUnit DetermineMeasurementUnit(MeasurementValue SensorValue)
+        public MUnit DetermineMeasurementUnit(MeasurementValue SensorValue)
         {
             var MUnit = DBInstance.DBMeasurementUnits.Where(a => a.Name == SensorValue.Unit).FirstOrDefault();
             if (MUnit == null)
             {
-                MUnit = new DBMeasurementUnit{Name = SensorValue.Unit};
+                MUnit = new MUnit{Name = SensorValue.Unit};
                 DBInstance.Add(MUnit);
                 DBInstance.SaveChanges();
             }

@@ -21,6 +21,9 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         public class ParamSQLite
         {
+            /// <summary>
+            /// Filename for the SQLite database file
+            /// </summary>
             public string Filename { get; set; }
         }
 
@@ -29,9 +32,24 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         public class ParamMariaDB
         {
+            /// <summary>
+            /// The server name or IP of the database
+            /// </summary>
             public string Server { get; set; }
+
+            /// <summary>
+            /// The username to connect to
+            /// </summary>
             public string UserId { get; set; }
+
+            /// <summary>
+            /// The password for the username to connect
+            /// </summary>
             public string Password { get; set; }
+
+            /// <summary>
+            /// The database schema used to write to
+            /// </summary>
             public string Database { get; set; }
         }
 
@@ -41,9 +59,9 @@ namespace net.derpaul.tf.plugin
         public void SetDefaults()
         {
             DatabaseType = SupportedDatabaseTypes.DBSQLite;
-            DatabaseParameters = "{Filename: \"weatherdata.db\"}";
+            DatabaseOptions = "{Filename: \"weatherdata.db\"}";
             //DatabaseType = SupportedDatabaseTypes.MariaDB;
-            //DatabaseParameters = "{Server: \"localhost\", UserId: \"wetter\", Password: \"wetter\", Database: \"wetter\"}";
+            //DatabaseOptions = "{Server: \"localhost\", UserId: \"wetter\", Password: \"wetter\", Database: \"wetter\"}";
         }
 
         /// <summary>
@@ -54,6 +72,6 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// The database parameters as JSON string
         /// </summary>
-        public string DatabaseParameters { get; set; }
+        public string DatabaseOptions { get; set; }
     }
 }
