@@ -5,7 +5,7 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Class to read values from ambient light sensor
     /// </summary>
-    public class AmbientLight : SensorBase
+    public class AmbientLight : DataSourceBase
     {
         /// <summary>
         /// Measurement unit of sensor

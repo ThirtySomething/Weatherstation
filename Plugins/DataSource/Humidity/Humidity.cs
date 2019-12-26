@@ -5,7 +5,7 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Class to read values from humidity sensor
     /// </summary>
-    public class Humidity : SensorBase
+    public class Humidity : DataSourceBase
     {
         /// <summary>
         /// Measurement unit of sensor

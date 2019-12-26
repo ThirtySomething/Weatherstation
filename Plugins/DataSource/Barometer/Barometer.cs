@@ -5,7 +5,7 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Class to read values from barometer sensor
     /// </summary>
-    public abstract class Barometer : SensorBase
+    public abstract class Barometer : DataSourceBase
     {
         /// <summary>
         /// Internal object of TF barometer bricklet
