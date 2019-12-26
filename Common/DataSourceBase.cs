@@ -3,7 +3,7 @@
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Abstract base class for all sensors implementing sensor's interface
+    /// Abstract base class for all data sources implementing the IDataSource interface
     /// </summary>
     public abstract class DataSourceBase : IDataSource
     {

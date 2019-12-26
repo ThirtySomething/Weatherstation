@@ -1,9 +1,9 @@
+*.log
 *.user
 .vs
 .vscode
 /build
-/doxygen/Weatherstation.log
 /doxygen/html
 bin
 obj
-/Documentation/Diagram.png~
+

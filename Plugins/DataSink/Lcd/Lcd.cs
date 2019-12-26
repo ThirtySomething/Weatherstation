@@ -7,18 +7,8 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Class to write values to TF LCD20x4 bricklet
     /// </summary>
-    public class Lcd : IDataSink
+    public class Lcd : DataSinkBase
     {
-        /// <summary>
-        /// Get the name of class
-        /// </summary>
-        public string Name { get { return this.GetType().Name; } }
-
-        /// <summary>
-        /// Flags successful initialization
-        /// </summary>
-        public bool IsInitialized { get; set; } = false;
-
         /// <summary>
         /// Internal object of TF bricklet
         /// </summary>
@@ -56,7 +46,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Cleanup Lcd
         /// </summary>
-        public void Shutdown()
+        public override void Shutdown()
         {
             TimeStampDisplayTimer.Stop();
             TimeStampDisplayTimer.Close();
@@ -72,7 +62,7 @@ namespace net.derpaul.tf.plugin
         /// Part of interface TFDataSink - perform action with given data
         /// </summary>
         /// <param name="SensorValue"></param>
-        public void HandleValue(MeasurementValue SensorValue)
+        public override void HandleValue(MeasurementValue SensorValue)
         {
             if (Bricklet == null)
             {
@@ -94,7 +84,7 @@ namespace net.derpaul.tf.plugin
         /// Part of interface TFDataSink - initalize plugin
         /// </summary>
         /// <returns></returns>
-        public bool Init()
+        public override bool Init()
         {
             if (PerformConnect() && CollectBrickletInformations())
             {

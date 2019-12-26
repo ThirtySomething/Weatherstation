@@ -5,18 +5,8 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Write collection of Tinkerforge Sensor plugin values to a database supported by the .net Entity Framework Core
     /// </summary>
-    public class Database : IDataSink
+    public class Database : DataSinkBase
     {
-        /// <summary>
-        /// Get the name of class
-        /// </summary>
-        public string Name { get { return this.GetType().Name; } }
-
-        /// <summary>
-        /// Flags successful initialization
-        /// </summary>
-        public bool IsInitialized { get; set; } = false;
-
         /// <summary>
         /// Reference to the database model
         /// </summary>
@@ -26,7 +16,7 @@ namespace net.derpaul.tf.plugin
         /// Initialize DB connection
         /// </summary>
         /// <returns>signal success with true</returns>
-        public bool Init()
+        public override bool Init()
         {
             DBInstance = new MModel();
             DBInstance.Database.EnsureCreated();
@@ -38,7 +28,7 @@ namespace net.derpaul.tf.plugin
         /// Write sensor values to database
         /// </summary>
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
-        public void HandleValue(MeasurementValue SensorValue)
+        public override void HandleValue(MeasurementValue SensorValue)
         {
             var MType = DetermineMeasurementType(SensorValue);
             var MUnit = DetermineMeasurementUnit(SensorValue);
@@ -67,7 +57,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Close database connection
         /// </summary>
-        public void Shutdown()
+        public override void Shutdown()
         {
             DBInstance.Dispose();
         }

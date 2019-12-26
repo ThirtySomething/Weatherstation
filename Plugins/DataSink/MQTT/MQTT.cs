@@ -10,13 +10,8 @@ namespace net.derpaul.tf.plugin
     /// <summary>
     /// Data sink - sending data using MQTT
     /// </summary>
-    public class MQTT : IDataSink
+    public class MQTT : DataSinkBase
     {
-        /// <summary>
-        /// Get the name of class
-        /// </summary>
-        public string Name { get { return this.GetType().Name; } }
-
         /// <summary>
         /// Instance of M2Mqtt client
         /// </summary>
@@ -33,11 +28,6 @@ namespace net.derpaul.tf.plugin
         private ElapsedEventHandler RunCheckEvent;
 
         /// <summary>
-        /// Flags successful initialization
-        /// </summary>
-        public bool IsInitialized { get; set; } = false;
-
-        /// <summary>
         /// Published measurement values waiting for acknowledge
         /// </summary>
         private Dictionary<string, MeasurementValue> AcknowledgeList { get; set; }
@@ -50,7 +40,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Disconnect from MQTT broker
         /// </summary>
-        public void Shutdown()
+        public override void Shutdown()
         {
             lock (Locker)
             {
@@ -65,7 +55,7 @@ namespace net.derpaul.tf.plugin
         /// Initialize MQTT client and connect to broker
         /// </summary>
         /// <returns>true on success otherwise false</returns>
-        public bool Init()
+        public override bool Init()
         {
             bool success = false;
 
@@ -98,7 +88,7 @@ namespace net.derpaul.tf.plugin
         /// Transform each result in a JSON string and publish string to topic
         /// </summary>
         /// <param name="SensorValue">Sensor value</param>
-        public void HandleValue(MeasurementValue SensorValue)
+        public override void HandleValue(MeasurementValue SensorValue)
         {
             PublishSingleValue(SensorValue);
         }
