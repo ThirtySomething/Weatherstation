@@ -24,7 +24,7 @@ dotnet --help
 </pre>
         The result should be something like <pre>
         Usage: dotnet [host-options] [path-to-application]
-        
+
     path-to-application:
     The path to an application .dll file to execute.
 
@@ -40,7 +40,7 @@ dotnet --help
     -h|--help                           Displays this help.
     --info                              Displays the host information
 </pre>
-    
+
 See also [here](https://blogs.msdn.microsoft.com/david/2017/07/20/setting_up_raspian_and_dotnet_core_2_0_on_a_raspberry_pi/) for more information. Maybe this [here](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md) is also necessary.
 
 ## Common prerequisites
@@ -95,8 +95,6 @@ The description for configuring the [device](./Device/Readme.md) or the [remote 
 * You cannot run the device and the remote device at one machine using the same plugin directory. The plugins cannot be used simultaneously by the device and the remote device. If you want to run both on the same machine, you need to have two plugin directories and to configure one for the device and the other for the remote device.
 
 * Some of the plugins are using NuGet packages. During the deployment the plugins have a different deployment location than the device program. Some of the DLLs will load additional dependencies - but somehow they are not taken from the plugin path. Caused by this the NuGet packages are also added to the device/remote device project. This solved the issue, but it's not a good solution.
-
-* Unfortunately there is somehow a dependency mismatch with the `SQLite` plugin. So it's necessary to reference `SQLitePCLRaw.bundle_green`.
 
 Return to [main](./Readme.md).
 

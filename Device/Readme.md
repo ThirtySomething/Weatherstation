@@ -21,4 +21,4 @@ For more details how to configure the plugins see the Readme in the project of t
 
 ## Remarks
 
-See also the [remote device documentation](./../RemoteDevice/Readme.md). The description to install the device on a Raspi can be found [here](./Install-RPi.md).
+See also the [remote device documentation](./../RemoteDevice/Readme.md). The description to install the device on a Raspi can be found [here](./../Build.md).
