@@ -1,4 +1,6 @@
-﻿namespace net.derpaul.tf.plugin
+﻿using Tinkerforge;
+
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Class to read altitude from barometer sensor
@@ -9,6 +11,17 @@
         /// Measurement unit of sensor
         /// </summary>
         public override string Unit { get; } = "m";
+
+        /// <summary>
+        /// Initialize internal TF bricklet
+        /// </summary>
+        /// <param name="connection">Connection to master brick</param>
+        /// <param name="UID">Sensor ID</param>
+        public override void Init(IPConnection connection, string UID)
+        {
+            AltitudeConfig.Instance.ShowConfig();
+            base.Init(connection, UID);
+        }
 
         /// <summary>
         /// Read value from sensor and prepare real value

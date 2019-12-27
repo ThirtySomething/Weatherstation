@@ -86,6 +86,8 @@ namespace net.derpaul.tf.plugin
         /// <returns></returns>
         public override bool Init()
         {
+            LcdConfig.Instance.ShowConfig();
+
             if (PerformConnect() && CollectBrickletInformations())
             {
                 // interval at which timer elapses (in ms)

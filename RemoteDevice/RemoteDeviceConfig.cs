@@ -19,6 +19,7 @@ namespace net.derpaul.tf
             ClientID = "WeatherMQTTRemoteDevice";
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
+            Handshake = false;
         }
 
         /// <summary>
@@ -55,6 +56,11 @@ namespace net.derpaul.tf
         /// Topic to send handshake information
         /// </summary>
         public string TopicAcknowledge { get; set; }
+
+        /// <summary>
+        /// To perform some kind of handshake, set to true
+        /// </summary>
+        public bool Handshake { get; set; }
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs

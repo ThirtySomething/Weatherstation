@@ -19,6 +19,7 @@ For more details how to configure the plugins see the Readme in the project of t
 * `ClientID` - The client ID signaled to the broker, default is: `WeatherMQTTClient`.
 * `TopicData` - The MQTT message topic to subscribe where the client publishs the measurement values, by default `/tinkerforge/weatherstation/data`.
 * `TopicAcknowledge` - The MQTT message topic to publish a successful recieve of a measurement value. Default is `/tinkerforge/weatherstation/ack`.
+* `Handshake` - If set to true, for each measurement value recieved an acknowledge MQTT message will be sent.
 
 ## Remarks
 

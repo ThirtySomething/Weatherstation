@@ -14,9 +14,10 @@ sudo apt-get install curl libunwind8 gettext
 </pre>
 
 * Install the .NET Core runtime <pre>
- curl -sSL -o dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Runtime/release/2.0.0/dotnet-runtime-latest-linux-arm.tar.gz
-sudo mkdir -p /opt/dotnet && sudo tar zxf dotnet.tar.gz -C /opt/dotnet
-sudo ln -s /opt/dotnet/dotnet /usr/local/bin
+curl -SL -o dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-sdk-latest-linux-arm.tar.gz
+sudo mkdir -p /usr/share/dotnet
+sudo tar -zxf dotnet.tar.gz -C /usr/share/dotnet
+sudo ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 </pre>
 
 * Test the .NET Core installation <pre>

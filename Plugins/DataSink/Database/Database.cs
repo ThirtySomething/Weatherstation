@@ -18,6 +18,7 @@ namespace net.derpaul.tf.plugin
         /// <returns>signal success with true</returns>
         public override bool Init()
         {
+            DatabaseConfig.Instance.ShowConfig();
             DBInstance = new MModel();
             DBInstance.Database.EnsureCreated();
 

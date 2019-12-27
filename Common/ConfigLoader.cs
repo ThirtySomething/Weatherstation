@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -116,6 +117,15 @@ namespace net.derpaul.tf
             }
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// To show the current configuration settings
+        /// </summary>
+        public void ShowConfig()
+        {
+            var configData = JsonConvert.SerializeObject(Instance);
+            System.Console.WriteLine($"{this.GetType().Name}: ConfigData [{configData}]");
         }
     }
 }

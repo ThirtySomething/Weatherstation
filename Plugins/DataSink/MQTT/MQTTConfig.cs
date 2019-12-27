@@ -16,6 +16,7 @@
             TopicData = "/tinkerforge/weatherstation/dta";
             TopicAcknowledge = "/tinkerforge/weatherstation/ack";
             TimerDelay = 10000;
+            Handshake = false;
         }
 
         /// <summary>
@@ -47,5 +48,10 @@
         /// Timer interval to check the acknowledge list
         /// </summary>
         public int TimerDelay { get; set; }
+
+        /// <summary>
+        /// To perform some kind of handshake, set to true
+        /// </summary>
+        public bool Handshake { get; set; }
     }
 }

@@ -44,10 +44,17 @@ namespace net.derpaul.tf.plugin
         {
             lock (Locker)
             {
-                MqttClient.MqttMsgPublishReceived -= MqttAcknowledgeRecieved;
+                if (MQTTConfig.Instance.Handshake == true)
+                {
+                    MqttClient.MqttMsgPublishReceived -= MqttAcknowledgeRecieved;
+                }
                 MqttClient.Disconnect();
-                RunCheck.Elapsed -= RunCheckEvent;
-                RunCheck.Enabled = false;
+
+                if (MQTTConfig.Instance.Handshake == true)
+                {
+                    RunCheck.Elapsed -= RunCheckEvent;
+                    RunCheck.Enabled = false;
+                }
             }
         }
 
@@ -61,17 +68,26 @@ namespace net.derpaul.tf.plugin
 
             try
             {
+                MQTTConfig.Instance.ShowConfig();
+
                 AcknowledgeList = new Dictionary<string, MeasurementValue>();
 
-                RunCheck = new Timer(MQTTConfig.Instance.TimerDelay);
-                RunCheckEvent = new ElapsedEventHandler(CheckAcknowledgeList);
-                RunCheck.Elapsed += RunCheckEvent;
-                RunCheck.Enabled = true;
+                if (MQTTConfig.Instance.Handshake == true)
+                {
+                    RunCheck = new Timer(MQTTConfig.Instance.TimerDelay);
+                    RunCheckEvent = new ElapsedEventHandler(CheckAcknowledgeList);
+                    RunCheck.Elapsed += RunCheckEvent;
+                    RunCheck.Enabled = true;
+                }
 
                 MqttClient = new MqttClient(MQTTConfig.Instance.BrokerIP, MQTTConfig.Instance.BrokerPort, false, null, null, MqttSslProtocols.None);
-                MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
                 MqttClient.Connect(MQTTConfig.Instance.ClientID);
                 MqttClient.Subscribe(new string[] { MQTTConfig.Instance.TopicAcknowledge }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
+                if (MQTTConfig.Instance.Handshake == true)
+                {
+                    MqttClient.MqttMsgPublishReceived += MqttAcknowledgeRecieved;
+                }
 
                 success = MqttClient.IsConnected;
             }

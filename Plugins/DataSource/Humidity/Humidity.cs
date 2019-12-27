@@ -29,6 +29,7 @@ namespace net.derpaul.tf.plugin
         /// <param name="UID">Sensor ID</param>
         public override void Init(IPConnection connection, string UID)
         {
+            HumidityConfig.Instance.ShowConfig();
             if (Bricklet == null)
             {
                 Bricklet = new BrickletHumidity(UID, connection);

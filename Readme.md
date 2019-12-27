@@ -25,6 +25,27 @@ You need to have some software installed to compile this project. There are
 - The [Tinkerforge Brick Viewer][TFBrickViewer] to update the firmwares.
 - The [MS .net Core 3.1 SDK][DotNet31SDK] for compiling/extend the software.
 
+## Scenarios
+
+The software consists of several parts. To get a feeling about the parts, see the following scenarios:
+
+- There is only a Raspberry Pi available
+  - You have to connect the weatherstation to the Raspberry Pi.
+  - You have to run the `Device` on the Raspberry Pi.
+  - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data.
+- There is a Raspberry Pi and a server (either Windows x64 or Linux x64) available
+  - You have to connect the weatherstation to the Raspberry Pi.
+  - You have to run the `Device` on the Raspberry Pi.
+  - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data - at least the `MQTT`-plugin is required.
+  - You have to run the `RemoteDevice` on the server.
+  - You have to select some of the [Data Sink Plugins](./Plugins/DataSink/Readme.md) to store the data.
+- There is only a server (either Windows x64 or Linux x64) available
+  - You have to connect the weatherstation to the server.
+  - You have to run the `Device` on the server.
+  - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data.
+
+Basically you want to use all [Data Source Plugins](./Plugins/DataSource/Readme.md) and usually not all of the [Data Sink Plugins](./Plugins/DataSink/Readme.md).
+
 ## Device
 
 See the [device documentation](./Device/Readme.md) for more details.
@@ -51,12 +72,9 @@ To build and run the software, see [here](./Build.md) for more details.
 
 ## ToDos
 
-- Create MariaDB plugin based on experience of SQLite plugin.
-- Get MQTT plugin working again using IP and port.
-- Improve MQTT plugin to handle not acknowledged data.
+- Check installation guide for .net 3.1!
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at device before publish
 - Implement remote device part, consists of
-  - Writing data to database (MySQL, MariaDB, ...)
   - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
   - Create a HTML frontend with various information
     - Data of current values
@@ -72,25 +90,29 @@ To build and run the software, see [here](./Build.md) for more details.
 - What about [rrdtool]?
 - What about [prometheus]?
 - What about [opentsdb]?
+- The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
 
+[DotNet31SDK]: https://dotnet.microsoft.com/download/dotnet-core/3.1
+[EFCore]: https://github.com/aspnet/EntityFrameworkCore
+[Grafana]: https://grafana.com/
+[JoHu]: https://blog.unixweb.de/
 [NGMQTT]: https://www.nuget.org/packages/M2MqttDotnetCore/
 [SDoor]: https://support.industry.siemens.com/cs/document/109739594/komprimierung-von-prozesswertarchiven-mit-dem-swinging-door-algorithmus-in-pcs-7?dti=0&lc=de-WW
+[SwingingDoorImpl]: https://www.hackerboard.de/threads/c-gesucht-implementierung-des-swinging-door-algorithmus.50448/
+[SwingingDoorOsiPi]: https://osipi.wordpress.com/tag/swinging-door-algorithm/
+[SwingingDoorPiSquare]: https://pisquare.osisoft.com/thread/7566
 [TFBrickDaemon]: https://www.tinkerforge.com/de/doc/Downloads.html
 [TFBrickViewer]: https://www.tinkerforge.com/de/doc/Downloads.html
 [TFURL]: https://www.tinkerforge.com/en/doc/Kits/Weatherstation/Weatherstation.html
+[TSDB]: https://en.wikipedia.org/wiki/Time_series_database
+[TUDresden]: http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
 [opentsdb]: http://opentsdb.net/
 [prometheus]: https://prometheus.io/
 [rrdtool]: https://oss.oetiker.ch/rrdtool/
-[TUDresden]: http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
-[SwingingDoorPiSquare]: https://pisquare.osisoft.com/thread/7566
-[SwingingDoorOsiPi]: https://osipi.wordpress.com/tag/swinging-door-algorithm/
-[SwingingDoorImpl]: https://www.hackerboard.de/threads/c-gesucht-implementierung-des-swinging-door-algorithmus.50448/
-[DotNet31SDK]: https://dotnet.microsoft.com/download/dotnet-core/3.1
-[EFCore]: https://github.com/aspnet/EntityFrameworkCore
 
+[csharp_lang]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+[csharp_lang_badge]: https://img.shields.io/badge/language-CSharp-blue.svg
 [lgpl_license]: http://www.gnu.org/licenses/lgpl-3.0
 [lgpl_license_badge]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg
-[repo_size_badge]: https://img.shields.io/github/repo-size/ThirtySomething/Weatherstation
 [repo_size]: https://github.com/ThirtySomething/Weatherstation
-[csharp_lang_badge]: https://img.shields.io/badge/language-CSharp-blue.svg
-[csharp_lang]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+[repo_size_badge]: https://img.shields.io/github/repo-size/ThirtySomething/Weatherstation

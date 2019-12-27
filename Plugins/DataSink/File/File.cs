@@ -38,6 +38,8 @@ namespace net.derpaul.tf.plugin
         {
             Datafile = new StreamWriter(FileConfig.Instance.DataFilename, FileConfig.Instance.AppendToFile);
 
+            FileConfig.Instance.ShowConfig();
+
             bool success = System.IO.File.Exists(FileConfig.Instance.DataFilename);
             return success;
         }

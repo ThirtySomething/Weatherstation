@@ -16,6 +16,8 @@ namespace net.derpaul.tf
             var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeviceConfig.Instance.PluginPath);
             var pluginHandler = new PluginHandler(pluginPath, DeviceConfig.Instance.BrickDaemonIP, DeviceConfig.Instance.BrickDaemonPort);
 
+            DeviceConfig.Instance.ShowConfig();
+
             if (!pluginHandler.Init())
             {
                 return;
