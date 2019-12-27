@@ -1,6 +1,6 @@
-# Remote device
+# Remotedevice
 
-The remote device is the receiver of the transmitted measurement values and has no direct connection to the weatherstation. In detail the remote device is responsible for:
+The `remotedevice` is the receiver of the transmitted measurement values and has no direct connection to the weatherstation. In detail the `remotedevice` is responsible for:
 
 * Picking up data via MQTT
 * Push received data to [data sinks](./../Plugins/DataSink/Readme.md)
@@ -11,7 +11,7 @@ Return to [main](./../Readme.md).
 
 ## RemoteDeviceConfig.config
 
-For more details how to configure the plugins see the Readme in the project of the plugin. For the remote device the following settings are available:
+For more details how to configure the plugins see the Readme in the project of the plugin. For the `remotedevice` the following settings are available:
 
 * `Delay` - time interval at which the next keypress is checked.
 * `PluginPath` - The path where the client is looking for datasource and datasink plugins, by default in a subdirectory called `Plugins`.

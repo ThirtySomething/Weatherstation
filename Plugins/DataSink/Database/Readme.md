@@ -21,7 +21,7 @@ For the Database plugin the following settings are available:
     * `UserId` - The user for the database connection.
     * `Password` -  The password for the database connection.
     * `Database` - The database used to write to.
-    * The option string looks like `{Server: "localhost", UserId: "wetter", Password: "wetter", Database: "wetter"}`.
+    * The option string looks like `{Server: "localhost", UserId: "weather", Password: "sunshine", Database: "weatherdata"}`.
     * You have to set all database parameters!
 
 For more details about the supported database types and parameters see file [DatabaseConfig.cs](./DatabaseConfig.cs).

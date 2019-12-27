@@ -3,7 +3,7 @@
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings of remote device reading data via MQTT
+    /// Configuration settings of remotedevice reading data via MQTT
     /// </summary>
     public class RemoteDeviceConfig : ConfigLoader<RemoteDeviceConfig>, IConfigObject
     {

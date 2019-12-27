@@ -1,9 +1,9 @@
 # Weatherstation
 
 This project will address a [Tinkerforge weather station][TFURL]. There are
-  - The device for reading the data of the weather station.
-  - The remote device for dealing with the data in form of saving them, historize them and compress them somehow.
-  - The UI for displaying the data processed by the remote device.
+  - The `device` for reading the data of the weather station.
+  - The `remotedevice` for dealing with the data in form of saving them, historize them and compress them somehow.
+  - The UI for displaying the data processed by the `remotedevice`.
 
 ## General information
 
@@ -50,9 +50,9 @@ Basically you want to use all [Data Source Plugins](./Plugins/DataSource/Readme.
 
 See the [device documentation](./Device/Readme.md) for more details.
 
-## Remote device
+## Remotedevice
 
-See the [remote device documentation](./RemoteDevice/Readme.md) for more details.
+See the [remotedevice documentation](./RemoteDevice/Readme.md) for more details.
 
 ## Plugins
 
@@ -73,8 +73,8 @@ To build and run the software, see [here](./Build.md) for more details.
 ## ToDos
 
 - Check installation guide for .net 3.1!
-- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at device before publish
-- Implement remote device part, consists of
+- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at `device` before publish
+- Implement `remotedevice` part, consists of
   - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
   - Create a HTML frontend with various information
     - Data of current values
@@ -92,7 +92,7 @@ To build and run the software, see [here](./Build.md) for more details.
 - What about [opentsdb]?
 - The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
 
-[DotNet31SDK]: https://dotnet.microsoft.com/download/dotnet-core/3.1
+[DotNet31SDK]: https://dotnet.microsoft.com/download/dotnet-core/scripts
 [EFCore]: https://github.com/aspnet/EntityFrameworkCore
 [Grafana]: https://grafana.com/
 [JoHu]: https://blog.unixweb.de/
@@ -101,9 +101,9 @@ To build and run the software, see [here](./Build.md) for more details.
 [SwingingDoorImpl]: https://www.hackerboard.de/threads/c-gesucht-implementierung-des-swinging-door-algorithmus.50448/
 [SwingingDoorOsiPi]: https://osipi.wordpress.com/tag/swinging-door-algorithm/
 [SwingingDoorPiSquare]: https://pisquare.osisoft.com/thread/7566
-[TFBrickDaemon]: https://www.tinkerforge.com/de/doc/Downloads.html
-[TFBrickViewer]: https://www.tinkerforge.com/de/doc/Downloads.html
-[TFURL]: https://www.tinkerforge.com/en/doc/Kits/Weatherstation/Weatherstation.html
+[TFBrickDaemon]: https://www.tinkerforge.com/en/doc/Downloads.html
+[TFBrickViewer]: https://www.tinkerforge.com/en/doc/Downloads.html
+[TFURL]: https://www.tinkerforge.com/en/shop/kits/starter-kit-weather-station.html
 [TSDB]: https://en.wikipedia.org/wiki/Time_series_database
 [TUDresden]: http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
 [opentsdb]: http://opentsdb.net/
