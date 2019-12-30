@@ -17,3 +17,11 @@ CREATE TABLE "MValue" (
     CONSTRAINT "FK_MValue_MType_TypeID" FOREIGN KEY ("TypeID") REFERENCES "MType" ("ID") ON DELETE SET NULL,
     CONSTRAINT "FK_MValue_MUnit_UnitID" FOREIGN KEY ("UnitID") REFERENCES "MUnit" ("ID") ON DELETE SET NULL
 );
+
+CREATE UNIQUE INDEX "IX_MType_Name" ON "MType" ("Name");
+
+CREATE UNIQUE INDEX "IX_MUnit_Name" ON "MUnit" ("Name");
+
+CREATE INDEX "IX_MValue_TypeID" ON "MValue" ("TypeID");
+
+CREATE INDEX "IX_MValue_UnitID" ON "MValue" ("UnitID");

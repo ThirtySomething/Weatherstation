@@ -10,7 +10,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// ID as primary key
         /// </summary>
-        public int ID { get; set; }
+        public ulong ID { get; set; }
 
         /// <summary>
         /// The measurement type of value
