@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Interface to deal with a collection of Tinkerforge Sensor plugin values

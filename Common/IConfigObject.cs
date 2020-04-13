@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Interface for configuration saving

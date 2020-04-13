@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf.plugin
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Configuration settings of file plugin to write data to a file

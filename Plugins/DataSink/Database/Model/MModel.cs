@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
@@ -54,13 +54,13 @@ namespace net.derpaul.tf.plugin
             try
             {
                 DatabaseConfig.ParamMariaDB Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamMariaDB>(DatabaseConfig.Instance.DatabaseOptions);
-                optionsBuilder.UseMySql ($"Server={Options.Server};User Id={Options.UserId};Password={Options.Password};Database={Options.Database}", options =>
-                {
-                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)
-                        .ServerVersion(new Version(10, 4, 11), ServerType.MariaDb)
-                        .CharSetBehavior(CharSetBehavior.AppendToAllColumns);
-                        //.AnsiCharSet(CharSet.Latin1)
-                        //.UnicodeCharSet(CharSet.Utf8mb4);
+                optionsBuilder.UseMySql($"Server={Options.Server};User Id={Options.UserId};Password={Options.Password};Database={Options.Database}", options =>
+               {
+                   options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)
+                       .ServerVersion(new Version(10, 4, 11), ServerType.MariaDb)
+                       .CharSetBehavior(CharSetBehavior.AppendToAllColumns);
+                    //.AnsiCharSet(CharSet.Latin1)
+                    //.UnicodeCharSet(CharSet.Utf8mb4);
                 });
             }
             catch (Exception e)

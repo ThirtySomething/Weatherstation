@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Tinkerforge;
 
@@ -45,7 +45,7 @@ namespace net.derpaul.tf.plugin
         {
             TimeStampDisplayTimer.Stop();
             TimeStampDisplayTimer.Close();
-            
+
             if (Bricklet != null)
             {
                 Bricklet.ClearDisplay();
@@ -139,7 +139,7 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         /// <returns></returns>
         private bool PerformConnect()
-        {   
+        {
             try
             {
                 TFConnection = new IPConnection();
@@ -168,7 +168,7 @@ namespace net.derpaul.tf.plugin
                 short[] hardwareVersion, short[] firmwareVersion,
                 int deviceIdentifier, short enumerationType)
         {
-            if ((enumerationType == IPConnection.ENUMERATION_TYPE_CONNECTED 
+            if ((enumerationType == IPConnection.ENUMERATION_TYPE_CONNECTED
                 || enumerationType == IPConnection.ENUMERATION_TYPE_AVAILABLE)
                 && (deviceIdentifier == BrickletLCD20x4.DEVICE_IDENTIFIER))
             {

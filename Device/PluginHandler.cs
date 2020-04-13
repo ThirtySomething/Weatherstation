@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -310,10 +310,10 @@ namespace net.derpaul.tf
         {
             StopThread = true;
             var stillRunning = true;
-            while(stillRunning)
+            while (stillRunning)
             {
                 stillRunning = false;
-                foreach(var currentThread in DataSourceThreads)
+                foreach (var currentThread in DataSourceThreads)
                 {
                     if (currentThread.IsAlive)
                     {

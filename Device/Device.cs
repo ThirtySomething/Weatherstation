@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace net.derpaul.tf
@@ -25,7 +25,7 @@ namespace net.derpaul.tf
 
             pluginHandler.ThreadsStart();
 
-            while(true)
+            while (true)
             {
                 if ((System.Console.KeyAvailable) &&
                     (System.Console.ReadKey(true).Key == ConsoleKey.Escape))

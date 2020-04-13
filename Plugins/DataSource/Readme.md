@@ -11,6 +11,6 @@ The data source plugins retrieve the measurement values from the Tinkerforge wea
 
 Return to [main](./../../Readme.md).
 
-## Remark
+## Remarks
 
 The data source plugins can be used only on `device` side.

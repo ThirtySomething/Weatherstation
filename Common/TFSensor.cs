@@ -1,4 +1,4 @@
-﻿namespace net.derpaul.tf
+namespace net.derpaul.tf
 {
     /// <summary>
     /// Object represents a Tinkerforge sensor meta information returned by enumerate event

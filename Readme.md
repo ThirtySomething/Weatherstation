@@ -8,7 +8,6 @@ This project will address a [Tinkerforge weather station][TFURL]. There are
 ## General information
 
 [![License: LGPL v3][lgpl_license_badge]][lgpl_license]
-[![Size:][repo_size_badge]][repo_size]
 [![Language: C#][csharp_lang_badge]][csharp_lang]
 
 **Weatherstation** is distributed under the terms of the **GNU LESSER GENERAL PUBLIC LICENSE**, version 3.0. The text of the license is included in the file [`LICENSE.TXT`](https://github.com/ThirtySomething/Weatherstation/blob/master/LICENSE.TXT "LGPL-3.0") in the project root.
@@ -114,5 +113,3 @@ To build and run the software, see [here](./Build.md) for more details.
 [csharp_lang_badge]: https://img.shields.io/badge/language-CSharp-blue.svg
 [lgpl_license]: http://www.gnu.org/licenses/lgpl-3.0
 [lgpl_license_badge]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg
-[repo_size]: https://github.com/ThirtySomething/Weatherstation
-[repo_size_badge]: https://img.shields.io/github/repo-size/ThirtySomething/Weatherstation

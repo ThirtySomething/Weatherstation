@@ -10,6 +10,7 @@ Several data sink plugins exist. Each of them has its (possible) own configurati
 
 Return to [main](./../../Readme.md).
 
-## Remark
+## Remarks
 
-The data sink plugins can be used on `device` side as well as on `remotedevice` side.
+* The data sink plugins can be used on `device` side as well as on `remotedevice` side.
+* The implementation offers a `lock object` to prevent concurrent write access by the threads of the data source plugins.
