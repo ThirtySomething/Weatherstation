@@ -60,5 +60,10 @@ namespace net.derpaul.tf
         /// </summary>
         /// <returns>Sensor name and value or 0.0</returns>
         protected abstract MeasurementValue RawValue();
+
+        /// <summary>
+        /// Delay until next measurement value is read
+        /// </summary>
+        public abstract int ReadDelay { get; }
     }
 }

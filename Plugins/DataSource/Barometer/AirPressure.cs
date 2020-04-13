@@ -13,6 +13,11 @@ namespace net.derpaul.tf.plugin
         public override string Unit { get; } = "mb";
 
         /// <summary>
+        /// Delay until next measurement value is read
+        /// </summary>
+        public override int ReadDelay { get; } = AirPressureConfig.Instance.ReadDelay;
+
+        /// <summary>
         /// Initialize internal TF bricklet
         /// </summary>
         /// <param name="connection">Connection to master brick</param>

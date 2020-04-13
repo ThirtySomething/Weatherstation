@@ -18,6 +18,11 @@ namespace net.derpaul.tf.plugin
         private static BrickletAmbientLight Bricklet { get; set; }
 
         /// <summary>
+        /// Delay until next measurement value is read
+        /// </summary>
+        public override int ReadDelay { get; } = AmbientLightConfig.Instance.ReadDelay;
+
+        /// <summary>
         /// The TF sensor type
         /// </summary>
         public override int SensorType { get; } = BrickletAmbientLight.DEVICE_IDENTIFIER;

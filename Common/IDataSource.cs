@@ -23,6 +23,11 @@ namespace net.derpaul.tf
         string Name { get; }
 
         /// <summary>
+        /// Delay until next measurement value is read
+        /// </summary>
+        int ReadDelay { get; }
+
+        /// <summary>
         /// Initialize internal TF bricklet
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
