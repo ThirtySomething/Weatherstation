@@ -117,9 +117,12 @@ namespace net.derpaul.tf.plugin
         {
             var dataJSON = dataToPublish.ToJSON();
 
-            lock (Locker)
+            if (MQTTConfig.Instance.Handshake == true)
             {
-                AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
+                lock (Locker)
+                {
+                    AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
+                }
             }
 
             MqttClient.Publish(MQTTConfig.Instance.TopicData, Encoding.ASCII.GetBytes(dataJSON));
