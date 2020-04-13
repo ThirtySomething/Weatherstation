@@ -62,7 +62,7 @@ namespace net.derpaul.tf
         protected abstract MeasurementValue RawValue();
 
         /// <summary>
-        /// Delay until next measurement value is read
+        /// Delay in milli seconds until next measurement value is read
         /// </summary>
         public abstract int ReadDelay { get; }
     }

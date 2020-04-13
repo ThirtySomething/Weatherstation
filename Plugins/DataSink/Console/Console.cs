@@ -1,4 +1,6 @@
-﻿namespace net.derpaul.tf.plugin
+﻿using System;
+
+namespace net.derpaul.tf.plugin
 {
     /// <summary>
     /// Write collection of Tinkerforge Sensor plugin values to console
@@ -11,7 +13,10 @@
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         public override void HandleValue(MeasurementValue SensorValue)
         {
-            System.Console.WriteLine($"Sensor [{SensorValue.Name}], Value [{SensorValue.Value}], Unit [{SensorValue.Unit}]");
+            lock (WriteLock)
+            {
+                System.Console.WriteLine($"Sensor [{SensorValue.Name}], Value [{SensorValue.Value}], Unit [{SensorValue.Unit}]");
+            }
         }
     }
 }

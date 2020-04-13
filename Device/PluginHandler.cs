@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Tinkerforge;
 
 namespace net.derpaul.tf
@@ -36,9 +37,9 @@ namespace net.derpaul.tf
         private bool Connected { get; set; }
 
         /// <summary>
-        /// List of sensor plugins
+        /// List of data source plugins
         /// </summary>
-        private List<IDataSource> SensorPlugins { get; set; }
+        private List<IDataSource> DataSourcePlugins { get; set; }
 
         /// <summary>
         /// List of data sink plugins
@@ -46,9 +47,19 @@ namespace net.derpaul.tf
         private List<IDataSink> DataSinkPlugins { get; set; }
 
         /// <summary>
-        /// List of identified sensors
+        /// List of identified Tinkerforge sensors
         /// </summary>
         private List<TFSensor> TFSensorIdentified { get; }
+
+        /// <summary>
+        /// Flag for stopping all running threads
+        /// </summary>
+        private bool StopThread;
+
+        /// <summary>
+        /// Memorize running threads
+        /// </summary>
+        private List<Thread> DataSourceThreads { get; set; }
 
         /// <summary>
         /// Constructor of TF handler
@@ -63,6 +74,7 @@ namespace net.derpaul.tf
             PluginPath = pluginPath;
             Connected = false;
             TFSensorIdentified = new List<TFSensor>();
+            DataSourceThreads = new List<Thread>();
         }
 
         /// <summary>
@@ -145,8 +157,8 @@ namespace net.derpaul.tf
                 return false;
             }
 
-            SensorPlugins = PluginLoader<IDataSource>.TFPluginsLoad(PluginPath, DeviceConfig.Instance.PluginProductName);
-            if (SensorPlugins.Count == 0)
+            DataSourcePlugins = PluginLoader<IDataSource>.TFPluginsLoad(PluginPath, DeviceConfig.Instance.PluginProductName);
+            if (DataSourcePlugins.Count == 0)
             {
                 System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No sensor plugins found in [{PluginPath}].");
                 return false;
@@ -154,7 +166,7 @@ namespace net.derpaul.tf
 
             foreach (var currentSensor in TFSensorIdentified)
             {
-                var plugin = SensorPlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
+                var plugin = DataSourcePlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
                 if (plugin == null)
                 {
                     System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
@@ -219,14 +231,14 @@ namespace net.derpaul.tf
         internal List<MeasurementValue> ValuesRead()
         {
             var pluginData = new List<MeasurementValue>();
-            SensorPlugins.ForEach(p => pluginData.Add(p.Value()));
+            DataSourcePlugins.ForEach(p => pluginData.Add(p.Value()));
             return pluginData.OrderBy(p => p.SortOrder).ToList();
         }
 
         /// <summary>
         /// Feed each IDataSink plugin with sensor data
         /// </summary>
-        /// <param name="SensorValues"></param>
+        /// <param name="SensorValues">List of sensor values</param>
         internal void HandleValues(List<MeasurementValue> SensorValues)
         {
             foreach (var currentPlugin in DataSinkPlugins)
@@ -251,6 +263,63 @@ namespace net.derpaul.tf
                 if (currentPlugin.IsInitialized)
                 {
                     currentPlugin.Shutdown();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to run data collection in a thread.
+        /// </summary>
+        /// <param name="DataSourcePlugin"></param>
+        private void RunDataCollectionThread(IDataSource DataSourcePlugin)
+        {
+            System.Console.WriteLine($"{nameof(RunDataCollectionThread)}: Thread for plugin [{DataSourcePlugin.Name}] started.");
+            while (!StopThread)
+            {
+                var value = DataSourcePlugin.Value();
+                foreach (var currentPlugin in DataSinkPlugins)
+                {
+                    if (currentPlugin.IsInitialized)
+                    {
+                        currentPlugin.HandleValue(value);
+                    }
+                }
+                TFUtils.WaitNMilliseconds(DataSourcePlugin.ReadDelay);
+            }
+            System.Console.WriteLine($"{nameof(RunDataCollectionThread)}: Thread for plugin [{DataSourcePlugin.Name}] stopped.");
+        }
+
+        /// <summary>
+        /// Start for each data source plugin an own thread
+        /// </summary>
+        internal void ThreadsStart()
+        {
+            StopThread = false;
+            foreach (var currentSensor in DataSourcePlugins)
+            {
+                Thread DataReadingThread = new Thread(delegate () { RunDataCollectionThread(currentSensor); });
+                DataReadingThread.Start();
+                DataSourceThreads.Add(DataReadingThread);
+            }
+        }
+
+        /// <summary>
+        /// Wait until all running threads are stopped
+        /// </summary>
+        internal void ThreadsStop()
+        {
+            StopThread = true;
+            var stillRunning = true;
+            while(stillRunning)
+            {
+                stillRunning = false;
+                foreach(var currentThread in DataSourceThreads)
+                {
+                    if (currentThread.IsAlive)
+                    {
+                        stillRunning = true;
+                        break;
+                    }
                 }
             }
         }

@@ -30,11 +30,6 @@ namespace net.derpaul.tf.plugin
         private System.Timers.Timer TimeStampDisplayTimer;
 
         /// <summary>
-        /// Object to lock on when writing to lcd display
-        /// </summary>
-        private Object Locker = new Object();
-
-        /// <summary>
         /// Constructor of plugin to initalize some internal fields
         /// </summary>
         public Lcd()
@@ -74,7 +69,7 @@ namespace net.derpaul.tf.plugin
             byte posY = (byte)((SensorValue.SortOrder / 2) + 1);
             string MeasurementValueData = string.Format("{0,7:####.00} {1}", SensorValue.Value, SensorValue.Unit);
 
-            lock (this.Locker)
+            lock (WriteLock)
             {
                 Bricklet.WriteLine(posY, posX, MeasurementValueData);
             }
@@ -103,7 +98,7 @@ namespace net.derpaul.tf.plugin
                 {
                     TFUtils.WaitForCleanTimestamp(delay / 1000, delayBuffer);
 
-                    lock (this.Locker)
+                    lock (WriteLock)
                     {
                         // Display timestamp
                         Bricklet.WriteLine(0, 0, DateTime.Now.ToString(LcdConfig.Instance.TimestampFormat));

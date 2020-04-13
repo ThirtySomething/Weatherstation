@@ -33,16 +33,11 @@ namespace net.derpaul.tf.plugin
         private Dictionary<string, MeasurementValue> AcknowledgeList { get; set; }
 
         /// <summary>
-        /// Object to lock while modifying acknowledge list
-        /// </summary>
-        private Object Locker = new Object();
-
-        /// <summary>
         /// Disconnect from MQTT broker
         /// </summary>
         public override void Shutdown()
         {
-            lock (Locker)
+            lock (WriteLock)
             {
                 if (MQTTConfig.Instance.Handshake == true)
                 {
@@ -106,7 +101,10 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Sensor value</param>
         public override void HandleValue(MeasurementValue SensorValue)
         {
-            PublishSingleValue(SensorValue);
+            lock (WriteLock)
+            {
+                PublishSingleValue(SensorValue);
+            }
         }
 
         /// <summary>
@@ -119,7 +117,7 @@ namespace net.derpaul.tf.plugin
 
             if (MQTTConfig.Instance.Handshake == true)
             {
-                lock (Locker)
+                lock (WriteLock)
                 {
                     AcknowledgeList.Add(dataToPublish.ToHash(), dataToPublish);
                 }
@@ -137,7 +135,7 @@ namespace net.derpaul.tf.plugin
         {
             string messageHash = Encoding.UTF8.GetString(e.Message);
 
-            lock (Locker)
+            lock (WriteLock)
             {
                 if (AcknowledgeList.ContainsKey(messageHash))
                 {
@@ -153,7 +151,7 @@ namespace net.derpaul.tf.plugin
         /// <param name="e"></param>
         internal void CheckAcknowledgeList(object sender, ElapsedEventArgs e)
         {
-            lock (Locker)
+            lock (WriteLock)
             {
                 var NumberOfValues = AcknowledgeList.Count;
                 if (NumberOfValues > 0)

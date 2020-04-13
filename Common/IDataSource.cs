@@ -23,7 +23,7 @@ namespace net.derpaul.tf
         string Name { get; }
 
         /// <summary>
-        /// Delay until next measurement value is read
+        /// Delay in milli seconds until next measurement value is read
         /// </summary>
         int ReadDelay { get; }
 

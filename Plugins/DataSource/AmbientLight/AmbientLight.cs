@@ -18,7 +18,7 @@ namespace net.derpaul.tf.plugin
         private static BrickletAmbientLight Bricklet { get; set; }
 
         /// <summary>
-        /// Delay until next measurement value is read
+        /// Delay in milli seconds until next measurement value is read
         /// </summary>
         public override int ReadDelay { get; } = AmbientLightConfig.Instance.ReadDelay;
 

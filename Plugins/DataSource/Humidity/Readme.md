@@ -8,4 +8,5 @@ Return to [main](./../Readme.md).
 
 For the Humidity plugin the following settings are available:
 
+* `ReadDelay` - The delay in milli seconds until next measurement value is read, default is `5000`.
 * `SortOrder` - The sort order on the Tinkerforge lcd display, default is `3`

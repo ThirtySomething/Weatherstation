@@ -27,7 +27,10 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         public override void HandleValue(MeasurementValue SensorValue)
         {
-            Datafile.WriteLine(SensorValue.ToJSON());
+            lock (WriteLock)
+            {
+                Datafile.WriteLine(SensorValue.ToJSON());
+            }
         }
 
         /// <summary>

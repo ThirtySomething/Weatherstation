@@ -1,3 +1,5 @@
+using System;
+
 namespace net.derpaul.tf
 {
     /// <summary>
@@ -5,6 +7,11 @@ namespace net.derpaul.tf
     /// </summary>
     public abstract class DataSinkBase : IDataSink
     {
+        /// <summary>
+        /// Object to lock on when writing
+        /// </summary>
+        private Object Locker = new Object();
+
         /// <summary>
         /// Init method of data sink
         /// </summary>
@@ -43,5 +50,9 @@ namespace net.derpaul.tf
         {
         }
 
+        /// <summary>
+        /// Lock object for preventing concurrent access to same data sink
+        /// </summary>
+        protected object WriteLock { get { return Locker; } }
     }
 }

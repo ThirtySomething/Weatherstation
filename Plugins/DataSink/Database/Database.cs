@@ -31,9 +31,12 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         public override void HandleValue(MeasurementValue SensorValue)
         {
-            var MType = DetermineMeasurementType(SensorValue);
-            var MUnit = DetermineMeasurementUnit(SensorValue);
-            WriteSensorData(SensorValue, MType, MUnit);
+            lock (WriteLock)
+            {
+                var MType = DetermineMeasurementType(SensorValue);
+                var MUnit = DetermineMeasurementUnit(SensorValue);
+                WriteSensorData(SensorValue, MType, MUnit);
+            }
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace net.derpaul.tf.plugin
             var MType = DBInstance.DBMeasurementTypes.Where(a => a.Name == SensorValue.Name).FirstOrDefault();
             if (MType == null)
             {
-                MType = new MType{Name = SensorValue.Name};
+                MType = new MType { Name = SensorValue.Name };
                 DBInstance.Add(MType);
                 DBInstance.SaveChanges();
             }
@@ -91,7 +94,7 @@ namespace net.derpaul.tf.plugin
             var MUnit = DBInstance.DBMeasurementUnits.Where(a => a.Name == SensorValue.Unit).FirstOrDefault();
             if (MUnit == null)
             {
-                MUnit = new MUnit{Name = SensorValue.Unit};
+                MUnit = new MUnit { Name = SensorValue.Unit };
                 DBInstance.Add(MUnit);
                 DBInstance.SaveChanges();
             }

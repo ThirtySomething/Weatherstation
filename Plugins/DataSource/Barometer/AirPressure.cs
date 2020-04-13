@@ -13,7 +13,7 @@ namespace net.derpaul.tf.plugin
         public override string Unit { get; } = "mb";
 
         /// <summary>
-        /// Delay until next measurement value is read
+        /// Delay in milli seconds until next measurement value is read
         /// </summary>
         public override int ReadDelay { get; } = AirPressureConfig.Instance.ReadDelay;
 
