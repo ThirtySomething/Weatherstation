@@ -73,43 +73,18 @@ To build and run the software, see [here](./Build.md) for more details.
 
 - Check installation guide for .net 3.1!
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at `device` before publish
-- Implement `remotedevice` part, consists of
-  - Implement a [swinging door algorithm][SDoor] for historizing/compressing the data.
-  - Create a HTML frontend with various information
-    - Data of current values
-    - Historized data
-    - Graphics
+- Setup UI: The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
 
-## Notes to myself
-- [Data compression on Techincal University Dresden][TUDresden]
-- [Swinging Door Algorithm@PiSquare][SwingingDoorPiSquare]
-- [Swinging Door Algorithm@OSI PI][SwingingDoorOsiPi]
-- [Swinging Door Implementation in C#][SwingingDoorImpl]
-- Is the swinging door a good algorithm to be used for weather data?
-- What about [rrdtool]?
-- What about [prometheus]?
-- What about [opentsdb]?
-- The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
+[csharp_lang]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+[csharp_lang_badge]: https://img.shields.io/badge/language-CSharp-blue.svg
+[lgpl_license]: http://www.gnu.org/licenses/lgpl-3.0
+[lgpl_license_badge]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg
 
 [DotNet31SDK]: https://dotnet.microsoft.com/download/dotnet-core/scripts
 [EFCore]: https://github.com/aspnet/EntityFrameworkCore
 [Grafana]: https://grafana.com/
 [JoHu]: https://blog.unixweb.de/
 [NGMQTT]: https://www.nuget.org/packages/M2MqttDotnetCore/
-[SDoor]: https://support.industry.siemens.com/cs/document/109739594/komprimierung-von-prozesswertarchiven-mit-dem-swinging-door-algorithmus-in-pcs-7?dti=0&lc=de-WW
-[SwingingDoorImpl]: https://www.hackerboard.de/threads/c-gesucht-implementierung-des-swinging-door-algorithmus.50448/
-[SwingingDoorOsiPi]: https://osipi.wordpress.com/tag/swinging-door-algorithm/
-[SwingingDoorPiSquare]: https://pisquare.osisoft.com/thread/7566
 [TFBrickDaemon]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFBrickViewer]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFURL]: https://www.tinkerforge.com/en/shop/kits/starter-kit-weather-station.html
-[TSDB]: https://en.wikipedia.org/wiki/Time_series_database
-[TUDresden]: http://www.et.tu-dresden.de/ifa/uploads/media/PIV006-Archiv.pdf
-[opentsdb]: http://opentsdb.net/
-[prometheus]: https://prometheus.io/
-[rrdtool]: https://oss.oetiker.ch/rrdtool/
-
-[csharp_lang]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)
-[csharp_lang_badge]: https://img.shields.io/badge/language-CSharp-blue.svg
-[lgpl_license]: http://www.gnu.org/licenses/lgpl-3.0
-[lgpl_license_badge]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg
