@@ -12,7 +12,8 @@ namespace net.derpaul.tf
         /// </summary>
         public void SetDefaults()
         {
-            Delay = 5000;
+            PluginDelay = TFUtils.DefaultDelay;
+            Delay = TFUtils.DefaultDelay;
             BrickDaemonIP = "127.0.0.1";
             BrickDaemonPort = 4223;
             PluginPath = "Plugins";
@@ -37,6 +38,11 @@ namespace net.derpaul.tf
         /// Default path for plugins
         /// </summary>
         public string PluginPath { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs

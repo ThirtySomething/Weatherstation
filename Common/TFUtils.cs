@@ -8,6 +8,11 @@ namespace net.derpaul.tf
     public class TFUtils
     {
         /// <summary>
+        /// Default delay for each plugin.
+        /// </summary>
+        public const int DefaultDelay = 5000;
+
+        /// <summary>
         /// Returns when current timestamp seconds are divisible by number given
         /// </summary>
         /// /// <param name="divisor">The divisor which the current time must be divisible by for the thread to stop waiting</param>

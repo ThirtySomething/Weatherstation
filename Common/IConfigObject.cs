@@ -14,5 +14,10 @@
         /// To set default values
         /// </summary>
         void SetDefaults();
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

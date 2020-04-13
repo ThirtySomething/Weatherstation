@@ -12,6 +12,7 @@ namespace net.derpaul.tf
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             Delay = 1000;
             PluginPath = "Plugins";
             BrokerIP = "test.mosquitto.org";
@@ -61,6 +62,11 @@ namespace net.derpaul.tf
         /// To perform some kind of handshake, set to true
         /// </summary>
         public bool Handshake { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs

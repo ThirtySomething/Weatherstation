@@ -10,6 +10,7 @@
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             BrickDaemonIP = "127.0.0.1";
             BrickDaemonPort = 4223;
             TimestampFormat = "dd.MM.yyyy  HH:mm:ss";
@@ -29,5 +30,10 @@
         /// Format to display a timestamp
         /// </summary>
         public string TimestampFormat { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

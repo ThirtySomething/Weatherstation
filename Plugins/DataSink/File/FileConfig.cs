@@ -10,6 +10,7 @@
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             DataFilename = "weatherdata.dat";
             AppendToFile = true;
         }
@@ -23,5 +24,10 @@
         /// Flag for appending to existing file or not
         /// </summary>
         public bool AppendToFile { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

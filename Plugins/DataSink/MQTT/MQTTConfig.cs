@@ -10,6 +10,7 @@
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             BrokerIP = "test.mosquitto.org";
             BrokerPort = 1883;
             ClientID = "WeatherMQTTDevice";
@@ -53,5 +54,10 @@
         /// To perform some kind of handshake, set to true
         /// </summary>
         public bool Handshake { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

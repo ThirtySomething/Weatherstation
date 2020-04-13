@@ -58,10 +58,11 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             DatabaseType = SupportedDatabaseTypes.DBSQLite;
             DatabaseOptions = "{Filename: \"weatherdata.db\"}";
             //DatabaseType = SupportedDatabaseTypes.MariaDB;
-            //DatabaseOptions = "{Server: \"localhost\", UserId: \"wetter\", Password: \"wetter\", Database: \"wetter\"}";
+            //DatabaseOptions = "{Server: \"localhost\", UserId: \"weatheruser\", Password: \"weatherpassword\", Database: \"weatherdatabase\"}";
         }
 
         /// <summary>
@@ -73,5 +74,10 @@ namespace net.derpaul.tf.plugin
         /// The database parameters as JSON string
         /// </summary>
         public string DatabaseOptions { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

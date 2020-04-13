@@ -10,6 +10,7 @@
         /// </summary>
         public void SetDefaults()
         {
+            PluginDelay = TFUtils.DefaultDelay;
             SortOrder = 2;
         }
 
@@ -17,5 +18,10 @@
         /// Sort order for air pressure
         /// </summary>
         public int SortOrder { get; set; }
+
+        /// <summary>
+        /// Inidividual delay time of each plugin.
+        /// </summary>
+        public int PluginDelay { get; set; }
     }
 }

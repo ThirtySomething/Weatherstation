@@ -91,7 +91,7 @@ namespace net.derpaul.tf.plugin
             if (PerformConnect() && CollectBrickletInformations())
             {
                 // interval at which timer elapses (in ms)
-                int delay = 5000;
+                int delay = TFUtils.DefaultDelay;
 
                 // buffer the timer actively waits (in ms)
                 // this exists to make sure we don't accidentally skip an interval at which
