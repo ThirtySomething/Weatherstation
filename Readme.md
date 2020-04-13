@@ -72,6 +72,7 @@ To build and run the software, see [here](./Build.md) for more details.
 ## ToDos
 
 - Check installation guide for .net 3.1!
+- Add data source module to scrape webistes, e. g. for [water marks][hvzo].
 - Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at `device` before publish
 - Setup UI: The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
 
@@ -88,3 +89,4 @@ To build and run the software, see [here](./Build.md) for more details.
 [TFBrickDaemon]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFBrickViewer]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFURL]: https://www.tinkerforge.com/en/shop/kits/starter-kit-weather-station.html
+[hvzo]: https://www.hvz.baden-wuerttemberg.de/
