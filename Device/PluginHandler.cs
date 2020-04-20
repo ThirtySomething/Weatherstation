@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using Tinkerforge;
 
 namespace net.derpaul.tf
@@ -51,6 +51,9 @@ namespace net.derpaul.tf
         /// </summary>
         private List<TFSensor> TFSensorIdentified { get; }
 
+        /// <summary>
+        /// List of timers, for each data source one
+        /// </summary>
         private List<System.Timers.Timer> DataSourceTimers { get; set; }
 
         /// <summary>
@@ -231,23 +234,36 @@ namespace net.derpaul.tf
         }
 
         /// <summary>
-        /// Start for each data source plugin an own thread
+        /// Method used in task
         /// </summary>
-        internal void ThreadsStart()
+        /// <param name="plugin"></param>
+        internal void PublishNewValue(object plugin)
+        {
+            if (plugin is IDataSource)
+            {
+                var value = (plugin as IDataSource).Value();
+                foreach (var currentPlugin in DataSinkPlugins)
+                {
+                    if (currentPlugin.IsInitialized)
+                    {
+                        currentPlugin.HandleValue(value);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Start for each data source plugin an own timer which starts a task
+        /// </summary>
+        internal void StartMeasurements()
         {
             foreach (var currentSensor in DataSourcePlugins)
             {
                 System.Timers.Timer currentTimer = new System.Timers.Timer(currentSensor.ReadDelay);
                 currentTimer.Elapsed += (o, args) =>
                 {
-                    var value = currentSensor.Value();
-                    foreach (var currentPlugin in DataSinkPlugins)
-                    {
-                        if (currentPlugin.IsInitialized)
-                        {
-                            currentPlugin.HandleValue(value);
-                        }
-                    }
+                    var task = new Task(PublishNewValue, currentSensor);
+                    task.Start();
                 };
                 currentTimer.Start();
                 DataSourceTimers.Add(currentTimer);
@@ -257,7 +273,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Wait until all running threads are stopped
         /// </summary>
-        internal void ThreadsStop()
+        internal void StopMeasurements()
         {
             foreach (var currentTimer in DataSourceTimers)
             {

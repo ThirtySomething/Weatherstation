@@ -23,14 +23,14 @@ namespace net.derpaul.tf
                 return;
             }
 
-            pluginHandler.ThreadsStart();
+            pluginHandler.StartMeasurements();
 
             while (true)
             {
                 if ((System.Console.KeyAvailable) &&
                     (System.Console.ReadKey(true).Key == ConsoleKey.Escape))
                 {
-                    pluginHandler.ThreadsStop();
+                    pluginHandler.StopMeasurements();
                     break;
                 }
             }
