@@ -12,16 +12,10 @@ namespace net.derpaul.tf
         /// </summary>
         public void SetDefaults()
         {
-            Delay = TFUtils.DefaultDelay;
             BrickDaemonIP = "127.0.0.1";
             BrickDaemonPort = 4223;
             PluginPath = "Plugins";
         }
-
-        /// <summary>
-        /// Delay between reading/sending values in milliseconds
-        /// </summary>
-        public int Delay { get; set; }
 
         /// <summary>
         /// IP address TF brick daemon to connect to
