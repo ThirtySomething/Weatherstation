@@ -54,7 +54,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Flag for stopping all running threads
         /// </summary>
-        private bool StopThread;
+        private static bool StopThread;
 
         /// <summary>
         /// Memorize running threads
@@ -69,10 +69,11 @@ namespace net.derpaul.tf
         /// <param name="tfPort">TF port</param>
         internal PluginHandler(string pluginPath, string tfHost, int tfPort)
         {
+            PluginPath = pluginPath;
             Host = tfHost;
             Port = tfPort;
-            PluginPath = pluginPath;
             Connected = false;
+            StopThread = true;
             TFSensorIdentified = new List<TFSensor>();
             DataSourceThreads = new List<Thread>();
         }
@@ -103,8 +104,8 @@ namespace net.derpaul.tf
             {
                 try
                 {
-                    TFConnection.EnumerateCallback -= IdentifySensorsCallBack;
-                    TFConnection.EnumerateCallback += IdentifySensorsCallBack;
+                    TFConnection.EnumerateCallback -= IdentifySensors;
+                    TFConnection.EnumerateCallback += IdentifySensors;
                     TFConnection.Enumerate();
                 }
                 catch (NotConnectedException e)
@@ -127,7 +128,7 @@ namespace net.derpaul.tf
         /// <param name="firmwareVersion">Info about firmware version</param>
         /// <param name="deviceIdentifier">Brick/Bricklet type identifier</param>
         /// <param name="enumerationType">Kind of enumeration</param>
-        private void IdentifySensorsCallBack(IPConnection sender, string UID, string connectedUID, char position,
+        private void IdentifySensors(IPConnection sender, string UID, string connectedUID, char position,
                         short[] hardwareVersion, short[] firmwareVersion,
                         int deviceIdentifier, short enumerationType)
         {
@@ -147,10 +148,10 @@ namespace net.derpaul.tf
         }
 
         /// <summary>
-        /// Initialize sensor plugins
+        /// Initialize data source plugins
         /// </summary>
         /// <returns>true on success, otherwise false</returns>
-        private bool InitSensorPlugins()
+        private bool InitDataSourcePlugins()
         {
             if (!Connect())
             {
@@ -160,7 +161,7 @@ namespace net.derpaul.tf
             DataSourcePlugins = PluginLoader<IDataSource>.TFPluginsLoad(PluginPath, DeviceConfig.Instance.PluginProductName);
             if (DataSourcePlugins.Count == 0)
             {
-                System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No sensor plugins found in [{PluginPath}].");
+                System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: No sensor plugins found in [{PluginPath}].");
                 return false;
             }
 
@@ -169,11 +170,11 @@ namespace net.derpaul.tf
                 var plugin = DataSourcePlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
                 if (plugin == null)
                 {
-                    System.Console.WriteLine($"{nameof(InitSensorPlugins)}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
+                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
                     continue;
                 }
                 plugin.Init(TFConnection, currentSensor.UID);
-                System.Console.WriteLine($"{nameof(InitSensorPlugins)}: Initialized [{plugin.Name}] plugin.");
+                System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Initialized [{plugin.Name}] plugin.");
             }
             return true;
         }
@@ -214,7 +215,7 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         internal bool Init()
         {
-            bool InitDone = InitSensorPlugins();
+            bool InitDone = InitDataSourcePlugins();
 
             if (!InitDone)
             {
@@ -222,35 +223,6 @@ namespace net.derpaul.tf
             }
 
             return InitDataSinkPlugins();
-        }
-
-        /// <summary>
-        /// Loop over all IDataSources, read data and return collection of all results
-        /// </summary>
-        /// <returns>Collection of (sensor type|sensor value)</returns>
-        internal List<MeasurementValue> ValuesRead()
-        {
-            var pluginData = new List<MeasurementValue>();
-            DataSourcePlugins.ForEach(p => pluginData.Add(p.Value()));
-            return pluginData.OrderBy(p => p.SortOrder).ToList();
-        }
-
-        /// <summary>
-        /// Feed each IDataSink plugin with sensor data
-        /// </summary>
-        /// <param name="SensorValues">List of sensor values</param>
-        internal void HandleValues(List<MeasurementValue> SensorValues)
-        {
-            foreach (var currentPlugin in DataSinkPlugins)
-            {
-                if (currentPlugin.IsInitialized)
-                {
-                    foreach (var currentValue in SensorValues)
-                    {
-                        currentPlugin.HandleValue(currentValue);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -297,7 +269,7 @@ namespace net.derpaul.tf
             StopThread = false;
             foreach (var currentSensor in DataSourcePlugins)
             {
-                Thread DataReadingThread = new Thread(delegate () { RunDataCollectionThread(currentSensor); });
+                Thread DataReadingThread = new Thread(() => RunDataCollectionThread(currentSensor));
                 DataReadingThread.Start();
                 DataSourceThreads.Add(DataReadingThread);
             }
