@@ -10,7 +10,7 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         public void SetDefaults()
         {
-            ReadDelay = TFUtils.DefaultDelay;
+            ReadDelay = CommonUtils.DefaultDelay;
             SortOrder = 5;
         }
 

@@ -5,7 +5,7 @@ namespace net.derpaul.tf
     /// <summary>
     /// Some primitve utilities
     /// </summary>
-    public class TFUtils
+    public class CommonUtils
     {
         /// <summary>
         /// Default delay for each plugin.
@@ -23,7 +23,7 @@ namespace net.derpaul.tf
 
             while (currentSeconds % divisor != 0)
             {
-                WaitNMilliseconds(checkFrequency);
+                System.Threading.Thread.Sleep(checkFrequency);
                 currentSeconds = DateTime.Now.Second;
             }
         }

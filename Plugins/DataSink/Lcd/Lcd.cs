@@ -86,17 +86,17 @@ namespace net.derpaul.tf.plugin
             if (PerformConnect() && CollectBrickletInformations())
             {
                 // interval at which timer elapses (in ms)
-                int delay = TFUtils.DefaultDelay;
+                int delay = CommonUtils.DefaultDelay;
 
                 // buffer the timer actively waits (in ms)
                 // this exists to make sure we don't accidentally skip an interval at which
                 // the timestamp could have been written to the lcd display
                 int delayBuffer = 100;
 
-                TimeStampDisplayTimer = new System.Timers.Timer(delay - delayBuffer);
+                TimeStampDisplayTimer = new System.Timers.Timer(CommonUtils.DefaultDelay);
                 TimeStampDisplayTimer.Elapsed += (o, args) =>
                 {
-                    TFUtils.WaitForCleanTimestamp(delay / 1000, delayBuffer);
+                    CommonUtils.WaitForCleanTimestamp(delay / 1000, delayBuffer);
 
                     lock (WriteLock)
                     {
@@ -105,7 +105,7 @@ namespace net.derpaul.tf.plugin
                     }
                 };
 
-                TFUtils.WaitForCleanTimestamp(delay / 1000, delayBuffer);
+                // CommonUtils.WaitForCleanTimestamp(delay / 1000, delayBuffer);
                 TimeStampDisplayTimer.Start();
                 return true;
             }

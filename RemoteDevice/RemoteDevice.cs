@@ -69,7 +69,7 @@ namespace net.derpaul.tf
                 {
                     if (!System.Console.KeyAvailable)
                     {
-                        TFUtils.WaitNMilliseconds(RemoteDeviceConfig.Instance.Delay);
+                        CommonUtils.WaitNMilliseconds(RemoteDeviceConfig.Instance.Delay);
                     }
                     else if (System.Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {

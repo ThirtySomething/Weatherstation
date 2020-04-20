@@ -51,15 +51,7 @@ namespace net.derpaul.tf
         /// </summary>
         private List<TFSensor> TFSensorIdentified { get; }
 
-        /// <summary>
-        /// Flag for stopping all running threads
-        /// </summary>
-        private static bool StopThread;
-
-        /// <summary>
-        /// Memorize running threads
-        /// </summary>
-        private List<Thread> DataSourceThreads { get; set; }
+        private List<System.Timers.Timer> DataSourceTimers { get; set; }
 
         /// <summary>
         /// Constructor of TF handler
@@ -73,9 +65,8 @@ namespace net.derpaul.tf
             Host = tfHost;
             Port = tfPort;
             Connected = false;
-            StopThread = true;
             TFSensorIdentified = new List<TFSensor>();
-            DataSourceThreads = new List<Thread>();
+            DataSourceTimers = new List<System.Timers.Timer>();
         }
 
         /// <summary>
@@ -240,38 +231,26 @@ namespace net.derpaul.tf
         }
 
         /// <summary>
-        /// Method to run data collection in a thread.
-        /// </summary>
-        /// <param name="DataSourcePlugin"></param>
-        private void RunDataCollectionThread(IDataSource DataSourcePlugin)
-        {
-            System.Console.WriteLine($"{nameof(RunDataCollectionThread)}: Thread for plugin [{DataSourcePlugin.Name}] started.");
-            while (!StopThread)
-            {
-                var value = DataSourcePlugin.Value();
-                foreach (var currentPlugin in DataSinkPlugins)
-                {
-                    if (currentPlugin.IsInitialized)
-                    {
-                        currentPlugin.HandleValue(value);
-                    }
-                }
-                TFUtils.WaitNMilliseconds(DataSourcePlugin.ReadDelay);
-            }
-            System.Console.WriteLine($"{nameof(RunDataCollectionThread)}: Thread for plugin [{DataSourcePlugin.Name}] stopped.");
-        }
-
-        /// <summary>
         /// Start for each data source plugin an own thread
         /// </summary>
         internal void ThreadsStart()
         {
-            StopThread = false;
             foreach (var currentSensor in DataSourcePlugins)
             {
-                Thread DataReadingThread = new Thread(() => RunDataCollectionThread(currentSensor));
-                DataReadingThread.Start();
-                DataSourceThreads.Add(DataReadingThread);
+                System.Timers.Timer currentTimer = new System.Timers.Timer(currentSensor.ReadDelay);
+                currentTimer.Elapsed += (o, args) =>
+                {
+                    var value = currentSensor.Value();
+                    foreach (var currentPlugin in DataSinkPlugins)
+                    {
+                        if (currentPlugin.IsInitialized)
+                        {
+                            currentPlugin.HandleValue(value);
+                        }
+                    }
+                };
+                currentTimer.Start();
+                DataSourceTimers.Add(currentTimer);
             }
         }
 
@@ -280,19 +259,9 @@ namespace net.derpaul.tf
         /// </summary>
         internal void ThreadsStop()
         {
-            StopThread = true;
-            var stillRunning = true;
-            while (stillRunning)
+            foreach (var currentTimer in DataSourceTimers)
             {
-                stillRunning = false;
-                foreach (var currentThread in DataSourceThreads)
-                {
-                    if (currentThread.IsAlive)
-                    {
-                        stillRunning = true;
-                        break;
-                    }
-                }
+                currentTimer.Stop();
             }
         }
     }
