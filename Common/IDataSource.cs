@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Tinkerforge;
 
 namespace net.derpaul.tf
@@ -35,9 +36,9 @@ namespace net.derpaul.tf
         void Init(IPConnection connection, string UID);
 
         /// <summary>
-        /// Read the value of the sensor
+        /// Read values of data sink
         /// </summary>
-        /// <returns>tuple of sensor name and value</returns>
-        MeasurementValue Value();
+        /// <returns>List of MeasurementValue</returns>
+        List<MeasurementValue> Values();
     }
 }

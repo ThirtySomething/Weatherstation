@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Tinkerforge;
 
 namespace net.derpaul.tf
@@ -36,18 +38,23 @@ namespace net.derpaul.tf
         public abstract void Init(IPConnection connection, string UID);
 
         /// <summary>
-        /// Read the value of the sensor, will catch TF exceptions
+        /// Read values of data source, will catch exceptions
         /// </summary>
         /// <returns>Sensor value or 0.0</returns>
-        public MeasurementValue Value()
+        public List<MeasurementValue> Values()
         {
-            var value = new MeasurementValue();
+            var value = new List<MeasurementValue>();
 
             try
             {
-                value = RawValue();
+                var values = RawValues();
+
+                foreach(var currentValue in values)
+                {
+                    value.Add(currentValue);
+                }
             }
-            catch (TinkerforgeException e)
+            catch (Exception e)
             {
                 System.Console.WriteLine($"Sensor [{Name}], Error [{e.Message}] ");
             }
@@ -59,7 +66,7 @@ namespace net.derpaul.tf
         /// Read the value of the sensor without paying attention to exceptions
         /// </summary>
         /// <returns>Sensor name and value or 0.0</returns>
-        protected abstract MeasurementValue RawValue();
+        protected abstract List<MeasurementValue> RawValues();
 
         /// <summary>
         /// Delay in milli seconds until next measurement value is read

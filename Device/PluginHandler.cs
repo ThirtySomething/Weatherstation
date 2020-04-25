@@ -237,16 +237,19 @@ namespace net.derpaul.tf
         /// Method used in task
         /// </summary>
         /// <param name="plugin"></param>
-        internal void PublishNewValue(object plugin)
+        internal void PublishNewValues(object plugin)
         {
             if (plugin is IDataSource)
             {
-                var value = (plugin as IDataSource).Value();
-                foreach (var currentPlugin in DataSinkPlugins)
+                var valueList = (plugin as IDataSource).Values();
+                foreach (var value in valueList)
                 {
-                    if (currentPlugin.IsInitialized)
+                    foreach (var currentPlugin in DataSinkPlugins)
                     {
-                        currentPlugin.HandleValue(value);
+                        if (currentPlugin.IsInitialized)
+                        {
+                            currentPlugin.HandleValue(value);
+                        }
                     }
                 }
             }
@@ -262,7 +265,7 @@ namespace net.derpaul.tf
                 System.Timers.Timer currentTimer = new System.Timers.Timer(currentSensor.ReadDelay);
                 currentTimer.Elapsed += (o, args) =>
                 {
-                    var task = new Task(PublishNewValue, currentSensor);
+                    var task = new Task(PublishNewValues, currentSensor);
                     task.Start();
                 };
                 currentTimer.Start();

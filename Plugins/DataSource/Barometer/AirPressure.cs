@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Tinkerforge;
 
 namespace net.derpaul.tf.plugin
@@ -32,17 +33,19 @@ namespace net.derpaul.tf.plugin
         /// Read value from sensor and prepare real value
         /// </summary>
         /// <returns>Air pressure or 0.0</returns>
-        protected override MeasurementValue RawValue()
+        protected override List<MeasurementValue> RawValues()
         {
-            MeasurementValue returnValue = new MeasurementValue(Name, Unit, AirPressureConfig.Instance.SortOrder);
+            var result = new List<MeasurementValue>();
+            MeasurementValue value = new MeasurementValue(Name, Unit, AirPressureConfig.Instance.SortOrder);
 
             if (Bricklet != null)
             {
                 int airPressureRaw = Bricklet.GetAirPressure();
-                returnValue.Value = airPressureRaw / 1000.0;
+                value.Value = airPressureRaw / 1000.0;
+                result.Add(value);
             }
 
-            return returnValue;
+            return result;
         }
     }
 }
