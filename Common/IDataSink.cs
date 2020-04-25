@@ -18,7 +18,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Initialize plugin with loaded config
         /// </summary>
-        /// <returns></returns>
+        /// <returns>signal success with true</returns>
         bool Init();
 
         /// <summary>

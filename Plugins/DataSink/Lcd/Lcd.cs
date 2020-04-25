@@ -78,7 +78,7 @@ namespace net.derpaul.tf.plugin
         /// <summary>
         /// Part of interface TFDataSink - initalize plugin
         /// </summary>
-        /// <returns></returns>
+        /// <returns>signal success with true</returns>
         public override bool Init()
         {
             LcdConfig.Instance.ShowConfig();
