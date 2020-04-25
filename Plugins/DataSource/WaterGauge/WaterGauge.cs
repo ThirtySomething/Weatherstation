@@ -27,23 +27,14 @@ namespace net.derpaul.tf.plugin
         public override int SensorType { get; } = -1;
 
         /// <summary>
-        /// Constructor
-        /// </summary>
-        public WaterGauge()
-        {
-            IsInitialized = false;
-        }
-
-        /// <summary>
         /// Initialize internal TF bricklet
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
         /// <param name="UID">Sensor ID</param>
         /// <returns>signal success with true</returns>
-        public override bool Init(IPConnection connection, string UID)
+        public override void Init(IPConnection connection, string UID)
         {
             WaterGaugeConfig.Instance.ShowConfig();
-            return true;
         }
 
         /// <summary>
