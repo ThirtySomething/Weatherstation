@@ -9,7 +9,8 @@ ECHO.Root directory [%STARTDIR%]
 REM Variable settings
 SET "DESTPATH=build"
 SET "DESTFRAM=netcoreapp3.1"
-SET "DESTTYPE=Release"
+REM SET "DESTTYPE=Release"
+SET "DESTTYPE=Debug"
 SET "PLUGINPATH=Plugins"
 SET "DELFILEEXT=json pdb"
 SET "ARCHTYPES=win-x64 linux-x64 linux-arm"
@@ -88,7 +89,7 @@ FOR /f "delims=" %%f IN ('DIR /b /s /a-d *.csproj') DO (
 	CALL :DNP "%%f" "%DEPLOYBASE%"
 )
 CD %STARTDIR%
-CALL :ROF "%DEPLOYBASE%"
+REM CALL :ROF "%DEPLOYBASE%"
 
 REM Switch back to startup directory
 :END
