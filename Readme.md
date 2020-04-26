@@ -88,3 +88,4 @@ To build and run the software, see [here](./Build.md) for more details.
 [TFBrickDaemon]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFBrickViewer]: https://www.tinkerforge.com/en/doc/Downloads.html
 [TFURL]: https://www.tinkerforge.com/en/shop/kits/starter-kit-weather-station.html
+[TSDB]: https://en.wikipedia.org/wiki/Time_series_database
