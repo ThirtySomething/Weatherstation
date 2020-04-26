@@ -50,10 +50,7 @@ namespace net.derpaul.tf
             try
             {
                 MqttClient = new MqttClient(RemoteDeviceConfig.Instance.BrokerIP, RemoteDeviceConfig.Instance.BrokerPort, false, null, null, MqttSslProtocols.None, null);
-                if (RemoteDeviceConfig.Instance.Handshake == true)
-                {
-                    MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
-                }
+                MqttClient.MqttMsgPublishReceived += MqttDataRecieved;
                 MqttClient.Connect(RemoteDeviceConfig.Instance.ClientID);
                 MqttClient.Subscribe(new string[] { RemoteDeviceConfig.Instance.TopicData }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
                 connected = true;
@@ -97,7 +94,10 @@ namespace net.derpaul.tf
             try
             {
                 MeasurementValue measurementValue = JsonConvert.DeserializeObject<MeasurementValue>(stringJson);
-                MqttClient.Publish(RemoteDeviceConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
+                if (RemoteDeviceConfig.Instance.Handshake)
+                {
+                    MqttClient.Publish(RemoteDeviceConfig.Instance.TopicAcknowledge, Encoding.ASCII.GetBytes(measurementValue.ToHash()));
+                }
                 pluginHandler.HandleValue(measurementValue);
             }
             catch (Exception)
