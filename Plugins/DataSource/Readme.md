@@ -8,6 +8,7 @@ The data source plugins retrieve the measurement values from the Tinkerforge wea
   * Altitude
   * Temperature
 * [Humidity sensor](./Humidity/Readme.md)
+* [Water gauge](./WaterGauge/Readme.md)
 
 Return to [main](./../../Readme.md).
 

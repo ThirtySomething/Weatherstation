@@ -1,6 +1,8 @@
 # WaterGauge
 
-The WaterGauge plugin reads the water gauge of rivers of Baden-Württemberg.
+The WaterGauge plugin reads the water gauge of rivers of Baden-Württemberg. At least it's scraping the data from the [website](https://www.hvz.baden-wuerttemberg.de).
+
+ATTENTION: Never rely on these values! This plugin is just an example for reading data form another source than a Tinkerforge Sensor.
 
 Return to [main](./../Readme.md).
 
