@@ -22,6 +22,11 @@ namespace net.derpaul.tf.plugin
         public override int ReadDelay { get; } = WaterGaugeConfig.Instance.ReadDelay;
 
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        public override bool IsInitialized { get; set; }
+
+        /// <summary>
         /// The TF sensor type
         /// </summary>
         public override int SensorType { get; } = -1;
@@ -60,6 +65,7 @@ namespace net.derpaul.tf.plugin
                         if (gaugeStations.Contains(currentWatermark.Id))
                         {
                             var value = currentWatermark.GetValue();
+                            value.PluginName = Name;
                             result.Add(value);
                         }
                     }

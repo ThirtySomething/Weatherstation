@@ -13,7 +13,7 @@ namespace net.derpaul.tf.plugin
         public ulong ID { get; set; }
 
         /// <summary>
-        /// Name as field for sensor type
+        /// Measurement type
         /// </summary>
         public string Name { get; set; }
 

@@ -64,6 +64,11 @@ namespace net.derpaul.tf.plugin
                 return;
             }
 
+            if (SensorValue.SortOrder == LcdConfig.Instance.SkipIndex)
+            {
+                return;
+            }
+
             // Calculation of position in dependency of the sort order
             byte posX = (byte)((SensorValue.SortOrder % 2) * 10);
             byte posY = (byte)((SensorValue.SortOrder / 2) + 1);

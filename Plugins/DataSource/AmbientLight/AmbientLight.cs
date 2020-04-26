@@ -24,6 +24,11 @@ namespace net.derpaul.tf.plugin
         public override int ReadDelay { get; } = AmbientLightConfig.Instance.ReadDelay;
 
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        public override bool IsInitialized { get; set; }
+
+        /// <summary>
         /// The TF sensor type
         /// </summary>
         public override int SensorType { get; } = BrickletAmbientLight.DEVICE_IDENTIFIER;
@@ -49,7 +54,7 @@ namespace net.derpaul.tf.plugin
         protected override List<MeasurementValue> RawValues()
         {
             var result = new List<MeasurementValue>();
-            MeasurementValue value = new MeasurementValue(Name, Unit, AmbientLightConfig.Instance.SortOrder);
+            MeasurementValue value = new MeasurementValue(Name, "", Unit, AmbientLightConfig.Instance.SortOrder);
 
             if (Bricklet != null)
             {

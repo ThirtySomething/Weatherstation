@@ -18,6 +18,11 @@ namespace net.derpaul.tf.plugin
         public MType Type { get; set; }
 
         /// <summary>
+        /// The measurement location of value
+        /// </summary>
+        public MLocation Location { get; set; }
+
+        /// <summary>
         /// The measurement value
         /// </summary>
         public double Value { get; set; }

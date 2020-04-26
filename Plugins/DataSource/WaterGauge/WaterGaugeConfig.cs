@@ -1,7 +1,7 @@
 namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Configuration settings of ambient light sensor
+    /// Configuration settings of water gauge scraping object
     /// </summary>
     public class WaterGaugeConfig : ConfigLoader<WaterGaugeConfig>, IConfigObject
     {
@@ -13,7 +13,7 @@ namespace net.derpaul.tf.plugin
             // 1 hour, 60 minutes, 60 seconds, 1000 milliseconds
             // 1 * 60 * 60 * 1000 = 3600000
             ReadDelay = 3600000;
-            SortOrder = -1;
+            SortOrder = 100;
             URL = "https://www.hvz.baden-wuerttemberg.de/js/hvz-data-peg-db.js";
             RegExpRecord = @"(\['.*\])";
             IndexID = 0;
@@ -27,7 +27,7 @@ namespace net.derpaul.tf.plugin
         }
 
         /// <summary>
-        /// Delay in milli seconds until next measurement value is read
+        /// Delay in milli seconds until next measurement values are read
         /// </summary>
         public int ReadDelay { get; set; }
 
@@ -37,7 +37,7 @@ namespace net.derpaul.tf.plugin
         public int SortOrder { get; set; }
 
         /// <summary>
-        /// URL to read for water gauges
+        /// URL to read water gauges from
         /// </summary>
         public string URL { get; set; }
 
@@ -85,5 +85,5 @@ namespace net.derpaul.tf.plugin
         /// The ids to pick gauges from as JSON string
         /// </summary>
         public string StationList { get; set; }
-    }
+   }
 }

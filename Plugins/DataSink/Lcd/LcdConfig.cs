@@ -13,6 +13,7 @@ namespace net.derpaul.tf.plugin
             BrickDaemonIP = "127.0.0.1";
             BrickDaemonPort = 4223;
             TimestampFormat = "dd.MM.yyyy  HH:mm:ss";
+            SkipIndex = 100;
         }
 
         /// <summary>
@@ -29,5 +30,10 @@ namespace net.derpaul.tf.plugin
         /// Format to display a timestamp
         /// </summary>
         public string TimestampFormat { get; set; }
+
+        /// <summary>
+        /// Skip values using this index
+        /// </summary>
+        public int SkipIndex { get; set; }
     }
 }

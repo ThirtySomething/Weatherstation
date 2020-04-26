@@ -29,6 +29,11 @@ namespace net.derpaul.tf.plugin
         public override int ReadDelay { get; } = HumidityConfig.Instance.ReadDelay;
 
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        public override bool IsInitialized { get; set; }
+
+        /// <summary>
         /// Initialize internal TF bricklet
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
@@ -49,7 +54,7 @@ namespace net.derpaul.tf.plugin
         protected override List<MeasurementValue> RawValues()
         {
             var result = new List<MeasurementValue>();
-            MeasurementValue value = new MeasurementValue(Name, Unit, HumidityConfig.Instance.SortOrder);
+            MeasurementValue value = new MeasurementValue(Name, "", Unit, HumidityConfig.Instance.SortOrder);
 
             if (Bricklet != null)
             {

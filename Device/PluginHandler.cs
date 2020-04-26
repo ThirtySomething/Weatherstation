@@ -159,17 +159,22 @@ namespace net.derpaul.tf
                 return false;
             }
 
-            foreach (var currentSensor in TFSensorIdentified)
+            foreach(var plugin in DataSourcePlugins)
             {
-                var plugin = DataSourcePlugins.FirstOrDefault(p => currentSensor.DeviceIdentifier == p.SensorType);
-                if (plugin == null)
+                var sensor = TFSensorIdentified.FirstOrDefault(p => p.DeviceIdentifier == plugin.SensorType);
+                if (sensor != null)
                 {
-                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: No plugin found for sensor type [{currentSensor.DeviceIdentifier}].");
-                    continue;
+                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Tinkerforge plugin.");
+                    plugin.Init(TFConnection, sensor.UID);
                 }
-                plugin.Init(TFConnection, currentSensor.UID);
+                else
+                {
+                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: No Tinkerforge plugin.");
+                    plugin.Init(null, null);
+                }
                 System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Initialized [{plugin.Name}] plugin.");
             }
+
             return true;
         }
 
@@ -209,14 +214,14 @@ namespace net.derpaul.tf
         /// <returns>true on success, otherwise false</returns>
         internal bool Init()
         {
-            bool InitDone = InitDataSourcePlugins();
+            bool InitDone = InitDataSinkPlugins();
 
             if (!InitDone)
             {
                 return false;
             }
 
-            return InitDataSinkPlugins();
+            return InitDataSourcePlugins();
         }
 
         /// <summary>
@@ -224,6 +229,14 @@ namespace net.derpaul.tf
         /// </summary>
         internal void Shutdown()
         {
+            foreach (var currentPlugin in DataSourcePlugins)
+            {
+                if (currentPlugin.IsInitialized)
+                {
+                    currentPlugin.Shutdown();
+                }
+            }
+
             foreach (var currentPlugin in DataSinkPlugins)
             {
                 if (currentPlugin.IsInitialized)
@@ -244,6 +257,10 @@ namespace net.derpaul.tf
                 var valueList = (plugin as IDataSource).Values();
                 foreach (var value in valueList)
                 {
+                    if (value.SensorLocation.Length == 0)
+                    {
+                        value.SensorLocation = DeviceConfig.Instance.Location;
+                    }
                     foreach (var currentPlugin in DataSinkPlugins)
                     {
                         if (currentPlugin.IsInitialized)

@@ -15,7 +15,7 @@ namespace net.derpaul.tf.plugin
         {
             lock (WriteLock)
             {
-                System.Console.WriteLine($"Sensor [{SensorValue.Name}], Value [{SensorValue.Value}], Unit [{SensorValue.Unit}]");
+                System.Console.WriteLine($"Sensor [{SensorValue.PluginName}], Location [{SensorValue.SensorLocation}], Value [{SensorValue.Value}], Unit [{SensorValue.Unit}]");
             }
         }
     }

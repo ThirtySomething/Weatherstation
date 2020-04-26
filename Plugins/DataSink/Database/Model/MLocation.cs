@@ -3,9 +3,9 @@ using System.Collections.Generic;
 namespace net.derpaul.tf.plugin
 {
     /// <summary>
-    /// Entity for measurement units
+    /// Entity for measurement locations
     /// </summary>
-    public class MUnit
+    public class MLocation
     {
         /// <summary>
         /// ID as primary key
@@ -13,7 +13,7 @@ namespace net.derpaul.tf.plugin
         public ulong ID { get; set; }
 
         /// <summary>
-        /// Measurement unit
+        /// Measurement location
         /// </summary>
         public string Name { get; set; }
 

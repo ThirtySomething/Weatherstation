@@ -7,15 +7,20 @@ namespace net.derpaul.tf
     /// Result of one measurement:
     /// - Measurement value
     /// - Unit of measurement value
-    /// - Name/kind of sensor
+    /// - PluginName/kind of sensor
     /// - Timestamp of recording
     /// </summary>
     public class MeasurementValue
     {
         /// <summary>
-        /// Name/kind of sensor
+        /// PluginName/kind of sensor
         /// </summary>
-        public string Name { get; set; }
+        public string PluginName { get; set; }
+
+        /// <summary>
+        /// Location of sensor
+        /// </summary>
+        public string SensorLocation { get; set; }
 
         /// <summary>
         /// Sort priority
@@ -40,16 +45,21 @@ namespace net.derpaul.tf
         /// <summary>
         /// Default constructor
         /// </summary>
-        public MeasurementValue() : this("", "", 1)
+        public MeasurementValue() : this("", "", "", 1)
         {
         }
 
         /// <summary>
         /// Constructor to initialize values
         /// </summary>
-        public MeasurementValue(string sensorName, string valueUnit, int sortOrder)
+        /// <param name="pluginName">Name of data source plugin</param>
+        /// <param name="sensorLocation">Location of the sensor</param>
+        /// <param name="valueUnit">Unit of measurement value</param>
+        /// <param name="sortOrder">Sort order for Tinkerforge LCD display</param>
+        public MeasurementValue(string pluginName, string sensorLocation, string valueUnit, int sortOrder)
         {
-            Name = sensorName;
+            PluginName = pluginName;
+            SensorLocation = sensorLocation;
             Timestamp = DateTime.Now;
             Unit = valueUnit;
             Value = 0.0;
@@ -72,7 +82,7 @@ namespace net.derpaul.tf
         /// <summary>
         /// Get object as hash
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Hash value of measurement value</returns>
         public string ToHash()
         {
             using (var sha = new System.Security.Cryptography.SHA256Managed())

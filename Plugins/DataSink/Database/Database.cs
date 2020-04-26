@@ -73,10 +73,10 @@ namespace net.derpaul.tf.plugin
         /// <returns>Referenced measurement type object</returns>
         public MType DetermineMeasurementType(MeasurementValue SensorValue)
         {
-            var MType = DBInstance.DBMeasurementTypes.Where(a => a.Name == SensorValue.Name).FirstOrDefault();
+            var MType = DBInstance.DBMeasurementTypes.Where(a => a.Name == SensorValue.PluginName).FirstOrDefault();
             if (MType == null)
             {
-                MType = new MType { Name = SensorValue.Name };
+                MType = new MType { Name = SensorValue.PluginName };
                 DBInstance.Add(MType);
                 DBInstance.SaveChanges();
             }

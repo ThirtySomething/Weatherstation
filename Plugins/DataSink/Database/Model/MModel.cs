@@ -28,6 +28,11 @@ namespace net.derpaul.tf.plugin
         public DbSet<MValue> DBMeasurementValues { get; set; }
 
         /// <summary>
+        /// Entity for measurement Locations
+        /// </summary>
+        public DbSet<MLocation> DBMeasurementLocations { get; set; }
+
+        /// <summary>
         /// Select correct database type and corresponding options
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -111,6 +116,14 @@ namespace net.derpaul.tf.plugin
                 entity.HasIndex(e => e.Name).IsUnique();
             });
 
+            // Entity for measurement locations
+            modelBuilder.Entity<MLocation>().ToTable("MLocation", null);
+            modelBuilder.Entity<MLocation>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.HasIndex(e => e.Name).IsUnique();
+            });
+
             // Entity for measurement values
             modelBuilder.Entity<MValue>().ToTable("MValue", null);
             modelBuilder.Entity<MValue>(entity =>
@@ -130,6 +143,13 @@ namespace net.derpaul.tf.plugin
             modelBuilder.Entity<MUnit>()
                     .HasMany(c => c.Values)
                     .WithOne(e => e.Unit)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.SetNull);
+
+            // Foreign key from measurement value to measurement unit
+            modelBuilder.Entity<MLocation>()
+                    .HasMany(c => c.Values)
+                    .WithOne(e => e.Location)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.SetNull);
 

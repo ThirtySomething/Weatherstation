@@ -3,17 +3,12 @@ namespace net.derpaul.tf
     /// <summary>
     /// Interface to deal with a collection of Tinkerforge Sensor plugin values
     /// </summary>
-    public interface IDataSink
+    public interface IDataSink : IPlugin
     {
         /// <summary>
         /// Get the name/kind of a sensor
         /// </summary>
         string Name { get; }
-
-        /// <summary>
-        /// Flags successful initialization
-        /// </summary>
-        bool IsInitialized { get; set; }
 
         /// <summary>
         /// Initialize plugin with loaded config
@@ -26,10 +21,5 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="SensorValue">A measuremet value</param>
         void HandleValue(MeasurementValue SensorValue);
-
-        /// <summary>
-        /// Enable plugin to shutdown some resources
-        /// </summary>
-        void Shutdown();
     }
 }

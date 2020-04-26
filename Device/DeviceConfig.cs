@@ -15,6 +15,7 @@ namespace net.derpaul.tf
             BrickDaemonIP = "127.0.0.1";
             BrickDaemonPort = 4223;
             PluginPath = "Plugins";
+            Location = "Kochertürn";
         }
 
         /// <summary>
@@ -31,6 +32,11 @@ namespace net.derpaul.tf
         /// Default path for plugins
         /// </summary>
         public string PluginPath { get; set; }
+
+        /// <summary>
+        /// Default location of device
+        /// </summary>
+        public string Location { get; set; }
 
         /// <summary>
         /// Product name of plugin set in AssemblyInfo.cs

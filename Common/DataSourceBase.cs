@@ -20,6 +20,11 @@ namespace net.derpaul.tf
         public abstract int SensorType { get; }
 
         /// <summary>
+        /// Flags successful initialization
+        /// </summary>
+        public abstract bool IsInitialized { get; set; }
+
+        /// <summary>
         /// Get the name of the sensor implementation
         /// </summary>
         public string Name
@@ -49,7 +54,7 @@ namespace net.derpaul.tf
             {
                 var values = RawValues();
 
-                foreach(var currentValue in values)
+                foreach (var currentValue in values)
                 {
                     value.Add(currentValue);
                 }
@@ -72,5 +77,13 @@ namespace net.derpaul.tf
         /// Delay in milli seconds until next measurement value is read
         /// </summary>
         public abstract int ReadDelay { get; }
+
+        /// <summary>
+        /// Enable plugin to shutdown some resources
+        /// </summary>
+        public virtual void Shutdown()
+        {
+        }
+
     }
 }
