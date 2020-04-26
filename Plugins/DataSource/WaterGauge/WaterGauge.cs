@@ -37,9 +37,11 @@ namespace net.derpaul.tf.plugin
         /// <param name="connection">Connection to master brick</param>
         /// <param name="UID">Sensor ID</param>
         /// <returns>signal success with true</returns>
-        public override void Init(IPConnection connection, string UID)
+        /// <returns>true on successful init</returns>
+        public override bool Init(IPConnection connection, string UID)
         {
             WaterGaugeConfig.Instance.ShowConfig();
+            return true;
         }
 
         /// <summary>

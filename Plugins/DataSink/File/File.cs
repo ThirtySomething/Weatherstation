@@ -29,7 +29,8 @@ namespace net.derpaul.tf.plugin
         {
             lock (WriteLock)
             {
-                Datafile.WriteLine(SensorValue.ToJSON());
+                string data = SensorValue.ToJSON();
+                Datafile.WriteLine(data);
             }
         }
 

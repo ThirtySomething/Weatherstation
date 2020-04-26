@@ -33,7 +33,8 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
         /// <param name="UID">Sensor ID</param>
-        void Init(IPConnection connection, string UID);
+        /// <returns>true on successful init</returns>
+        bool Init(IPConnection connection, string UID);
 
         /// <summary>
         /// Read values of data sink

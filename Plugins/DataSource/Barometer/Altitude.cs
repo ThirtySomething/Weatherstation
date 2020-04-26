@@ -28,10 +28,11 @@ namespace net.derpaul.tf.plugin
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
         /// <param name="UID">Sensor ID</param>
-        public override void Init(IPConnection connection, string UID)
+        /// <returns>true on successful init</returns>
+        public override bool Init(IPConnection connection, string UID)
         {
             AltitudeConfig.Instance.ShowConfig();
-            base.Init(connection, UID);
+            return base.Init(connection, UID);
         }
 
         /// <summary>

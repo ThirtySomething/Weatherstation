@@ -164,15 +164,21 @@ namespace net.derpaul.tf
                 var sensor = TFSensorIdentified.FirstOrDefault(p => p.DeviceIdentifier == plugin.SensorType);
                 if (sensor != null)
                 {
-                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Tinkerforge plugin.");
-                    plugin.Init(TFConnection, sensor.UID);
+                    plugin.IsInitialized = plugin.Init(TFConnection, sensor.UID);
                 }
                 else
                 {
-                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: No Tinkerforge plugin.");
-                    plugin.Init(null, null);
+                    plugin.IsInitialized = plugin.Init(null, null);
                 }
-                System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Initialized [{plugin.Name}] plugin.");
+                if (plugin.IsInitialized)
+                {
+                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Initialized [{plugin.Name}] plugin.");
+                }
+                else
+                {
+                    System.Console.WriteLine($"{nameof(InitDataSourcePlugins)}: Failed to initialize [{plugin.Name}] plugin.");
+                }
+                System.Console.WriteLine();
             }
 
             return true;
@@ -196,13 +202,14 @@ namespace net.derpaul.tf
                 try
                 {
                     currentPlugin.IsInitialized = currentPlugin.Init();
-                    System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Initialized [{currentPlugin.Name}] plugin.");
                 }
                 catch (Exception e)
                 {
                     System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Cannot init plugin [{currentPlugin.GetType()}] => [{e.Message}]");
                     System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Inner exception => [{e.InnerException}]");
+                    continue;
                 }
+                System.Console.WriteLine($"{nameof(InitDataSinkPlugins)}: Initialized [{currentPlugin.Name}] plugin.");
             }
 
             return true;

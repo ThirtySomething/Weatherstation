@@ -1,6 +1,12 @@
 @startuml DataModel
 hide circle
 
+entity MeasurementLocation
+{
+    * integer ID
+    string Name
+}
+
 entity MeasurementType
 {
     * integer ID
@@ -17,6 +23,7 @@ entity MeasurementValue
 {
     * integer ID
     integer MeasurementTypeID
+    integer MeasurementLocationID
     double Value
     integer MeasurementUnitID
     DateTime RecordTime
@@ -24,5 +31,6 @@ entity MeasurementValue
 
 MeasurementValue }|--|| MeasurementType
 MeasurementValue }|--|| MeasurementUnit
+MeasurementValue }|--|| MeasurementLocation
 
 @enduml

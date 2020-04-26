@@ -40,7 +40,8 @@ namespace net.derpaul.tf
         /// </summary>
         /// <param name="connection">Connection to master brick</param>
         /// <param name="UID">Sensor ID</param>
-        public abstract void Init(IPConnection connection, string UID);
+        /// <returns>true on successful init</returns>
+        public abstract bool Init(IPConnection connection, string UID);
 
         /// <summary>
         /// Read values of data source, will catch exceptions

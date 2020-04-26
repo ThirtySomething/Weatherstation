@@ -35,7 +35,8 @@ namespace net.derpaul.tf.plugin
             {
                 var MType = DetermineMeasurementType(SensorValue);
                 var MUnit = DetermineMeasurementUnit(SensorValue);
-                WriteSensorData(SensorValue, MType, MUnit);
+                var MLocation = DetermineMeasurementLocation(SensorValue);
+                WriteSensorData(SensorValue, MType, MUnit, MLocation);
             }
         }
 
@@ -45,12 +46,14 @@ namespace net.derpaul.tf.plugin
         /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
         /// <param name="MType">Used measurement type - the sensor name</param>
         /// <param name="MUnit">used measurement unit</param>
-        private void WriteSensorData(MeasurementValue SensorValue, MType MType, MUnit MUnit)
+        /// <param name="MLocation">used measurement location</param>
+        private void WriteSensorData(MeasurementValue SensorValue, MType MType, MUnit MUnit, MLocation MLocation)
         {
             var MValue = new MValue
             {
                 Type = MType,
                 Unit = MUnit,
+                Location = MLocation,
                 RecordTime = SensorValue.Timestamp,
                 Value = SensorValue.Value
             };
@@ -100,6 +103,25 @@ namespace net.derpaul.tf.plugin
             }
 
             return MUnit;
+        }
+
+
+        /// <summary>
+        /// Determine measurement location object, create if not exists
+        /// </summary>
+        /// <param name="SensorValue">Tinkerforge Sensor plugin value</param>
+        /// <returns>Referenced measurement location object</returns>
+        public MLocation DetermineMeasurementLocation(MeasurementValue SensorValue)
+        {
+            var MLocation = DBInstance.DBMeasurementLocations.Where(a => a.Name == SensorValue.SensorLocation).FirstOrDefault();
+            if (MLocation == null)
+            {
+                MLocation = new MLocation { Name = SensorValue.SensorLocation };
+                DBInstance.Add(MLocation);
+                DBInstance.SaveChanges();
+            }
+
+            return MLocation;
         }
     }
 }
