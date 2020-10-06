@@ -3,9 +3,9 @@ using System.Xml.Serialization;
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Configuration settings of device to read the bricklets
+    /// Configuration settings of datacollector to read the bricklets
     /// </summary>
-    public class DeviceConfig : ConfigLoader<DeviceConfig>, IConfigObject
+    public class DataCollectorConfig : ConfigLoader<DataCollectorConfig>, IConfigObject
     {
         /// <summary>
         /// To set default values
@@ -34,7 +34,7 @@ namespace net.derpaul.tf
         public string PluginPath { get; set; }
 
         /// <summary>
-        /// Default location of device
+        /// Default location of datacollector
         /// </summary>
         public string Location { get; set; }
 

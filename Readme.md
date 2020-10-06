@@ -1,7 +1,7 @@
 # Weatherstation
 
 This project will address a [Tinkerforge weather station][TFURL]. There are
-  - The `device` for reading the data of the weather station.
+  - The `datacollector` for reading the data of the weather station.
   - The `remotedevice` for dealing with the data in form of saving them, historize them and compress them somehow.
   - The UI for displaying the data processed by the `remotedevice`.
 
@@ -30,24 +30,24 @@ The software consists of several parts. To get a feeling about the parts, see th
 
 - There is only a Raspberry Pi available
   - You have to connect the weatherstation to the Raspberry Pi.
-  - You have to run the `Device` on the Raspberry Pi.
+  - You have to run the `datacollector` on the Raspberry Pi.
   - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data.
 - There is a Raspberry Pi and a server (either Windows x64 or Linux x64) available
   - You have to connect the weatherstation to the Raspberry Pi.
-  - You have to run the `Device` on the Raspberry Pi.
+  - You have to run the `datacollector` on the Raspberry Pi.
   - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data - at least the `MQTT`-plugin is required.
   - You have to run the `RemoteDevice` on the server.
-  - You have to select some of the [Data Sink Plugins](./Plugins/DataSink/Readme.md) to store the data.
+  - You have to select some of the [Data Sink Plugins](./Plugins/DataSink/Readme.md) to store the data on the server.
 - There is only a server (either Windows x64 or Linux x64) available
   - You have to connect the weatherstation to the server.
-  - You have to run the `Device` on the server.
+  - You have to run the `datacollector` on the server.
   - You have to select some of the [Plugins](./Plugins/Readme.md) to read and store the data.
 
 Basically you want to use all [Data Source Plugins](./Plugins/DataSource/Readme.md) and usually not all of the [Data Sink Plugins](./Plugins/DataSink/Readme.md).
 
-## Device
+## DataCollector
 
-See the [device documentation](./Device/Readme.md) for more details.
+See the [datacollector documentation](./DataCollector/Readme.md) for more details.
 
 ## Remotedevice
 
@@ -72,7 +72,7 @@ To build and run the software, see [here](./Build.md) for more details.
 ## ToDos
 
 - Check installation guide for .net 3.1!
-- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at `device` before publish
+- Remember to remove [M2MqttDotnetCore][NGMQTT] NuGet package at `datacollector` before publish
 - Setup UI: The combination of a [time series database][TSDB] and an UI like [Grafana][Grafana] looks very promising. Thanks to [Joachim Hummel][JoHu] for inspiration.
 
 [csharp_lang]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)

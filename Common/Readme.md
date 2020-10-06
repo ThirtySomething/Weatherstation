@@ -1,6 +1,6 @@
 # Common
 
-Here is common used software stuff collected. This library will be used from the `device` as well as from the `remotedevice`.
+Here is common used software stuff collected. This library will be used from the `datacollector` as well as from the `remotedevice`.
 
 ## Details
 

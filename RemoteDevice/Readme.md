@@ -23,4 +23,4 @@ For more details how to configure the plugins see the Readme in the project of t
 
 ## Remarks
 
-See also the [device documentation](./../Device/Readme.md)
+See also the [datacollector documentation](./../DataCollector/Readme.md)

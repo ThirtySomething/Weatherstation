@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<Import Project="$(SolutionPath).targets" />
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <RootNamespace>net.derpaul.tf</RootNamespace>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-        <AssemblyName>Device</AssemblyName>
+        <AssemblyName>DataCollector</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     </PropertyGroup>
 

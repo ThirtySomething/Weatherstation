@@ -4,19 +4,19 @@ using System.IO;
 namespace net.derpaul.tf
 {
     /// <summary>
-    /// Main program to handle data of TF weather station
+    /// Main program for collecting data
     /// </summary>
-    internal class Device
+    internal class DataCollector
     {
         /// <summary>
         /// Main entry point
         /// </summary>
         private static void Main()
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeviceConfig.Instance.PluginPath);
-            var pluginHandler = new PluginHandler(pluginPath, DeviceConfig.Instance.BrickDaemonIP, DeviceConfig.Instance.BrickDaemonPort);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DataCollectorConfig.Instance.PluginPath);
+            var pluginHandler = new PluginHandler(pluginPath, DataCollectorConfig.Instance.BrickDaemonIP, DataCollectorConfig.Instance.BrickDaemonPort);
 
-            DeviceConfig.Instance.ShowConfig();
+            DataCollectorConfig.Instance.ShowConfig();
 
             if (!pluginHandler.Init())
             {
