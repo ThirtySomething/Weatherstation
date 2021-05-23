@@ -1,4 +1,5 @@
 @ECHO OFF
+TITLE Buildscript for Weatherstation
 REM Memorize master directory
 SET "STARTDIR=%~dp0"
 SET "GENERATOR=buildscript.bat"

@@ -1,5 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="$(SolutionPath).targets" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputPath>..\bin\$(Platform)\$(Configuration)</OutputPath>
+    </PropertyGroup>
+
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,12 +10,17 @@
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <AssemblyName>RemoteDevice</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="M2MqttDotnetCore" Version="1.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
         <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
         <PackageReference Include="Tinkerforge" Version="2.1.17" />

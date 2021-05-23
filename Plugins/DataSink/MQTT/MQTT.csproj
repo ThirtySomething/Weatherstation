@@ -1,15 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="$(SolutionPath).targets" />
+    <PropertyGroup>
+        <OutputPath>..\..\..\bin\$(Platform)\$(Configuration)</OutputPath>
+    </PropertyGroup>
+
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <AssemblyName>MQTT</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="M2MqttDotnetCore" Version="1.0.8" />
+        <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

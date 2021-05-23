@@ -1,14 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="$(SolutionPath).targets" />
+    <PropertyGroup>
+        <OutputPath>..\..\..\bin\$(Platform)\$(Configuration)</OutputPath>
+    </PropertyGroup>
+
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <RootNamespace>net.derpaul.tf.plugin</RootNamespace>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <AssemblyName>AmbientLight</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Tinkerforge" Version="2.1.17" />
     </ItemGroup>
 
