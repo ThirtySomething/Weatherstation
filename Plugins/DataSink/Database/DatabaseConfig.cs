@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace net.derpaul.tf.plugin
 {
     /// <summary>
@@ -51,6 +49,10 @@ namespace net.derpaul.tf.plugin
             /// The database schema used to write to
             /// </summary>
             public string Database { get; set; }
+            /// <summary>
+            /// The port of the database instance
+            /// </summary>
+            public int Port { get; set; }
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace net.derpaul.tf.plugin
             DatabaseType = SupportedDatabaseTypes.DBSQLite;
             DatabaseOptions = "{Filename: \"weatherdata.db\"}";
             //DatabaseType = SupportedDatabaseTypes.MariaDB;
-            //DatabaseOptions = "{Server: \"localhost\", UserId: \"weatheruser\", Password: \"weatherpassword\", Database: \"weatherdatabase\"}";
+            //DatabaseOptions = "{Server: \"localhost\", UserId: \"weatheruser\", Password: \"weatherpassword\", Database: \"weatherdatabase\", Port: 3306}";
         }
 
         /// <summary>

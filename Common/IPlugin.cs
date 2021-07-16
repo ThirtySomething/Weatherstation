@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace net.derpaul.tf
+﻿namespace net.derpaul.tf
 {
     public interface IPlugin
     {

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace net.derpaul.tf.plugin
@@ -19,7 +20,7 @@ namespace net.derpaul.tf.plugin
         public override bool Init()
         {
             DatabaseConfig.Instance.ShowConfig();
-            DBInstance = new MModel();
+            DBInstance = new MModel(new DbContextOptions < MModel > ());
             DBInstance.Database.EnsureCreated();
 
             return true;

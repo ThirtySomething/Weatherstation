@@ -1,5 +1,3 @@
-using System;
-
 namespace net.derpaul.tf.plugin
 {
     /// <summary>

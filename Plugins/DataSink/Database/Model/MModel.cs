@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Reflection;
-using System.Runtime.InteropServices;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace net.derpaul.tf.plugin
 {
@@ -33,6 +32,14 @@ namespace net.derpaul.tf.plugin
         public DbSet<MLocation> DBMeasurementLocations { get; set; }
 
         /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="options"></param>
+        public MModel(DbContextOptions<MModel> options) : base(options)
+        {
+        }
+
+        /// <summary>
         /// Select correct database type and corresponding options
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -59,13 +66,11 @@ namespace net.derpaul.tf.plugin
             try
             {
                 DatabaseConfig.ParamMariaDB Options = JsonConvert.DeserializeObject<DatabaseConfig.ParamMariaDB>(DatabaseConfig.Instance.DatabaseOptions);
-                optionsBuilder.UseMySql($"Server={Options.Server};User Id={Options.UserId};Password={Options.Password};Database={Options.Database}", options =>
-               {
-                   options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)
-                       .ServerVersion(new Version(10, 4, 11), ServerType.MariaDb)
-                       .CharSetBehavior(CharSetBehavior.AppendToAllColumns);
-                    //.AnsiCharSet(CharSet.Latin1)
-                    //.UnicodeCharSet(CharSet.Utf8mb4);
+                var connectionString = @"server={Options.Server};port={Options.Port};database={Options.Database};user={Options.UserId};password={Options.Password}";
+                var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
+                optionsBuilder.UseMySql(connectionString, serverVersion, options =>
+                {
+                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
                 });
             }
             catch (Exception e)
@@ -101,7 +106,7 @@ namespace net.derpaul.tf.plugin
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Entity for measurement types
-            modelBuilder.Entity<MType>().ToTable("MType", null);
+            modelBuilder.Entity<MType>().ToTable("MType");
             modelBuilder.Entity<MType>(entity =>
             {
                 entity.HasKey(e => e.ID);
@@ -109,7 +114,7 @@ namespace net.derpaul.tf.plugin
             });
 
             // Entity for measurement units
-            modelBuilder.Entity<MUnit>().ToTable("MUnit", null);
+            modelBuilder.Entity<MUnit>().ToTable("MUnit");
             modelBuilder.Entity<MUnit>(entity =>
             {
                 entity.HasKey(e => e.ID);
@@ -117,7 +122,7 @@ namespace net.derpaul.tf.plugin
             });
 
             // Entity for measurement locations
-            modelBuilder.Entity<MLocation>().ToTable("MLocation", null);
+            modelBuilder.Entity<MLocation>().ToTable("MLocation");
             modelBuilder.Entity<MLocation>(entity =>
             {
                 entity.HasKey(e => e.ID);
@@ -125,7 +130,7 @@ namespace net.derpaul.tf.plugin
             });
 
             // Entity for measurement values
-            modelBuilder.Entity<MValue>().ToTable("MValue", null);
+            modelBuilder.Entity<MValue>().ToTable("MValue");
             modelBuilder.Entity<MValue>(entity =>
             {
                 entity.HasKey(e => e.ID);

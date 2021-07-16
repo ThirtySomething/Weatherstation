@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputPath>..\..\..\bin\$(Platform)\$(Configuration)</OutputPath>
+        <IntermediateOutputPath>..\..\..\build\$(Platform)\$(Configuration)\obj</IntermediateOutputPath>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -13,6 +14,10 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <NoWarn>1701;1702;8034</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\..\Common\Common.csproj" />
     </ItemGroup>
@@ -23,12 +28,21 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputPath>..\..\..\bin\$(Platform)\$(Configuration)</OutputPath>
+        <IntermediateOutputPath>..\..\..\build\$(Platform)\$(Configuration)\obj</IntermediateOutputPath>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -12,11 +13,15 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <NoWarn>1701;1702;8034</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
